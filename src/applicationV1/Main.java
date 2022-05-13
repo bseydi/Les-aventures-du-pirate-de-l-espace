@@ -10,7 +10,6 @@ import javafx.scene.layout.BorderPane;
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
-		Personnage p=new Personnage(1,1,1);
 		try {
 			BorderPane root = FXMLLoader.load(getClass().getResource("vue/vue1.fxml"));
 			Scene scene = new Scene(root,800,600);
@@ -25,3 +24,4 @@ public class Main extends Application {
 		launch(args);
 	}
 }
+
