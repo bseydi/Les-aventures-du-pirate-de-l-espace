@@ -34,5 +34,17 @@ public class Controleur implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
-	}	
+	}
+	
+		@FXML
+    void keyPressed(KeyEvent e) {
+    	if(e.getCode()==KeyCode.D) {
+    		p.seDeplacerADroite(); 
+    		System.out.println("droite");
+    	}
+    	else if(e.getCode()==KeyCode.Q) {
+    		p.seDeplacerAGauche();
+    		System.out.println("gauche");
+    	}
+    }
 }
