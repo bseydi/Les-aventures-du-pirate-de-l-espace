@@ -1,19 +1,15 @@
 package applicationV1.modele;
 
-import java.util.Scanner;
-
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.scene.input.KeyEvent;
 
 public class Personnage {
 	private IntegerProperty xProperty,yProperty;
-	private int vitesse;
-	private int dx,dy ;// direction 
-	private Environnement env;
+	private int vitesse; 
 	private int pointDeVie;
 	
 	public Personnage (int x,int y,int v){
+		super();
 		this.xProperty=new SimpleIntegerProperty(x);
 		this.yProperty =new SimpleIntegerProperty(y);
 		this.vitesse=v;
@@ -28,12 +24,8 @@ public class Personnage {
 		this.xProperty.set(this.getX()+this.vitesse);
 	}
 	
-	public void seDeplacerEnHaut() {
-		this.yProperty.set(this.getY()+this.vitesse);
-	}
-	
-	public void seDeplacerEnBas() {
-		this.yProperty.set(this.getY()-this.vitesse);
+	public void sauter() {
+		this.yProperty.set(this.getY()-40);
 	}
 	
 	public boolean estVivant() {
