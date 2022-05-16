@@ -12,16 +12,17 @@ import javafx.scene.shape.Circle;
 
 public class TerrainVue {
 	
-	private Pane panneauJeu;
+	
 	private TilePane terrainJeu;
 	private Terrain terrain;
 	
-	public TerrainVue(TilePane terrainJeu, Terrain terrain, Pane panneauJeu) {
+	public TerrainVue(TilePane terrainJeu, Terrain terrain) {
 		super();
 		this.terrainJeu = terrainJeu;
 		this.terrain = terrain;
-		this.panneauJeu = panneauJeu;
+		
 	}
+
 	public void creerTerrainJeu() throws FileNotFoundException  {       		    
 		int[][] carte = terrain.getCarte();
 		for(int ligne = 0; ligne < carte.length ;ligne++) {
@@ -35,35 +36,25 @@ public class TerrainVue {
 				}					
 			}
         }
-		personnage();
+
     }	
-	
-	public void personnage() {
-		Circle r;
-		r = new Circle(5);
-		r.setFill(Color.RED);
-		r.setTranslateX(200);
-   	 	r.setTranslateY(172);
-   	 	panneauJeu.getChildren().add(r);
-		
-	}
+
 	
 	public void ciel() throws FileNotFoundException {
-    	FileInputStream input = new FileInputStream("/home/etudiants/info/bseydi/eclipse-workspace/TerrainJeu/src/image/ciel.jpg");
+    	FileInputStream input = new FileInputStream("/home/etudiants/info/slecomte/works_01/TerrainJeu/src/image/ciel.jpg");
 		ImageView img = new ImageView(new Image (input));
         terrainJeu.getChildren().add(img);
 	}
 	
 	public void terre() throws FileNotFoundException {
-        FileInputStream input = new FileInputStream("/home/etudiants/info/bseydi/eclipse-workspace/TerrainJeu/src/image/terre.jpg");
-        ImageView img = new ImageView(new Image (input));
+        FileInputStream input2 = new FileInputStream("/home/etudiants/info/slecomte/works_01/TerrainJeu/src/image/terre.jpg");
+        ImageView img = new ImageView(new Image (input2));
         terrainJeu.getChildren().add(img);
 	}
 	
 	public void herbe() throws FileNotFoundException {
-        FileInputStream input = new FileInputStream("/home/etudiants/info/bseydi/eclipse-workspace/TerrainJeu/src/image/herbe.jpg");
+        FileInputStream input = new FileInputStream("/home/etudiants/info/slecomte/works_01/TerrainJeu/src/image/herbe.jpg");
         ImageView img = new ImageView(new Image (input));
         terrainJeu.getChildren().add(img);
 	}
-
 }
