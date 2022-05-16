@@ -49,10 +49,11 @@ public class Controleur implements Initializable {
 		personnageVue = new PersonnageVue(panneauJeu);
 		try {
 			terrainVue.creerTerrainJeu();
+			personnageVue.perso(personnage);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		personnageVue.perso(personnage);
+		
 	}		
 }
