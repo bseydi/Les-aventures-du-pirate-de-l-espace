@@ -16,6 +16,7 @@ import javafx.scene.shape.Circle;
 public class Controleur implements Initializable {
 	Terrain terrain;
 	ImageView img;
+	Personnage p;
 
 	@FXML
     private TilePane terrainJeu;
