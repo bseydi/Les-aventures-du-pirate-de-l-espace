@@ -8,6 +8,10 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.Controleur">
    <center>
-      <TilePane fx:id="terrainJeu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320" prefWidth="320" BorderPane.alignment="CENTER" />
+      <Pane fx:id="panneauJeu" prefHeight="320" prefWidth="320" BorderPane.alignment="CENTER">
+         <children>
+            <TilePane fx:id="terrainJeu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320" prefWidth="320" />
+         </children>
+      </Pane>
    </center>
 </BorderPane>

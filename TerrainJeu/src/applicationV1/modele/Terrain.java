@@ -16,23 +16,14 @@ public class Terrain {
 			for (int colonne = 0; colonne < carte[ligne].length; colonne++) {
 				    if (ligne <= carte.length/2) {
 				    	carte[ligne][colonne] = 0;				    
-				    }else {
+				    }else if (ligne > carte.length/2) {
 				    	carte[ligne][colonne] = 1;
 				    }
-			}
-			
-		}
-		
-		/*carte[5][0] = 1;
-		carte[5][4] = 1;
-		carte[5][5] = 1;
-		carte[5][6] = 1;
-		carte[5][7] = 1;
-		carte[4][5] = 1;
-		carte[4][6] = 1;
-		carte[4][7] = 1;*/
-		
-		
+				    if(ligne == carte.length/2 +1) {
+				    	carte[ligne][colonne] = 2;
+				    }
+			}			
+		}	
 	}
 	
 	public void afficherTableau() {     
