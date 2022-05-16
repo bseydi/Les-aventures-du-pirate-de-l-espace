@@ -9,8 +9,8 @@ public class Terrain {
 
 	public Terrain (int largeur, int longueur) {
 		carte = new int [largeur][longueur];
-		
-		
+		this.longueur = longueur;
+		this.largeur = largeur;
 		
 		for(int ligne = 0; ligne < carte.length ;ligne++) {
 			for (int colonne = 0; colonne < carte[ligne].length; colonne++) {
