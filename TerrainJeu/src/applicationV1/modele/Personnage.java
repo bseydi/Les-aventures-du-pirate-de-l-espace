@@ -1,4 +1,4 @@
-package applicationV1;
+package applicationV1.modele;
 
 import java.util.Scanner;
 
