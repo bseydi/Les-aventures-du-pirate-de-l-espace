@@ -13,7 +13,7 @@ public class Personnage {
 	private Environnement env;
 	private int pointDeVie;
 	
-	Personnage (int x,int y,int v){
+	public Personnage (int x,int y,int v){
 		this.xProperty=new SimpleIntegerProperty(x);
 		this.yProperty =new SimpleIntegerProperty(y);
 		this.vitesse=v;
