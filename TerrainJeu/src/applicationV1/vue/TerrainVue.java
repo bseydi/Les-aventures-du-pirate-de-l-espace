@@ -26,6 +26,26 @@ public class TerrainVue {
 	public void creerTerrainJeu() throws FileNotFoundException  {       		    
 		int[][] carte = terrain.getCarte();
 		for(int ligne = 0; ligne < carte.length ;ligne++) {
+			for (int colonne = 0; colonne < carte[ligne].length; colonne++) {	
+				switch(carte[ligne][colonne]) {
+					case 0:
+						ciel();	
+						break;
+					case 1:
+						terre();
+						break;
+					case 2:
+						herbe();
+						break;
+				}
+			}
+        }
+
+    }	
+
+	/*public void creerTerrainJeu() throws FileNotFoundException  {       		    
+		int[][] carte = terrain.getCarte();
+		for(int ligne = 0; ligne < carte.length ;ligne++) {
 			for (int colonne = 0; colonne < carte[ligne].length; colonne++) {
 				if (carte[ligne][colonne] == 0) {
 					ciel();				
@@ -33,13 +53,11 @@ public class TerrainVue {
 					terre();
 				} else {
 					herbe();
-				}					
+				}	
 			}
         }
 
-    }	
-
-	
+    }*/
 	public void ciel() throws FileNotFoundException {
     	FileInputStream input = new FileInputStream("/home/etudiants/info/slecomte/works_01/TerrainJeu/src/image/ciel.jpg");
 		ImageView img = new ImageView(new Image (input));
