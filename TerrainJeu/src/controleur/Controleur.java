@@ -5,8 +5,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import applicationV1.modele.Personnage;
 import applicationV1.modele.Terrain;
+import applicationV1.modele.Vie;
 import applicationV1.vue.PersonnageVue;
 import applicationV1.vue.TerrainVue;
+import applicationV1.vue.VieVue;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -20,10 +22,10 @@ import javafx.util.Duration;
 public class Controleur implements Initializable {
 	Terrain terrain;
 	Personnage personnage;
-	
+	Vie tabCoeur;
 	TerrainVue terrainVue;
 	PersonnageVue personnageVue;
-	
+	VieVue vieVue;
 	private Timeline gameLoop;
 	private int temps;
 	
@@ -32,7 +34,12 @@ public class Controleur implements Initializable {
 	
 	@FXML
     private Pane panneauJeu;
-			
+	
+	@FXML
+	private TilePane placeCoeur;
+	
+	
+		
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		initAnimation();
@@ -42,13 +49,28 @@ public class Controleur implements Initializable {
 		terrainVue = new TerrainVue(terrainJeu, terrain);
 		personnage = new Personnage(100,172,5);
 		personnageVue = new PersonnageVue(panneauJeu);
+		tabCoeur = new Vie(personnage);
+		vieVue = new VieVue(placeCoeur,tabCoeur);
 		try {
 			terrainVue.creerTerrainJeu();
+			personnageVue.perso(personnage);
+			vieVue.afficheCoeur();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		personnageVue.perso(personnage);
+		
 	}	
+	
+	@FXML
+    void toucheAppuyée(KeyEvent event) {
+		if(event.getCode()==KeyCode.D) {
+    		personnage.seDeplacerADroite(); 
+    	} else if(event.getCode()==KeyCode.Q) {
+    		personnage.seDeplacerAGauche();   		
+    	} else if(event.getCode()==KeyCode.Z) {
+    		 personnage.sauter();  		
+    	}
+    }
 	
 	private void initAnimation() {
 		gameLoop = new Timeline();
@@ -63,16 +85,7 @@ public class Controleur implements Initializable {
 			);
 			gameLoop.getKeyFrames().add(kf);
 		}
+}	
+	
+	
 
-
-	@FXML
-    void toucheAppuyée(KeyEvent event) {
-		if(event.getCode()==KeyCode.D) {
-    		personnage.seDeplacerADroite(); 
-    	} else if(event.getCode()==KeyCode.Q) {
-    		personnage.seDeplacerAGauche();   		
-    	} else if(event.getCode()==KeyCode.Z) {
-    		 personnage.sauter();  		
-    	}
-    }
-}

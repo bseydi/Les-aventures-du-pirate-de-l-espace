@@ -39,40 +39,25 @@ public class TerrainVue {
 						break;
 				}
 			}
-        }
-
+		}
     }	
-
-	/*public void creerTerrainJeu() throws FileNotFoundException  {       		    
-		int[][] carte = terrain.getCarte();
-		for(int ligne = 0; ligne < carte.length ;ligne++) {
-			for (int colonne = 0; colonne < carte[ligne].length; colonne++) {
-				if (carte[ligne][colonne] == 0) {
-					ciel();				
-				}else if (carte[ligne][colonne] == 1){
-					terre();
-				} else {
-					herbe();
-				}	
-			}
-        }
-
-    }*/
+	
 	public void ciel() throws FileNotFoundException {
-    	FileInputStream input = new FileInputStream("/home/etudiants/info/slecomte/works_01/TerrainJeu/src/image/ciel.jpg");
+    	FileInputStream input = new FileInputStream("/home/etudiants/info/wvincent/prive/S2/DOO/TerrainJeu/src/image/ciel.jpg");
 		ImageView img = new ImageView(new Image (input));
         terrainJeu.getChildren().add(img);
 	}
 	
 	public void terre() throws FileNotFoundException {
-        FileInputStream input2 = new FileInputStream("/home/etudiants/info/slecomte/works_01/TerrainJeu/src/image/terre.jpg");
-        ImageView img = new ImageView(new Image (input2));
+        FileInputStream input = new FileInputStream("/home/etudiants/info/wvincent/prive/S2/DOO/TerrainJeu/src/image/terre.jpg");
+        ImageView img = new ImageView(new Image (input));
         terrainJeu.getChildren().add(img);
 	}
 	
 	public void herbe() throws FileNotFoundException {
-        FileInputStream input = new FileInputStream("/home/etudiants/info/slecomte/works_01/TerrainJeu/src/image/herbe.jpg");
+        FileInputStream input = new FileInputStream("/home/etudiants/info/wvincent/prive/S2/DOO/TerrainJeu/src/image/herbe.jpg");
         ImageView img = new ImageView(new Image (input));
         terrainJeu.getChildren().add(img);
 	}
+
 }

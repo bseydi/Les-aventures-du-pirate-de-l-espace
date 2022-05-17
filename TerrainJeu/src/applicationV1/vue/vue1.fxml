@@ -11,6 +11,7 @@
       <Pane fx:id="panneauJeu" prefHeight="320" prefWidth="320" BorderPane.alignment="CENTER">
          <children>
             <TilePane fx:id="terrainJeu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320" prefWidth="320" />
+            <TilePane fx:id="placeCoeur" prefHeight="44.0" prefWidth="320.0" />
          </children>
       </Pane>
    </center>
