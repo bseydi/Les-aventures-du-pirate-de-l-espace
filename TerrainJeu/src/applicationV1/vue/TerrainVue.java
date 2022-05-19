@@ -3,61 +3,59 @@ package applicationV1.vue;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import applicationV1.modele.Terrain;
+import controleur.ControleurClick;
+import controleur.ControleurTileQuitté;
+import controleur.ControleurTileSurvolé;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public class TerrainVue {
-	
-	
+
 	private TilePane terrainJeu;
 	private Terrain terrain;
-	
+
 	public TerrainVue(TilePane terrainJeu, Terrain terrain) {
-		super();
 		this.terrainJeu = terrainJeu;
 		this.terrain = terrain;
-		
+
 	}
 
-	public void creerTerrainJeu() throws FileNotFoundException  {       		    
-		int[][] carte = terrain.getCarte();
-		for(int ligne = 0; ligne < carte.length ;ligne++) {
-			for (int colonne = 0; colonne < carte[ligne].length; colonne++) {	
-				switch(carte[ligne][colonne]) {
-					case 0:
-						ciel();	
-						break;
-					case 1:
-						terre();
-						break;
-					case 2:
-						herbe();
-						break;
-				}
+	public void creerTerrainJeu() throws FileNotFoundException  {  
+
+		ImageView img = null;
+		int[] carte = terrain.getCarte();
+		for(int i = 0; i < carte.length ;i++) {
+			switch(carte[i]) {
+			case 1:
+				img = new ImageView(new Image("./image/Ciel.png"));
+				break;
+			case 2:
+				img = new ImageView(new Image("./image/gazon.png"));
+				break;
+			case 3:
+				img = new ImageView(new Image("./image/Terre.png"));
+				break;
+			case 4:
+				img = new ImageView(new Image("./image/fer1.png"));
+				break;
+			case 5:
+				img = new ImageView(new Image("./image/fer2.png"));
+				break;
+			case 6:
+				img = new ImageView(new Image("./image/pierre.png"));
+				break;
+
+			default: break;
 			}
+			terrainJeu.getChildren().add(img);
+			img.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, new ControleurTileSurvolé());
+			img.addEventHandler(MouseEvent.MOUSE_EXITED, new ControleurTileQuitté());
+			img.addEventHandler(MouseEvent.MOUSE_CLICKED, new ControleurClick(carte[i]));
 		}
-    }	
-	
-	public void ciel() throws FileNotFoundException {
-    	FileInputStream input = new FileInputStream("/home/etudiants/info/wvincent/prive/S2/DOO/TerrainJeu/src/image/ciel.jpg");
-		ImageView img = new ImageView(new Image (input));
-        terrainJeu.getChildren().add(img);
 	}
-	
-	public void terre() throws FileNotFoundException {
-        FileInputStream input = new FileInputStream("/home/etudiants/info/wvincent/prive/S2/DOO/TerrainJeu/src/image/terre.jpg");
-        ImageView img = new ImageView(new Image (input));
-        terrainJeu.getChildren().add(img);
-	}
-	
-	public void herbe() throws FileNotFoundException {
-        FileInputStream input = new FileInputStream("/home/etudiants/info/wvincent/prive/S2/DOO/TerrainJeu/src/image/herbe.jpg");
-        ImageView img = new ImageView(new Image (input));
-        terrainJeu.getChildren().add(img);
-	}
-
-}
+}	
