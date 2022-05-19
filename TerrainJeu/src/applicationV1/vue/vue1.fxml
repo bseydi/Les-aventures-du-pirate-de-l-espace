@@ -8,10 +8,11 @@
 
 <BorderPane onKeyPressed="#toucheAppuyée" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.Controleur">
    <center>
-      <Pane fx:id="panneauJeu" prefHeight="320" prefWidth="320" BorderPane.alignment="CENTER">
+      <Pane fx:id="panneauJeu" prefHeight="960" prefWidth="640" BorderPane.alignment="CENTER">
          <children>
-            <TilePane fx:id="terrainJeu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320" prefWidth="320" />
-            <TilePane fx:id="placeCoeur" prefHeight="44.0" prefWidth="320.0" />
+            <TilePane fx:id="terrainJeu" prefColumns="30" prefRows="0" />
+
+          
          </children>
       </Pane>
    </center>
