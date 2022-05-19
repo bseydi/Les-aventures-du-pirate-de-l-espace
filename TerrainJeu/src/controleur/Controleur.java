@@ -45,7 +45,7 @@ public class Controleur implements Initializable {
 		initAnimation();
 		gameLoop.play();
 		
-		this.terrain = new Terrain (20,20);
+		this.terrain = new Terrain ();
 		terrainVue = new TerrainVue(terrainJeu, terrain);
 		personnage = new Personnage(100,172,5);
 		personnageVue = new PersonnageVue(panneauJeu);
