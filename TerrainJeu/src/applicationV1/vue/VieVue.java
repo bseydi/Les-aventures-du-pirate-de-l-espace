@@ -23,17 +23,20 @@ public class VieVue {
 	
 	public void afficheCoeur() throws FileNotFoundException {
 		
-		int[][] carte = tabCoeur.getTabCoeur();
+		int[] carte = tabCoeur.getTabCoeur();
 		for(int ligne = 0; ligne < carte.length ;ligne++) {
-			for (int colonne = 0; colonne < carte[ligne].length; colonne++) {	
-				switch(carte[ligne][colonne]) {
-				case 1:
+				switch(carte[ligne]) {
+				case 10:
 					coeur();
 					break;
+				case 0:
+					coeurVide();
+					break;
+					
 				}
 			}
-		}
 	}
+	
 	
 	public void coeur () throws FileNotFoundException {
 		FileInputStream input = new FileInputStream("/home/etudiants/info/wvincent/prive/S2/DOO/TerrainJeu/src/image/coeur.png");
@@ -50,7 +53,7 @@ public class VieVue {
 	}
 	
 	public void coeurVide () throws FileNotFoundException {
-		FileInputStream input = new FileInputStream("/home/etudiants/info/wvincent/prive/S2/DOO/TerrainJeu/src/image/coeur.png");
+		FileInputStream input = new FileInputStream("/home/etudiants/info/wvincent/prive/S2/DOO/TerrainJeu/src/image/coeurVide.png");
 		ImageView img = new ImageView(new Image (input));
         placeCoeur.getChildren().add(img);
 		

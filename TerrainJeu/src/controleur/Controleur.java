@@ -50,6 +50,8 @@ public class Controleur implements Initializable {
 		personnage = new Personnage(100,172,5);
 		personnageVue = new PersonnageVue(panneauJeu);
 		tabCoeur = new Vie(personnage);
+		personnage.setPointDeVie(10);
+		tabCoeur.miseAjourTabCoeur();
 		vieVue = new VieVue(placeCoeur,tabCoeur);
 		try {
 			terrainVue.creerTerrainJeu();
