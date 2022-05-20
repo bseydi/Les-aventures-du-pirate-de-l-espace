@@ -3,6 +3,7 @@ package controleur;
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import applicationV1.modele.Personnage;
 import applicationV1.modele.Terrain;
 import applicationV1.modele.Vie;
@@ -13,6 +14,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -22,7 +24,7 @@ import javafx.util.Duration;
 public class Controleur implements Initializable {
 	Terrain terrain;
 	Personnage personnage;
-	Vie tabCoeur;
+	Vie vie;
 	TerrainVue terrainVue;
 	PersonnageVue personnageVue;
 	VieVue vieVue;
@@ -36,7 +38,7 @@ public class Controleur implements Initializable {
     private Pane panneauJeu;
 	
 	@FXML
-	private TilePane placeCoeur;
+    private Pane placeCoeur;
 	
 	
 		
@@ -49,10 +51,12 @@ public class Controleur implements Initializable {
 		terrainVue = new TerrainVue(terrainJeu, terrain);
 		personnage = new Personnage(100,172,5);
 		personnageVue = new PersonnageVue(panneauJeu);
-		tabCoeur = new Vie(personnage);
-		personnage.setPointDeVie(10);
-		tabCoeur.miseAjourTabCoeur();
-		vieVue = new VieVue(placeCoeur,tabCoeur);
+		personnage.setPointDeVie(60);
+		vie = new Vie(personnage.pointdeVieProperty());
+		
+		vieVue = new VieVue(placeCoeur, vie);
+		//tabCoeur.miseAjourTabCoeur();
+		
 		try {
 			terrainVue.creerTerrainJeu();
 			personnageVue.perso(personnage);
@@ -87,7 +91,7 @@ public class Controleur implements Initializable {
 			);
 			gameLoop.getKeyFrames().add(kf);
 		}
-}	
+}
 	
 	
 

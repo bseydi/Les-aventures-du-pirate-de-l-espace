@@ -1,3 +1,4 @@
+
 package controleur;
 
 import javafx.event.EventHandler;
@@ -16,7 +17,7 @@ public class ControleurClick implements EventHandler<MouseEvent> {
 	@Override
 	public void handle(MouseEvent event) {
 		ImageView img =(ImageView) event.getSource();
-		if ( event.getButton() == MouseButton.SECONDARY && this.id == 2 || this.id == 3 ) {
+		if ( event.getButton() == MouseButton.SECONDARY && (this.id == 2 || this.id == 3 )) {
 			img.setImage(new Image("./image/Ciel.png"));
 		}
 	}

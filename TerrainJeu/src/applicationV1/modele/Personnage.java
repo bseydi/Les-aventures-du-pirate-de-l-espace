@@ -6,13 +6,13 @@ import javafx.beans.property.SimpleIntegerProperty;
 public class Personnage {
 	private IntegerProperty xProperty,yProperty;
 	private int vitesse;
-	private IntegerProperty pointDeVie;
+	private IntegerProperty pointDeVieProperty;
 	
 	public Personnage (int x,int y,int v){
 		this.xProperty=new SimpleIntegerProperty(x);
 		this.yProperty =new SimpleIntegerProperty(y);
 		this.vitesse=v;
-		this.pointDeVie=new SimpleIntegerProperty(100);
+		this.pointDeVieProperty=new SimpleIntegerProperty(100);
 	}
 	
 
@@ -30,7 +30,7 @@ public class Personnage {
 	}
 	
 	public boolean estVivant() {
-		return this.pointDeVie.get()>0;
+		return this.pointDeVieProperty.get()>0;
 	}
 
 	public final IntegerProperty xProperty() {
@@ -56,16 +56,16 @@ public class Personnage {
 		return this.yProperty.getValue();
 	}
 	
-	public final IntegerProperty pointdeVie() {
-		return pointDeVie;
+	public final IntegerProperty pointdeVieProperty() {
+		return this.pointDeVieProperty;
 	}
 
 	public void setPointDeVie(int n) {
-		pointDeVie.setValue(n);
+		pointDeVieProperty.setValue(n);
 	}
 	
 	public final int getPointDeVie() {
-		return this.pointDeVie.getValue();
+		return this.pointDeVieProperty.getValue();
 	}
 	
 	public int getVitesse() {

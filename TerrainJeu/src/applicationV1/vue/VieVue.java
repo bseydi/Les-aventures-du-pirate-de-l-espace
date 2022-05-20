@@ -11,53 +11,51 @@ import javafx.scene.layout.TilePane;
 
 public class VieVue {
 	
-	private TilePane placeCoeur;
-	private Vie tabCoeur;
+	private Pane placeCoeur;
+	private Vie vie;
 	
-	public VieVue(TilePane placeCoeur, Vie tabCoeur) {
-		super();
+	public VieVue(Pane placeCoeur, Vie vie) {
 		this.placeCoeur = placeCoeur;
-		this.tabCoeur = tabCoeur;
+		this.vie = vie;
 
 	} 
 	
 	public void afficheCoeur() throws FileNotFoundException {
 		
-		int[] carte = tabCoeur.getTabCoeur();
-		for(int ligne = 0; ligne < carte.length ;ligne++) {
-				switch(carte[ligne]) {
-				case 10:
-					coeur();
-					break;
-				case 0:
-					coeurVide();
-					break;
-				default:
-					break;
-					
-				}
-			}
-	}
-	
-	
-	public void coeur () throws FileNotFoundException {
-		FileInputStream input = new FileInputStream("/home/etudiants/info/wvincent/prive/S2/DOO/TerrainJeu/src/image/coeur.png");
-		ImageView img = new ImageView(new Image (input));
-        this.placeCoeur.getChildren().add(img);
+		ImageView img = new ImageView(new Image("./image/coeur100.jpg"));
 		
+		switch(vie.getPv()) {
+		case 100:
+			img = new ImageView(new Image("./image/coeur100.jpg"));
+			break;
+		case 90:
+			img = new ImageView(new Image("./image/coeur90.jpg"));
+			break;
+		case 75:
+			img = new ImageView(new Image("./image/coeur75.jpg"));
+			break;
+		case 60:
+			img = new ImageView(new Image("./image/coeur60.jpg"));
+			break;
+		case 45:
+			img = new ImageView(new Image("./image/coeur45.jpg"));
+			break;
+		case 30:
+			img = new ImageView(new Image("./image/coeur30.jpg"));
+			break;
+		case 15:
+			img = new ImageView(new Image("./image/coeur15.jpg"));
+			break;
+		case 0:
+			img = new ImageView(new Image("./image/coeur0.jpg"));
+			break;
+		default:
+			break;
+		}
+		placeCoeur.getChildren().add(img);
+	
 	}
 	
-	public void miCoeur () throws FileNotFoundException {
-		FileInputStream input = new FileInputStream("/home/etudiants/info/wvincent/prive/S2/DOO/TerrainJeu/src/image/coeur.png");
-		ImageView img = new ImageView(new Image (input));
-        this.placeCoeur.getChildren().add(img);
-		
-	}
 	
-	public void coeurVide () throws FileNotFoundException {
-		FileInputStream input = new FileInputStream("/home/etudiants/info/wvincent/prive/S2/DOO/TerrainJeu/src/image/coeurVide.png");
-		ImageView img = new ImageView(new Image (input));
-        this.placeCoeur.getChildren().add(img);
-		
-	}
+	
 }

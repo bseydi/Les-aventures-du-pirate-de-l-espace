@@ -3,7 +3,7 @@ package applicationV1.modele;
 public class Environnement {
 	
 	private Terrain terrain;
-	private int[][] carte;
+	private int[] carte;
 	
 	public Environnement(Terrain t) {
 		
