@@ -19,21 +19,19 @@ public class Collisions {
 		return estTraversable(id);
 	}
 	public boolean blocGauche (int x, int y) {			// Calcule selon la position l'id du block à gauche du joueur selon le Terrain
-		x = ( x - 32 )/ 32; 
+		x = x / 32; 
 		y = y / 32;
-		Math.ceil(x);
-		Math.ceil(y);
-		x = ( x * 20  ) + ( y + 1 );
-		id = blockMap[x];
+		x = x +  y *30;
+		id = blockMap[x-30];
+		System.out.println("gauche : " +id );
 		return estTraversable(id);
 	}
 	public boolean blocDroit (int x, int y) {			// Calcule selon la position l'id du block à droite du joueur selon le Terrain
-		x = ( x + 32 ) / 32; 
+		x = x / 32; 
 		y = y / 32;
-		Math.ceil(x);
-		Math.ceil(y);
-		x = ( x * 20  ) + ( y + 1 );
+		x = x +  ((y-1) *30);
 		id = blockMap[x];
+		System.out.println("droite : " +id);
 		return estTraversable(id);
 	}
 	public boolean estTraversable (int id) { // Retourne false si autre que l'id du ciel
