@@ -50,7 +50,8 @@ public class Controleur implements Initializable {
 		terrainVue = new TerrainVue(terrainJeu, terrain);
 		personnage = new Personnage(300,290,5);
 		personnageVue = new PersonnageVue(panneauJeu,personnage);
-		
+		c1 = new Collisions(personnage, terrain);
+
 		try {
 			terrainVue.creerTerrainJeu();
 		} catch (FileNotFoundException e) {
