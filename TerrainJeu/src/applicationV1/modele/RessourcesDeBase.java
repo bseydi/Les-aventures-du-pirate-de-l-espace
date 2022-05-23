@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class RessourcesDeBase {
 
-	private Map<String,Integer> ressourcesBase;
+	private Map<Ressources,Integer> ressourcesBase;
 	private Ressources bois;
 	private Ressources fer;
 	private Ressources fraise;
@@ -29,22 +29,22 @@ public class RessourcesDeBase {
 	
 	
 
-	public Map<String, Integer> getRessourcesBase() {
+	public Map<Ressources,Integer> getRessourcesBase() {
 		return ressourcesBase;
 	}
 
-	public void setRessourcesBase(Map<String, Integer> ressourcesBase) {
+	public void setRessourcesBase(Map<Ressources,Integer> ressourcesBase) {
 		this.ressourcesBase = ressourcesBase;
 	}
 
 	// ajoute l'objet dans la liste
-	public void ajouterRessources(String r) {
+	public void ajouterRessources(Ressources r) {
 		this.ressourcesBase.put(r, this.ressourcesBase.get(r)+1);
 	}
 	
 	
 	// supprime l'objet de la list
-	public void supprimmeRessources(String r) {
+	public void supprimmeRessources(Ressources r) {
 		this.ressourcesBase.put(r, this.ressourcesBase.get(r)-1);
 	}
 	
