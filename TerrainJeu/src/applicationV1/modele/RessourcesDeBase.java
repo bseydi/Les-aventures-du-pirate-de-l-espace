@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class RessourcesDeBase {
 
-	private Map<Ressources,Integer> ressourcesBase;
+	private Map<String,Integer> ressourcesBase;
 	private Ressources bois;
 	private Ressources fer;
 	private Ressources fraise;
@@ -17,34 +17,34 @@ public class RessourcesDeBase {
 	
 	public RessourcesDeBase() {
 		this.ressourcesBase=new HashMap<>();
-		this.ressourcesBase.put(bois, 0);
-		this.ressourcesBase.put(fer, 0);
-		this.ressourcesBase.put(fraise, 2);
-		this.ressourcesBase.put(pierre, 0);
-		this.ressourcesBase.put(pommeDeTerre, 2);
-		this.ressourcesBase.put(viandesDeCreatures, 0);
-		this.ressourcesBase.put(pommeDeTerreCuite, 0);
-		this.ressourcesBase.put(viandesDeCreaturesCuite, 0);
+		this.ressourcesBase.put("bois", 0);
+		this.ressourcesBase.put("fer", 0);
+		this.ressourcesBase.put("fraise", 2);
+		this.ressourcesBase.put("pierre", 0);
+		this.ressourcesBase.put("pommeDeTerre", 2);
+		this.ressourcesBase.put("viandesDeCreatures", 0);
+		this.ressourcesBase.put("pommeDeTerreCuite", 0);
+		this.ressourcesBase.put("viandesDeCreaturesCuite", 0);
 	}
 	
 	
 
-	public Map<Ressources, Integer> getRessourcesBase() {
+	public Map<String, Integer> getRessourcesBase() {
 		return ressourcesBase;
 	}
 
-	public void setRessourcesBase(Map<Ressources, Integer> ressourcesBase) {
+	public void setRessourcesBase(Map<String, Integer> ressourcesBase) {
 		this.ressourcesBase = ressourcesBase;
 	}
 
 	// ajoute l'objet dans la liste
-	public void ajouterRessources(Ressources r) {
+	public void ajouterRessources(String r) {
 		this.ressourcesBase.put(r, this.ressourcesBase.get(r)+1);
 	}
 	
 	
 	// supprime l'objet de la list
-	public void supprimmeRessources(Ressources r) {
+	public void supprimmeRessources(String r) {
 		this.ressourcesBase.put(r, this.ressourcesBase.get(r)-1);
 	}
 	
