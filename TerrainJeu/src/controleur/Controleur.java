@@ -66,7 +66,9 @@ public class Controleur implements Initializable {
 		
 		KeyFrame kf = new KeyFrame (Duration.seconds(0.017 ),(ev ->{	
 					
-			
+			if ( c1.blocDessous(personnage.getX(), personnage.getY())) {
+					personnage.setY(personnage.getY()+1);
+			}
 						
 			temps++;
 			})
@@ -96,14 +98,5 @@ public class Controleur implements Initializable {
 			}
 				
 		}
-	}
-	
-	
-		
-		
-			
+	}			
 }
-
-	
-	
-
