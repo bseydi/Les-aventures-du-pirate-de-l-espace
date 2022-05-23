@@ -55,7 +55,7 @@ public class TerrainVue {
 			terrainJeu.getChildren().add(img);
 			img.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, new ControleurTileSurvolé());
 			img.addEventHandler(MouseEvent.MOUSE_EXITED, new ControleurTileQuitté());
-			img.addEventHandler(MouseEvent.MOUSE_CLICKED, new ControleurClick(carte[i]));
+			img.addEventHandler(MouseEvent.MOUSE_CLICKED, new ControleurClick(terrain,carte[i],i));
 		}
 	}
 }	
