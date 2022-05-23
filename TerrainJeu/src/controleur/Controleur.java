@@ -90,23 +90,27 @@ public class Controleur implements Initializable {
 	
 	@FXML
     void toucheAppuyée(KeyEvent event) {		
-		if(event.getCode()==KeyCode.D) {	
-    		direction = 1;
-			personnage.seDeplacerADroite();
+		if(event.getCode()==KeyCode.D) {
+			if ( c1.blocDroit(personnage.getX(),personnage.getY())) {
+				direction = 1;
+				personnage.seDeplacerADroite();
+			}
     	} 
 		else if(event.getCode()==KeyCode.Q) {
-    		direction = 2;
-			personnage.seDeplacerAGauche(); 
+			if ( c1.blocGauche(personnage.getX(),personnage.getY())) {
+				direction = 2;
+				personnage.seDeplacerAGauche(); 
+			}
     	} 
 		else if(event.getCode()==KeyCode.Z) {   		
 			if (direction == 1) {
-				personnage.setY(personnage.getY() - 100);	
-				personnage.setX(personnage.getX() + 100);
+				personnage.setY(personnage.getY() - 50);	
+				personnage.setX(personnage.getX() + 50);
 			} else if (direction == 2) {
-				personnage.setY(personnage.getY() - 100);	
-				personnage.setX(personnage.getX() - 100);
+				personnage.setY(personnage.getY() - 50);	
+				personnage.setX(personnage.getX() - 50);
 			} else {
-				personnage.setY(personnage.getY() - 100);	
+				personnage.setY(personnage.getY() - 50);	
 			}
 				
 		}
