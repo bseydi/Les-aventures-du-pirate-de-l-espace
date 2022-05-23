@@ -4,14 +4,15 @@ import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import applicationV1.modele.principal.Personnage;
-import applicationV1.modele.principal.Terrain;
+import applicationV1.modele.Personnage;
+import applicationV1.modele.RessourcesDeBase;
 import applicationV1.modele.fonctionnalités.Collisions;
-import applicationV1.modele.ressourcesDeBase.Bois;
-import applicationV1.modele.ressourcesDeBase.Fer;
+import applicationV1.modele.Terrain;
+import applicationV1.modele.Vie;
 import applicationV1.vue.PersonnageVue;
-import applicationV1.vue.RessourceVue;
+import applicationV1.vue.RessourcesDeBaseVue;
 import applicationV1.vue.TerrainVue;
+import applicationV1.vue.VieVue;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -28,6 +29,8 @@ public class Controleur implements Initializable {
 	Collisions c1;
 	TerrainVue terrainVue;
 	PersonnageVue personnageVue;
+	Vie vie;
+	VieVue vieVue;
 	
 	private Timeline gameLoop;
 
@@ -40,6 +43,9 @@ public class Controleur implements Initializable {
 	
 	@FXML
     private Pane panneauJeu;
+	
+	@FXML
+    private Pane placeCoeur;
 			
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -50,10 +56,14 @@ public class Controleur implements Initializable {
 		terrainVue = new TerrainVue(terrainJeu, terrain);
 		personnage = new Personnage(300,290,5);
 		personnageVue = new PersonnageVue(panneauJeu,personnage);
+		vie = new Vie(personnage.pointdeVieProperty());
+		vieVue = new VieVue(placeCoeur, vie);
 		c1 = new Collisions(personnage, terrain);
 
 		try {
 			terrainVue.creerTerrainJeu();
+			vieVue.afficheCoeur();
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
