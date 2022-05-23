@@ -5,12 +5,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import applicationV1.modele.Personnage;
-import applicationV1.modele.Ressources;
 import applicationV1.modele.RessourcesDeBase;
 import applicationV1.modele.Terrain;
+import applicationV1.modele.Vie;
 import applicationV1.vue.PersonnageVue;
 import applicationV1.vue.RessourcesDeBaseVue;
 import applicationV1.vue.TerrainVue;
+import applicationV1.vue.VieVue;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -18,7 +19,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
@@ -26,11 +26,12 @@ import javafx.util.Duration;
 public class Controleur implements Initializable {
 	Terrain terrain;
 	Personnage personnage;
+	Vie vie;
 	TerrainVue terrainVue;
 	PersonnageVue personnageVue;
+	VieVue vieVue;
 	RessourcesDeBase ressourcesBase;
 	RessourcesDeBaseVue ressourcesDeBaseVue;
-	Ressources r;
 	private Timeline gameLoop;
 	private int temps;
 	
@@ -40,44 +41,51 @@ public class Controleur implements Initializable {
 	@FXML
     private Pane panneauJeu;
 	
+	@FXML
+    private Pane placeCoeur;
+	
    @FXML
     private TilePane placeRessources;
 	
-	@FXML
-    void toucheAppuyée(KeyEvent event) {
-		if(event.getCode()==KeyCode.D) {
-    		personnage.seDeplacerADroite(); 
-    	}
-    	else if(event.getCode()==KeyCode.Q) {
-    		personnage.seDeplacerAGauche();   		
-    	}
-    	else if(event.getCode()==KeyCode.Z) {
-    		 personnage.sauter();  		
-    	}
-    }
+	
 		
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		initAnimation();
 		gameLoop.play();
 		
-		
-		
 		this.terrain = new Terrain ();
 		terrainVue = new TerrainVue(terrainJeu, terrain);
 		personnage = new Personnage(100,172,5);
 		personnageVue = new PersonnageVue(panneauJeu);
+		personnage.setPointDeVie(100);
+		vie = new Vie(personnage.pointdeVieProperty());
+		vieVue = new VieVue(placeCoeur, vie);
 		ressourcesBase = new RessourcesDeBase();
 		ressourcesDeBaseVue = new RessourcesDeBaseVue(placeRessources,ressourcesBase.getRessourcesBase());
+		//tabCoeur.miseAjourTabCoeur();
+		
 		try {
 			terrainVue.creerTerrainJeu();
+			personnageVue.perso(personnage);
+			vieVue.afficheCoeur();
 			ressourcesDeBaseVue.afficheRessources();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		personnageVue.perso(personnage);
 		
-	}		
+	}	
+	
+	@FXML
+    void toucheAppuyée(KeyEvent event) {
+		if(event.getCode()==KeyCode.D) {
+    		personnage.seDeplacerADroite(); 
+    	} else if(event.getCode()==KeyCode.Q) {
+    		personnage.seDeplacerAGauche();   		
+    	} else if(event.getCode()==KeyCode.Z) {
+    		 personnage.sauter();  		
+    	}
+    }
 	
 	private void initAnimation() {
 		gameLoop = new Timeline();
@@ -92,5 +100,7 @@ public class Controleur implements Initializable {
 			);
 			gameLoop.getKeyFrames().add(kf);
 		}
-
 }
+	
+	
+
