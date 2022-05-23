@@ -1,4 +1,3 @@
-
 package applicationV1.modele;
 
 
@@ -26,10 +25,13 @@ public class Terrain {
 			3,3,6,6,6,6,6,6,6,6,6,6,6,3,3,5,3,3,3,6,3,3,3,3,3,3,3,3,3,3};
 
 	public Terrain () {
-
+		this.carte = carte;
 	}		
 	
 	public int[] getCarte() {
 		return carte;
-	}	
+	}
+	public void supprimerCase(int num) {
+		carte[num] = 1;
+	}
 }
