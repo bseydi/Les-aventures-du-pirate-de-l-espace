@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import applicationV1.modele.principal.Personnage;
 import applicationV1.modele.principal.Terrain;
+import applicationV1.modele.fonctionnalités.Collisions;
 import applicationV1.modele.ressourcesDeBase.Bois;
 import applicationV1.modele.ressourcesDeBase.Fer;
 import applicationV1.vue.PersonnageVue;
@@ -24,7 +25,7 @@ import javafx.util.Duration;
 public class Controleur implements Initializable {
 	Terrain terrain;
 	Personnage personnage;
-	
+	Collisions c1;
 	TerrainVue terrainVue;
 	PersonnageVue personnageVue;
 	
