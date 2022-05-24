@@ -22,32 +22,32 @@ public class VieVue {
 	
 	public void afficheCoeur() throws FileNotFoundException {
 		
-		ImageView img = new ImageView(new Image("./image/coeur100.jpg"));
+		ImageView img = new ImageView(new Image("./image/imageCoeurs/coeur100.png"));
 		
 		switch(vie.getPv()) {
 		case 100:
-			img = new ImageView(new Image("./image/coeur100.jpg"));
+			img = new ImageView(new Image("./image/imageCoeurs/coeur100.png"));
 			break;
 		case 90:
-			img = new ImageView(new Image("./image/coeur90.jpg"));
+			img = new ImageView(new Image("./image/imageCoeurs/coeur90.png"));
 			break;
 		case 75:
-			img = new ImageView(new Image("./image/coeur75.jpg"));
+			img = new ImageView(new Image("./image/imageCoeurs/coeur75.png"));
 			break;
 		case 60:
-			img = new ImageView(new Image("./image/coeur60.jpg"));
+			img = new ImageView(new Image("./image/imageCoeurs/coeur60.png"));
 			break;
 		case 45:
-			img = new ImageView(new Image("./image/coeur45.jpg"));
+			img = new ImageView(new Image("./image/imageCoeurs/coeur45.png"));
 			break;
 		case 30:
-			img = new ImageView(new Image("./image/coeur30.jpg"));
+			img = new ImageView(new Image("./image/imageCoeurs/coeur30.png"));
 			break;
 		case 15:
-			img = new ImageView(new Image("./image/coeur15.jpg"));
+			img = new ImageView(new Image("./image/imageCoeurs/coeur15.png"));
 			break;
 		case 0:
-			img = new ImageView(new Image("./image/coeur0.jpg"));
+			img = new ImageView(new Image("./image/imageCoeurs/coeur0.png"));
 			break;
 		default:
 			break;
