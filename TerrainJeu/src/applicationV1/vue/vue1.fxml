@@ -11,7 +11,7 @@
       <Pane fx:id="panneauJeu" prefHeight="960" prefWidth="640" BorderPane.alignment="CENTER">
          <children>
             <TilePane fx:id="terrainJeu" prefColumns="30" prefRows="0" />
-            <Pane fx:id="placeCoeur" prefHeight="75.0" prefWidth="640.0" />
+            <Pane fx:id="placeCoeur" />
          </children>
       </Pane>
    </center>
