@@ -30,7 +30,7 @@ public class RessourcesDeBaseVue {
 	
 	public void bois() throws FileNotFoundException{
 		
-		FileInputStream input = new FileInputStream("/home/etudiants/info/slecomte/works_01/TerrainJeu/src/image/bois_ressources.jpg");
+		FileInputStream input = new FileInputStream("/home/etudiants/info/slecomte/works_01/TerrainJeu/src/image/imageRessources/ressource_bois.png");
 		ImageView img = new ImageView(new Image (input));
 		this.placeRessources.getChildren().add(img);
         
@@ -38,7 +38,7 @@ public class RessourcesDeBaseVue {
 	}
 	
 	public void fer() throws FileNotFoundException{
-		FileInputStream input = new FileInputStream("/home/etudiants/info/slecomte/works_01/TerrainJeu/src/image/fer_ressourcesBase.jpg");
+		FileInputStream input = new FileInputStream("/home/etudiants/info/slecomte/works_01/TerrainJeu/src/image/imageRessources/ressource_fer.png");
 		ImageView img = new ImageView(new Image (input));
         	this.placeRessources.getChildren().add(img);
 	}
@@ -50,7 +50,7 @@ public class RessourcesDeBaseVue {
 	}
 	
 	public void pierre() throws FileNotFoundException{
-		FileInputStream input = new FileInputStream("/home/etudiants/info/slecomte/works_01/TerrainJeu/src/image/Pierre_ressources.jpg");
+		FileInputStream input = new FileInputStream("/home/etudiants/info/slecomte/works_01/TerrainJeu/src/image/imageRessources/ressource_pierre.png");
 		ImageView img = new ImageView(new Image (input));
         	this.placeRessources.getChildren().add(img);
 	}
