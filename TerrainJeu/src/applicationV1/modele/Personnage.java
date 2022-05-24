@@ -25,10 +25,6 @@ public class Personnage {
 		this.xProperty.set(this.getX()+this.vitesse);
 	}
 	
-	public void sauter() {
-		this.yProperty.set(this.getY()-40);
-	}
-	
 	public boolean estVivant() {
 		return this.pointDeVieProperty.get()>0;
 	}
