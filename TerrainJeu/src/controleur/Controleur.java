@@ -31,6 +31,8 @@ public class Controleur implements Initializable {
 	PersonnageVue personnageVue;
 	Vie vie;
 	VieVue vieVue;
+	RessourcesDeBase listRessources;
+	RessourcesDeBaseVue ressourcesDeBaseVue;
 	
 	private Timeline gameLoop;
 
@@ -46,7 +48,19 @@ public class Controleur implements Initializable {
 	
 	@FXML
     private Pane placeCoeur;
-			
+
+	@FXML
+    private TilePane placeRessources;
+   
+   @FXML
+   private Label labelBois;
+
+   @FXML
+   private Label labelFer;
+
+   @FXML
+   private Label labelPierre;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		initAnimation();
@@ -59,11 +73,13 @@ public class Controleur implements Initializable {
 		vie = new Vie(personnage.pointdeVieProperty());
 		vieVue = new VieVue(placeCoeur, vie);
 		c1 = new Collisions(personnage, terrain);
-
+		listRessources = new RessourcesDeBase();
+		ressourcesDeBaseVue = new RessourcesDeBaseVue(placeRessources,labelBois,labelFer,labelPierre,listRessources.getRessourcesBase());
+		
 		try {
 			terrainVue.creerTerrainJeu();
 			vieVue.afficheCoeur();
-
+			ressourcesDeBaseVue.afficheRessources();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
