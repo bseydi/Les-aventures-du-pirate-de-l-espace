@@ -35,7 +35,7 @@ public class RessourcesDeBaseVue {
 	public void afficheRessources() throws FileNotFoundException {
 		bois();
 		fer();
-		pierre
+		pierre();
 	}
 	
 	public void bois() throws FileNotFoundException{
