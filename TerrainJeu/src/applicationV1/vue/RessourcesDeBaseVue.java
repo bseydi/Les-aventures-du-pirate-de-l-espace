@@ -2,9 +2,13 @@ package applicationV1.vue;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Map;
 
 import applicationV1.modele.Ressources;
+import javafx.beans.property.IntegerProperty;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
@@ -12,14 +16,20 @@ import javafx.scene.layout.TilePane;
 public class RessourcesDeBaseVue {
 	
 	private TilePane placeRessources;
-	private Map<Ressources,Integer> ressourcesBase;
-	private int nbRessources;
-
+	private Label labelBois;
+	private Label labelFer;
+	private Label labelPierre;
+	private ArrayList<Ressources> listRessources;
+	private Ressources bois;
+	private Ressources fer;
+	private Ressources pierre;
 	
-	public RessourcesDeBaseVue(TilePane placeRessource,Map<Ressurces,Integer> ressourcesBase) {
+	public RessourcesDeBaseVue(TilePane placeRessource,Label labelBois,Label labelFer,Label labelPierre,ArrayList<Ressources> listRessources) {
 		this.placeRessources=placeRessource;
-
-		this.ressourcesBase=ressourcesBase;
+		this.labelBois=labelBois;
+		this.labelFer=labelFer;
+		this.labelPierre=labelPierre;
+		this.listRessources=listRessources;
 	}
 	
 	public void afficheRessources() throws FileNotFoundException {
@@ -29,53 +39,17 @@ public class RessourcesDeBaseVue {
 	}
 	
 	public void bois() throws FileNotFoundException{
-		
-		FileInputStream input = new FileInputStream("/home/etudiants/info/slecomte/works_01/TerrainJeu/src/image/imageRessources/ressource_bois.png");
-		ImageView img = new ImageView(new Image (input));
-		this.placeRessources.getChildren().add(img);
-        
-        
+		this.bois=listRessources.get(0);
+		labelBois.textProperty().bind(this.bois.getQuantiteProperty().asString());
 	}
 	
 	public void fer() throws FileNotFoundException{
-		FileInputStream input = new FileInputStream("/home/etudiants/info/slecomte/works_01/TerrainJeu/src/image/imageRessources/ressource_fer.png");
-		ImageView img = new ImageView(new Image (input));
-        	this.placeRessources.getChildren().add(img);
-	}
-	
-	public void fraise() throws FileNotFoundException{
-		FileInputStream input = new FileInputStream("/home/etudiants/info/slecomte/works_01/TerrainJeu/src/image/Fraise_ressources.jpg");
-		ImageView img = new ImageView(new Image (input));
-       	 	this.placeRessources.getChildren().add(img);
+		this.fer=listRessources.get(1);
+		labelFer.textProperty().bind(this.fer.getQuantiteProperty().asString());
 	}
 	
 	public void pierre() throws FileNotFoundException{
-		FileInputStream input = new FileInputStream("/home/etudiants/info/slecomte/works_01/TerrainJeu/src/image/imageRessources/ressource_pierre.png");
-		ImageView img = new ImageView(new Image (input));
-        	this.placeRessources.getChildren().add(img);
-	}
-	
-	public void pommeDeTerre() throws FileNotFoundException{
-		FileInputStream input = new FileInputStream("/home/etudiants/info/slecomte/works_01/TerrainJeu/src/image/PommeDeTerre_ressources_ressources.jpg");
-		ImageView img = new ImageView(new Image (input));
-        	this.placeRessources.getChildren().add(img);
-	}
-	
-	public void pommeDeTerreCuite() throws FileNotFoundException{
-		FileInputStream input = new FileInputStream("/home/etudiants/info/slecomte/works_01/TerrainJeu/src/image/PommeDeTerreCuite.jpg");
-		ImageView img = new ImageView(new Image (input));
-        	this.placeRessources.getChildren().add(img);
-	}
-	
-	public void viandesDeCreature() throws FileNotFoundException{
-		FileInputStream input = new FileInputStream("/home/etudiants/info/slecomte/works_01/TerrainJeu/src/image/ViandesdeCreatures_ressources.jpg");
-		ImageView img = new ImageView(new Image (input));
-       	 	this.placeRessources.getChildren().add(img);
-	}
-	
-	public void viandesDeCreatureCuite() throws FileNotFoundException{
-		FileInputStream input = new FileInputStream("/home/etudiants/info/slecomte/works_01/TerrainJeu/src/image/ViandeDeCreaturesCuite_ressources.jpg");
-		ImageView img = new ImageView(new Image (input));
-        	this.placeRessources.getChildren().add(img);
+		this.pierre=listRessources.get(3);
+		labelPierre.textProperty().bind(this.pierre.getQuantiteProperty().asString());
 	}
 }
