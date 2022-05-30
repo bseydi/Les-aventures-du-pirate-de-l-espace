@@ -13,7 +13,7 @@
          <children>
             <TilePane fx:id="terrainJeu" prefColumns="30" prefRows="0" />
            	<Pane fx:id="placeCoeur" prefHeight="75.0" prefWidth="640.0" />
-            <TilePane fx:id="placeRessources" layoutX="1.0" layoutY="400.0" prefColumns="2">
+            <TilePane fx:id="placeRessources" layoutX="1.0" layoutY="550.0" prefColumns="2">
                <children>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
