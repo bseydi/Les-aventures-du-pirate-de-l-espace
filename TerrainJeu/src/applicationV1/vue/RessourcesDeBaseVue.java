@@ -3,11 +3,7 @@ package applicationV1.vue;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Map;
-
 import applicationV1.modele.Ressources;
-import javafx.beans.property.IntegerProperty;
-import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
