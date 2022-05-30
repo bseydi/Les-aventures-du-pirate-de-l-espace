@@ -1,6 +1,5 @@
 package applicationV1.vue;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import applicationV1.modele.Terrain;
 import controleur.ControleurClick;
@@ -9,10 +8,7 @@ import controleur.ControleurTileSurvolé;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 
 public class TerrainVue {
 

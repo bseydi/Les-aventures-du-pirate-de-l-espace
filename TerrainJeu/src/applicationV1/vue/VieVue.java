@@ -23,8 +23,10 @@ public class VieVue {
 	public void afficheCoeur() throws FileNotFoundException {
 		
 		ImageView img = new ImageView(new Image("./image/imageCoeurs/coeur100.png"));
+		int pvArrondi = arrondirPv(vie.getPv());
+		System.out.println(pvArrondi);
 		
-		switch(vie.getPv()) {
+		switch(pvArrondi) {
 		case 100:
 			img = new ImageView(new Image("./image/imageCoeurs/coeur100.png"));
 			break;
@@ -54,6 +56,22 @@ public class VieVue {
 		}
 		placeCoeur.getChildren().add(img);
 	
+	}
+	
+	// A modifier 
+	public int arrondirPv(int pv) {
+		
+		int[] tab = {100,90,75,60,45,30,15,0};
+		int pvArrondi = 0;
+		
+		for(int i = 0; i < tab.length;i++) {
+			System.out.println(tab[i]);
+			if((tab[i] - pv) <= pvArrondi) {
+				pvArrondi = tab[i];
+			}
+		}
+		
+		return pvArrondi;
 	}
 	
 	
