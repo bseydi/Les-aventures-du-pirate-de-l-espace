@@ -63,8 +63,6 @@ public class Controleur implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		initAnimation();
-		gameLoop.play();
 		
 		this.terrain = new Terrain ();
 		terrainVue = new TerrainVue(terrainJeu, terrain);
@@ -76,6 +74,8 @@ public class Controleur implements Initializable {
 		listRessources = new RessourcesDeBase();
 		ressourcesDeBaseVue = new RessourcesDeBaseVue(placeRessources,labelBois,labelFer,labelPierre,listRessources.getRessourcesBase());
 		
+		initAnimation();
+		gameLoop.play();
 		try {
 			terrainVue.creerTerrainJeu();
 			vieVue.afficheCoeur();
