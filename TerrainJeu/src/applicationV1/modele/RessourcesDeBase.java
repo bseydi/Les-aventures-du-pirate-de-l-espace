@@ -27,10 +27,9 @@ public class RessourcesDeBase {
 		this.listRessources.add(viandesDeCreatures);
 		this.listRessources.add(pommeDeTerreCuite);
 		this.listRessources.add(viandesDeCreaturesCuite);
-	}
+		
+		}
 	
-	
-
 	public ArrayList<Ressources> getRessourcesBase() {
 		return listRessources;
 	}
@@ -54,5 +53,4 @@ public class RessourcesDeBase {
 	public boolean contientRessources(Ressources r) {
 		return this.listRessources.contains(r);
 	}
-
 }

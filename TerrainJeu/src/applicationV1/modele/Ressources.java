@@ -31,16 +31,21 @@ public class Ressources {
 		this.donnerPV = donnerPV;
 	}
 	
+
 	public final IntegerProperty quantiteProperty() {
 		return quantiteProperty;
 	}
-	
+/*
+	public int getQuantite() {
+		return this.quantiteProperty.getValue();
+	}
+*/
 	public IntegerProperty getQuantiteProperty() {
 		return quantiteProperty;
 	}
 
-	public void setQuantiteProperty(IntegerProperty quantiteProperty) {
-		this.quantiteProperty = quantiteProperty;
+	public void setQuantiteProperty(int quantite) {
+		this.quantiteProperty.setValue(quantite);
 	}
-
+	
 }
