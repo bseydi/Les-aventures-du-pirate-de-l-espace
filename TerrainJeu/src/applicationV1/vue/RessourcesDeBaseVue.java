@@ -3,10 +3,15 @@ package applicationV1.vue;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Map;
+
 import applicationV1.modele.Ressources;
+import javafx.beans.property.IntegerProperty;
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
 import javafx.scene.layout.TilePane;
 
 public class RessourcesDeBaseVue {
@@ -14,7 +19,8 @@ public class RessourcesDeBaseVue {
 	private TilePane placeRessources;
 	private Label labelBois;
 	private Label labelFer;
-	private Label labelPierre;
+	private Label labelPierre;	
+	//private Map<String,Integer> ressourcesBase;
 	private ArrayList<Ressources> listRessources;
 	private Ressources bois;
 	private Ressources fer;
@@ -25,18 +31,21 @@ public class RessourcesDeBaseVue {
 		this.labelBois=labelBois;
 		this.labelFer=labelFer;
 		this.labelPierre=labelPierre;
+		//this.labelRessources=labelRessources;
 		this.listRessources=listRessources;
+		//this.ressourcesBase=ressourcesBase;
 	}
 	
 	public void afficheRessources() throws FileNotFoundException {
 		bois();
 		fer();
 		pierre();
+	
 	}
 	
 	public void bois() throws FileNotFoundException{
 		this.bois=listRessources.get(0);
-		labelBois.textProperty().bind(this.bois.getQuantiteProperty().asString());
+		labelBois.textProperty().bind(this.bois.getQuantiteProperty().asString());           
 	}
 	
 	public void fer() throws FileNotFoundException{
