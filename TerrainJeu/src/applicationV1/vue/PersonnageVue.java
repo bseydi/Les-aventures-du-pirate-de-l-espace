@@ -18,10 +18,7 @@ public class PersonnageVue {
 	}
 
 	public void perso () {
-		/*Circle r;
-		r = new Circle(5);
-		r.setFill(Color.RED);*/
-		ImageView r = new ImageView(new Image("./image/astronaute(2).jpeg"));
+		ImageView r = new ImageView(new Image("./image/astronaut.png"));	// Creation de notre sprite
 		r.translateXProperty().bind(personnage.xProperty());
     	r.translateYProperty().bind(personnage.yProperty());
    	 	panneauJeu.getChildren().add(r);
