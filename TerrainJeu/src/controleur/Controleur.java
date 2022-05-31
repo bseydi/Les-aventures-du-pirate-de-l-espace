@@ -5,7 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import applicationV1.modele.Personnage;
-import applicationV1.modele.RessourcesDeBase;
+
 import applicationV1.modele.fonctionnalités.Collisions;
 import applicationV1.modele.Terrain;
 import applicationV1.modele.Vie;
@@ -32,11 +32,10 @@ public class Controleur implements Initializable {
 	PersonnageVue personnageVue;
 	Vie vie;
 	VieVue vieVue;
-	RessourcesDeBase listRessources;
 	RessourcesDeBaseVue ressourcesDeBaseVue;
 	
 	private Timeline gameLoop;
-	private int temps;
+	
 	int direction = 0;
 	
 	@FXML
@@ -47,8 +46,8 @@ public class Controleur implements Initializable {
 	
 	@FXML
     private Pane placeCoeur;
-	
-   @FXML
+
+	@FXML
     private TilePane placeRessources;
    
    @FXML
@@ -60,21 +59,17 @@ public class Controleur implements Initializable {
    @FXML
    private Label labelPierre;
 	
-	
-		
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
 		
 		this.terrain = new Terrain ();
 		terrainVue = new TerrainVue(terrainJeu, terrain);
 		personnage = new Personnage(300,290,5);
-		personnageVue = new PersonnageVue(panneauJeu, personnage);
+		personnageVue = new PersonnageVue(panneauJeu,personnage);
 		vie = new Vie(personnage.pointdeVieProperty());
 		vieVue = new VieVue(placeCoeur, vie);
 		c1 = new Collisions(personnage, terrain);
-		listRessources = new RessourcesDeBase();
-		ressourcesDeBaseVue = new RessourcesDeBaseVue(placeRessources,labelBois,labelFer,labelPierre,listRessources.getRessourcesBase());
+		ressourcesDeBaseVue = new RessourcesDeBaseVue(personnage,labelBois,labelFer,labelPierre);
 		
 		initAnimation();
 		gameLoop.play();
@@ -91,19 +86,18 @@ public class Controleur implements Initializable {
 	
 	private void initAnimation() {
 		gameLoop = new Timeline();
-		temps=0;
 		gameLoop.setCycleCount(Timeline.INDEFINITE);
-
-		KeyFrame kf = new KeyFrame (Duration.seconds(0.017),(ev ->{
-			
+		
+		KeyFrame kf = new KeyFrame (Duration.seconds(0.017 ),(ev ->{	
+					
 			if ( c1.blocDessous(personnage.getX(), personnage.getY())) {
-				personnage.setY(personnage.getY()+1);
-		}			
-				temps++;
+					personnage.setY(personnage.getY()+1);
+			}
+						
 			})
 			);
-			gameLoop.getKeyFrames().add(kf);
-		}
+		gameLoop.getKeyFrames().add(kf);	
+	}
 	
 	@FXML
     void toucheAppuyée(KeyEvent event) {		
@@ -133,5 +127,3 @@ public class Controleur implements Initializable {
 		}
 	}			
 }
-	
-
