@@ -8,7 +8,6 @@ import applicationV1.modele.Personnage;
 
 import applicationV1.modele.fonctionnalités.Collisions;
 import applicationV1.modele.Terrain;
-import applicationV1.modele.Vie;
 import applicationV1.vue.PersonnageVue;
 import applicationV1.vue.RessourcesDeBaseVue;
 import applicationV1.vue.TerrainVue;
