@@ -26,15 +26,26 @@ import javafx.util.Duration;
 public class Controleur implements Initializable {
 	Terrain terrain;
 	Personnage personnage;
-	Collisions c1;
+	
 	TerrainVue terrainVue;
 	PersonnageVue personnageVue;
+	
+	//InventaireVue inventaireVue;
+	
+	Collisions c1;
+	
+	Vie vie;
 	VieVue vieVue;
+	
 	RessourcesDeBaseVue ressourcesDeBaseVue;
 	
 	private Timeline gameLoop;
+
+	private int temps;
+	private int posInit;
 	
 	int direction = 0;
+	boolean sauter = false;
 	
 	@FXML
     private TilePane terrainJeu;
@@ -44,29 +55,29 @@ public class Controleur implements Initializable {
 	
 	@FXML
     private Pane placeCoeur;
-
-	@FXML
-    private TilePane placeRessources;
-   
-   @FXML
-   private Label labelBois;
-
-   @FXML
-   private Label labelFer;
-
-   @FXML
-   private Label labelPierre;
 	
+    @FXML
+    private Label labelBois;
+
+    @FXML
+    private Label labelFer;
+
+    @FXML
+    private Label labelPierre;
+			
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+
+		personnage = new Personnage(300,290,5);
 		this.terrain = new Terrain ();
 		terrainVue = new TerrainVue(terrainJeu, terrain);
-		personnage = new Personnage(300,290,5);
 		personnageVue = new PersonnageVue(panneauJeu,personnage);
-		vieVue = new VieVue(placeCoeur,personnage.getPointDeVie());
+		vie = new Vie(personnage.pointdeVieProperty());
+		vieVue = new VieVue(placeCoeur, vie);
 		c1 = new Collisions(personnage, terrain);
 		ressourcesDeBaseVue = new RessourcesDeBaseVue(personnage,labelBois,labelFer,labelPierre);
+		
+		//inventaireVue = new InventaireVue(panneauJeu, personnage);
 		
 		initAnimation();
 		gameLoop.play();
@@ -77,50 +88,81 @@ public class Controleur implements Initializable {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		personnageVue.perso();
-		
+		personnageVue.perso();	
 	}	
 	
 	private void initAnimation() {
 		gameLoop = new Timeline();
+		temps=0;
+		
+		posInit=0;
 		gameLoop.setCycleCount(Timeline.INDEFINITE);
 		
-		KeyFrame kf = new KeyFrame (Duration.seconds(0.017 ),(ev ->{	
-					
-			if ( c1.blocDessous(personnage.getX(), personnage.getY())) {
-					personnage.setY(personnage.getY()+1);
+		KeyFrame kf = new KeyFrame (Duration.seconds(0.017),(ev ->{							
+			if (!sauter) {
+				if (c1.blocDessous(personnage.getX(), personnage.getY())) {			
+					if(direction == 1) {
+						personnage.setY(personnage.getY()+2);
+						personnage.setX(personnage.getX()+2);
+						if (personnage.getY() == posInit-2) {
+							direction = 0;
+						}
+					} else if (direction == 2) {
+						personnage.setY(personnage.getY()+2);
+						personnage.setX(personnage.getX()-2);
+						if (personnage.getY() == posInit-2) {
+							direction = 0;
+						}
+					}else {
+						personnage.setY(personnage.getY()+2);
+					}				
+				}
+			}			
+			if (sauter) {				
+				if(direction == 1) {
+					personnage.setY(personnage.getY()-2);
+					personnage.setX(personnage.getX()+1);
+				} else if (direction == 2) {
+					personnage.setY(personnage.getY()-2);
+					personnage.setX(personnage.getX()-1);
+				}else {
+					personnage.setY(personnage.getY()-2);
+				}
+				temps++;
 			}
-						
+			
+			if(temps%20==0) {
+				temps = 0 ;
+				sauter = false;
+			}									
 			})
 			);
 		gameLoop.getKeyFrames().add(kf);	
 	}
 	
 	@FXML
-    void toucheAppuyée(KeyEvent event) {		
+    void toucheAppuyée(KeyEvent event) {
 		if(event.getCode()==KeyCode.D) {
-			if ( c1.blocDroit(personnage.getX(),personnage.getY())) {
-				direction = 1;
-				personnage.seDeplacerADroite();
-			}
-    	} 
-		else if(event.getCode()==KeyCode.Q) {
-			if ( c1.blocGauche(personnage.getX(),personnage.getY())) {
-				direction = 2;
-				personnage.seDeplacerAGauche(); 
-			}
-    	} 
-		else if(event.getCode()==KeyCode.Z) {   		
-			if (direction == 1) {
-				personnage.setY(personnage.getY() - 50);	
-				personnage.setX(personnage.getX() + 50);
-			} else if (direction == 2) {
-				personnage.setY(personnage.getY() - 50);	
-				personnage.setX(personnage.getX() - 50);
-			} else {
-				personnage.setY(personnage.getY() - 50);	
-			}
-				
+			if (!c1.blocDessous(personnage.getX(), personnage.getY())) {
+				if (c1.blocDroit(personnage.getX(), personnage.getY())) {
+					direction = 1;
+					personnage.seDeplacerADroite();
+					}
+	    	} 
 		}
-	}			
-}
+		else if(event.getCode()==KeyCode.Q) {
+			if (!c1.blocDessous(personnage.getX(), personnage.getY())) {
+				if (c1.blocGauche(personnage.getX(), personnage.getY())) {
+					direction = 2;
+					personnage.seDeplacerAGauche(); 
+					}
+		    	} 
+		}
+		else if(event.getCode()==KeyCode.Z) {   		
+			if (!c1.blocDessous(personnage.getX(), personnage.getY())) {
+				sauter = true;
+				posInit = personnage.getY();
+			}	
+		}else if(event.getCode()==KeyCode.S) {   		
+				direction = 0;			
+		}
