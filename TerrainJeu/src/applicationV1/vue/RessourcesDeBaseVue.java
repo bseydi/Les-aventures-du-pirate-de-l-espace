@@ -23,9 +23,9 @@ public class RessourcesDeBaseVue {
 	}
 	
 	public void afficheRessources() throws FileNotFoundException {
-		labelBois.textProperty().bind(perso.getRessource().getNbBoisProperty().asString());           
-		labelFer.textProperty().bind(perso.getRessource().getNbFerProperty().asString());
-		labelPierre.textProperty().bind(perso.getRessource().getNbPierreProperty().asString());	
+		labelBois.textProperty().bind(perso.getRessource().nombreBoisProperty().asString());           
+		labelFer.textProperty().bind(perso.getRessource().nombreFerProperty().asString());
+		labelPierre.textProperty().bind(perso.getRessource().nombrePierreProperty().asString());	
 	}
 
 }
