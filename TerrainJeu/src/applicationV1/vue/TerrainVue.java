@@ -1,6 +1,7 @@
 package applicationV1.vue;
 
 import java.io.FileNotFoundException;
+import applicationV1.modele.Personnage;
 import applicationV1.modele.Terrain;
 import controleur.ControleurClick;
 import controleur.ControleurTileQuitté;
@@ -14,10 +15,12 @@ public class TerrainVue {
 
 	private TilePane terrainJeu;
 	private Terrain terrain;
+	private Personnage perso;
 
-	public TerrainVue(TilePane terrainJeu, Terrain terrain) {
+	public TerrainVue(Personnage p,TilePane terrainJeu, Terrain terrain) {
 		this.terrainJeu = terrainJeu;
 		this.terrain = terrain;
+		this.perso = p;
 
 	}
 
@@ -51,7 +54,7 @@ public class TerrainVue {
 			terrainJeu.getChildren().add(img);
 			img.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, new ControleurTileSurvolé());
 			img.addEventHandler(MouseEvent.MOUSE_EXITED, new ControleurTileQuitté());
-			img.addEventHandler(MouseEvent.MOUSE_CLICKED, new ControleurClick(terrain,carte[i],i));
+			img.addEventHandler(MouseEvent.MOUSE_CLICKED, new ControleurClick(perso,terrain,carte[i],i));
 		}
 	}
 }	
