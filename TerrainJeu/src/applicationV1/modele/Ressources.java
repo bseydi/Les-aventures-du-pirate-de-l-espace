@@ -7,12 +7,16 @@ public class Ressources {
 
 	private int pv;
 	private int donnerPV;
-	private IntegerProperty quantiteProperty;
+	private IntegerProperty nbBoisProperty;
+	private IntegerProperty nbPierreProperty;
+	private IntegerProperty nbFerProperty;
 	
 	public Ressources(int pv,int donnerPV) {
 		this.pv = pv;
 		this.donnerPV = donnerPV;
-		this.quantiteProperty =  new SimpleIntegerProperty(0);
+		this.nbBoisProperty =  new SimpleIntegerProperty(1);
+		this.nbPierreProperty =  new SimpleIntegerProperty(2);
+		this.nbFerProperty =  new SimpleIntegerProperty(3);
 	}
 
 	public int getPv() {
@@ -30,22 +34,24 @@ public class Ressources {
 	public void setDonnerPV(int donnerPV) {
 		this.donnerPV = donnerPV;
 	}
-	
 
-	public final IntegerProperty quantiteProperty() {
-		return quantiteProperty;
+	public IntegerProperty getNbBoisProperty() {
+		return this.nbBoisProperty;
 	}
-/*
-	public int getQuantite() {
-		return this.quantiteProperty.getValue();
+	public IntegerProperty getNbPierreProperty() {
+		return this.nbPierreProperty;
 	}
-*/
-	public IntegerProperty getQuantiteProperty() {
-		return quantiteProperty;
+	public IntegerProperty getNbFerProperty() {
+		return this.nbFerProperty;
 	}
-
-	public void setQuantiteProperty(int quantite) {
-		this.quantiteProperty.setValue(quantite);
+	public void setBoisProperty(int quantite) {
+		this.nbBoisProperty.setValue(quantite);
+	}
+	public void setPierreProperty(int quantite) {
+		this.nbPierreProperty.setValue(quantite);
+	}
+	public void setFerProperty(int quantite) {
+		this.nbFerProperty.setValue(quantite);
 	}
 	
 }
