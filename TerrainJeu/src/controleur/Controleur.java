@@ -68,7 +68,7 @@ public class Controleur implements Initializable {
 
 		personnage = new Personnage(300,290,5);
 		this.terrain = new Terrain ();
-		terrainVue = new TerrainVue(terrainJeu, terrain);
+		terrainVue = new TerrainVue(personnage,terrainJeu, terrain);
 		personnageVue = new PersonnageVue(panneauJeu,personnage);
 		vieVue = new VieVue(placeCoeur,personnage.getPointDeVie());
 		c1 = new Collisions(personnage, terrain);
