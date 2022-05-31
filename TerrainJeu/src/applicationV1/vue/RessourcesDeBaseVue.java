@@ -1,49 +1,31 @@
 package applicationV1.vue;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
+import applicationV1.modele.Personnage;
 
-import applicationV1.modele.Ressources;
 import javafx.scene.control.Label;
 
-import javafx.scene.layout.TilePane;
 
 public class RessourcesDeBaseVue {
 	
+	
 	private Label labelBois;
 	private Label labelFer;
-	private Label labelPierre;	
-	private ArrayList<Ressources> listRessources;
-	private Ressources bois;
-	private Ressources fer;
-	private Ressources pierre;
+	private Label labelPierre;
+	private Personnage perso;
 	
-	public RessourcesDeBaseVue(TilePane placeRessource,Label labelBois,Label labelFer,Label labelPierre,ArrayList<Ressources> listRessources) {
+	
+	public RessourcesDeBaseVue(Personnage p,Label labelBois,Label labelFer,Label labelPierre) {
 		this.labelBois=labelBois;
 		this.labelFer=labelFer;
 		this.labelPierre=labelPierre;
-		this.listRessources=listRessources;
+		this.perso = p;
 	}
 	
 	public void afficheRessources() throws FileNotFoundException {
-		bois();
-		fer();
-		pierre();
-	
+		labelBois.textProperty().bind(perso.getRessource().getNbBoisProperty().asString());           
+		labelFer.textProperty().bind(perso.getRessource().getNbFerProperty().asString());
+		labelPierre.textProperty().bind(perso.getRessource().getNbPierreProperty().asString());	
 	}
-	
-	public void bois() throws FileNotFoundException{
-		this.bois=listRessources.get(0);
-		labelBois.textProperty().bind(this.bois.getNbBoisProperty().asString());           
-	}
-	
-	public void fer() throws FileNotFoundException{
-		this.fer=listRessources.get(1);
-		labelFer.textProperty().bind(this.fer.getNbFerProperty().asString());
-	}
-	
-	public void pierre() throws FileNotFoundException{
-		this.pierre=listRessources.get(3);
-		labelPierre.textProperty().bind(this.pierre.getNbPierreProperty().asString());
-	}
+
 }
