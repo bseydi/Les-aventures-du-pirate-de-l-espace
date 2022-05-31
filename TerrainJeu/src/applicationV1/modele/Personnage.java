@@ -7,15 +7,19 @@ public class Personnage {
 	private IntegerProperty xProperty,yProperty;
 	private int vitesse;
 	private IntegerProperty pointDeVieProperty;
+	private Ressources ressource;
 	
 	public Personnage (int x,int y,int v){
 		this.xProperty=new SimpleIntegerProperty(x);
 		this.yProperty =new SimpleIntegerProperty(y);
 		this.vitesse=v;
 		this.pointDeVieProperty=new SimpleIntegerProperty(100);
+		this.ressource = new Ressources ();
 	}
 	
-
+	public Ressources getRessource() {
+		return ressource;
+	}
 
 	public void seDeplacerAGauche() {
 		this.xProperty.set(this.getX()-this.vitesse);
@@ -41,15 +45,16 @@ public class Personnage {
 		return this.xProperty.getValue();
 	}
 	
-	public final IntegerProperty yProperty() {
-		return yProperty;
-	}
 	public final void setY(int n){
 		yProperty.setValue(n);
 	}
 	
 	public final int getY() {
 		return this.yProperty.getValue();
+	}
+	
+	public final IntegerProperty yProperty() {
+		return yProperty;
 	}
 	
 	public final IntegerProperty pointdeVieProperty() {
@@ -64,11 +69,5 @@ public class Personnage {
 		return this.pointDeVieProperty.getValue();
 	}
 	
-	public int getVitesse() {
-		return vitesse;
-	}
 
-	public void setVitesse(int vitesse) {
-		this.vitesse = vitesse;
-	}
 }
