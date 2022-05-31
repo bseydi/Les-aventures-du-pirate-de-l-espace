@@ -3,7 +3,6 @@ package applicationV1.vue;
 
 import java.io.FileNotFoundException;
 
-import applicationV1.modele.Vie;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
