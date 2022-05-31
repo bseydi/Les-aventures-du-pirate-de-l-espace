@@ -30,7 +30,6 @@ public class Controleur implements Initializable {
 	Collisions c1;
 	TerrainVue terrainVue;
 	PersonnageVue personnageVue;
-	Vie vie;
 	VieVue vieVue;
 	RessourcesDeBaseVue ressourcesDeBaseVue;
 	
@@ -66,8 +65,7 @@ public class Controleur implements Initializable {
 		terrainVue = new TerrainVue(terrainJeu, terrain);
 		personnage = new Personnage(300,290,5);
 		personnageVue = new PersonnageVue(panneauJeu,personnage);
-		vie = new Vie(personnage.pointdeVieProperty());
-		vieVue = new VieVue(placeCoeur, vie);
+		vieVue = new VieVue(placeCoeur,personnage.getPointDeVie());
 		c1 = new Collisions(personnage, terrain);
 		ressourcesDeBaseVue = new RessourcesDeBaseVue(personnage,labelBois,labelFer,labelPierre);
 		
