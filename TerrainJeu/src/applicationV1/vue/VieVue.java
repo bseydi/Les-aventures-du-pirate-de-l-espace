@@ -12,9 +12,9 @@ import javafx.scene.layout.Pane;
 public class VieVue {
 	
 	private Pane placeCoeur;
-	private Vie vie;
+	private int vie;
 	
-	public VieVue(Pane placeCoeur, Vie vie) {
+	public VieVue(Pane placeCoeur,int vie ) {
 		this.placeCoeur = placeCoeur;
 		this.vie = vie;
 
@@ -24,7 +24,7 @@ public class VieVue {
 		
 		ImageView img = new ImageView(new Image("./image/imageCoeurs/coeur100.png"));
 		
-		switch(vie.getPv()) {
+		switch(vie) {
 		case 100:
 			img = new ImageView(new Image("./image/imageCoeurs/coeur100.png"));
 			break;
