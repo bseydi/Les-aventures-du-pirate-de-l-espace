@@ -8,6 +8,9 @@ public class Personnage {
 	private int vitesse;
 	private IntegerProperty pointDeVieProperty;
 	private Ressources ressource;
+	private int nourritureEnMains = 0; //Sa valeur correspond à la nourriturre en mains 1=fraise 2=viandes 3=viande cuite 4=pdt 5=pdt cuites.
+	private int BlocEnMains = 0; //Sa valeur correspond au bloc en mains.
+	private int objetEnMains = 0; //Sa valeur correspond à l'objet en mains.
 	
 	public Personnage (int x,int y,int v){
 		this.xProperty=new SimpleIntegerProperty(x);
