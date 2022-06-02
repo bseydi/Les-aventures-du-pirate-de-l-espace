@@ -105,7 +105,18 @@ public class Personnage {
 
 	public int getObjetEnMains() {
 		return objetEnMains;
-	}	
+	}
+	
+	//Methode qui permet de tester la perte de vie et sont affichage sur la vue
+	public void perdVie() {
+		pointDeVieProperty.set(this.getPointDeVie() - 10);
+	}
+	
+	/* Sera utiliser plus tard pour faire perdre des point de vie au personnage
+	 * public void perdVie(int pvPerdu) {
+	 * 		setPointDeVie(getPointDeVie() += pvPerdu);
+	 *}
+	 */
 	
 
 }
