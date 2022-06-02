@@ -167,13 +167,13 @@ public class Controleur implements Initializable {
 		}else if(event.getCode()==KeyCode.S) {   		
 				direction = 0;			
 		} else if(event.getCode()==KeyCode.W) {   		
-			//inventaireVue.changerItems(1);
+			inventaireVue.changerItems(1);
 
 		}else if(event.getCode()==KeyCode.X) {   		
-			//inventaireVue.changerItems(2);	
+			inventaireVue.changerItems(2);	
 
 		}else if(event.getCode()==KeyCode.C) { 
-			//inventaireVue.changerItems(3);						
+			inventaireVue.changerItems(3);						
 		}else if(event.getCode()==KeyCode.V) {
 
 		} else if(event.getCode()==KeyCode.A) {
