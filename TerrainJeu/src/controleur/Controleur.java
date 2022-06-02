@@ -14,6 +14,7 @@ import applicationV1.vue.TerrainVue;
 import applicationV1.vue.VieVue;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -73,6 +74,9 @@ public class Controleur implements Initializable {
 		vieVue = new VieVue(placeCoeur,personnage.getPointDeVie());
 		c1 = new Collisions(personnage, terrain);
 		ressourcesDeBaseVue = new RessourcesDeBaseVue(personnage,labelBois,labelFer,labelPierre);
+		
+		personnage.pointdeVieProperty().addListener((ChangeListener) (o, oldVal, newVal) -> { vieVue.afficheCoeur();});
+
 		
 		//inventaireVue = new InventaireVue(panneauJeu, personnage);
 		
@@ -163,15 +167,18 @@ public class Controleur implements Initializable {
 		}else if(event.getCode()==KeyCode.S) {   		
 				direction = 0;			
 		} else if(event.getCode()==KeyCode.W) {   		
-			inventaireVue.changerItems(1);
+			//inventaireVue.changerItems(1);
 
 		}else if(event.getCode()==KeyCode.X) {   		
-			inventaireVue.changerItems(2);	
+			//inventaireVue.changerItems(2);	
 
 		}else if(event.getCode()==KeyCode.C) { 
-			inventaireVue.changerItems(3);						
+			//inventaireVue.changerItems(3);						
 		}else if(event.getCode()==KeyCode.V) {
 
-		}
+		} else if(event.getCode()==KeyCode.A) {
+			personnage.perdVie();
+			System.out.println(personnage.getPointDeVie());
+    		} 
 	}		
 }
