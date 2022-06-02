@@ -68,6 +68,41 @@ public class Personnage {
 	public final int getPointDeVie() {
 		return this.pointDeVieProperty.getValue();
 	}
+	public int changerNourriture() {
+		nourritureEnMains++;
+		if(nourritureEnMains > 5) {
+			nourritureEnMains=1;
+		}		
+		return nourritureEnMains;
+	}
+
+	public int getNourritureEnMains() {
+		return nourritureEnMains;
+	}	
+	
+	public int changerBloc() {
+		BlocEnMains++;
+		if(BlocEnMains > 5) {
+			BlocEnMains=1;
+		}		
+		return BlocEnMains;
+	}
+
+	public int getBlocEnMains() {
+		return BlocEnMains;
+	}	
+	
+	public int changerObjet() {
+		objetEnMains++;
+		if(objetEnMains > 5) {
+			objetEnMains=1;
+		}		
+		return objetEnMains;
+	}
+
+	public int getObjetEnMains() {
+		return objetEnMains;
+	}	
 	
 
 }
