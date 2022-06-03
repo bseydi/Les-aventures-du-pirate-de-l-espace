@@ -179,6 +179,9 @@ public class Controleur implements Initializable {
 		} else if(event.getCode()==KeyCode.A) {
 			personnage.perdVie();
 			System.out.println(personnage.getPointDeVie());
-    		} 
-	}		
+    	} else if(event.getCode()==KeyCode.B) {
+			personnage.gagneVie();;
+			System.out.println(personnage.getPointDeVie());
+    	}
+	}	
 }
