@@ -1,34 +1,29 @@
 package applicationV1.modele;
 
+import applicationV1.modele.Ressources;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class Personnage {
 	private IntegerProperty xProperty,yProperty;
-	private int vitesse;
+	private int vitesse; 
 	private IntegerProperty pointDeVieProperty;
+	private int nourritureEnMains = 1; //Sa valeur correspond à la nourriturre en mains 1=fraise 2=viandes 3=viande cuite 4=pdt 5=pdt cuites.
+	private int blocEnMains = 1; //Sa valeur correspond au bloc en mains.
+	private int objetEnMains = 1; //Sa valeur correspond à l'objet en mains 1 = mains, 2 = épée, 3 = hache bois, 4 = pioche en bois, 5 = pioche en pierre.                          
 	private Ressources ressource;
-	private int nourritureEnMains = 0; //Sa valeur correspond à la nourriturre en mains 1=fraise 2=viandes 3=viande cuite 4=pdt 5=pdt cuites.
-	private int BlocEnMains = 0; //Sa valeur correspond au bloc en mains.
-	private int objetEnMains = 0; //Sa valeur correspond à l'objet en mains.
-	private Inventaire inv;
+	private Inventaire inventaire;
 	
 	public Personnage (int x,int y,int v){
+		super();
 		this.xProperty=new SimpleIntegerProperty(x);
 		this.yProperty =new SimpleIntegerProperty(y);
 		this.vitesse=v;
 		this.pointDeVieProperty=new SimpleIntegerProperty(100);
 		this.ressource = new Ressources ();
-		this.inv = new Inventaire();
+		this.inventaire = new Inventaire();
 	}
 	
-	public Ressources getRessource() {
-		return this.ressource;
-	}
-	public Inventaire getInventaire() {
-		return this.inv;
-	}
-
 	public void seDeplacerAGauche() {
 		this.xProperty.set(this.getX()-this.vitesse);
 	}
@@ -53,17 +48,16 @@ public class Personnage {
 		return this.xProperty.getValue();
 	}
 	
+	public final IntegerProperty yProperty() {
+		return yProperty;
+	}
 	public final void setY(int n){
 		yProperty.setValue(n);
 	}
 	
 	public final int getY() {
 		return this.yProperty.getValue();
-	}
-	
-	public final IntegerProperty yProperty() {
-		return yProperty;
-	}
+	}	
 	
 	public final IntegerProperty pointdeVieProperty() {
 		return this.pointDeVieProperty;
@@ -76,41 +70,48 @@ public class Personnage {
 	public final int getPointDeVie() {
 		return this.pointDeVieProperty.getValue();
 	}
-	public int changerNourriture() {
-		nourritureEnMains++;
-		if(nourritureEnMains > 5) {
-			nourritureEnMains=1;
+	
+	public Ressources getRessource() {
+		return ressource;
+	}
+	
+	public Inventaire getInventaire() {
+		return inventaire;
+	}
+
+	public int changerItemsEnMain(int typeItem) {		
+		int itemEnMain = 0;
+		if (typeItem == 1) {
+			nourritureEnMains++;
+			if(nourritureEnMains > 5) {
+				nourritureEnMains=1;
+			}	
+			itemEnMain = nourritureEnMains;
+		}else if (typeItem == 2) {
+			blocEnMains++;
+			if(blocEnMains > 5) {
+				blocEnMains=1;
+			}		
+			itemEnMain = blocEnMains;
+		} else {
+			objetEnMains++;
+			if(objetEnMains > 6) {
+				objetEnMains=1;
+			}		
+			itemEnMain = objetEnMains;
 		}		
-		return nourritureEnMains;
+		return itemEnMain;
 	}
 
 	public int getNourritureEnMains() {
 		return nourritureEnMains;
-	}	
+	}		
 	
-	public int changerBloc() {
-		BlocEnMains++;
-		if(BlocEnMains > 5) {
-			BlocEnMains=1;
-		}		
-		return BlocEnMains;
-	}
-
 	public int getBlocEnMains() {
-		return BlocEnMains;
+		return blocEnMains;
 	}	
-	
-	public int changerObjet() {
-		objetEnMains++;
-		if(objetEnMains > 5) {
-			objetEnMains=1;
-		}		
-		return objetEnMains;
-	}
 
 	public int getObjetEnMains() {
 		return objetEnMains;
 	}	
-	
-
 }
