@@ -2,7 +2,7 @@ package applicationV1.modele.outils;
 
 public class HacheEnBois extends Outils{
 
-	public HacéheEnBois() {
+	public HacheEnBois() {
 		super(15, 2);
 	}
 
