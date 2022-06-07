@@ -3,18 +3,25 @@ package controleur;
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import applicationV1.modele.fonctionnalités.Arbre;
 import applicationV1.modele.fonctionnalités.Collisions;
+import applicationV1.modele.nourriture.Fraise;
+import applicationV1.modele.nourriture.PommeDeTerre;
 import applicationV1.modele.Personnage;
 import applicationV1.modele.PnjCraft;
 import applicationV1.modele.Terrain;
+import applicationV1.vue.ArbreVue;
 import applicationV1.vue.InventaireVue;
 import applicationV1.vue.PersonnageVue;
 import applicationV1.vue.PnjCraftVue;
+import applicationV1.vue.PommeDeTerreVue;
 import applicationV1.vue.RessourcesDeBaseVue;
 import applicationV1.vue.TerrainVue;
 import applicationV1.vue.VieVue;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -36,6 +43,18 @@ public class Controleur implements Initializable {
 	InventaireVue inventaireVue;
 	PnjCraft pnj;
 	PnjCraftVue pnjVue;
+	
+	ArbreVue arbrevue1;
+	ArbreVue arbrevue2;
+	ArbreVue arbrevue3;
+	Arbre arbre1;
+	Arbre arbre2;
+	Arbre arbre3;
+	
+	Fraise fraise;
+	
+	PommeDeTerre pommeDeTerre;
+	PommeDeTerreVue pommeDeTerreVue;
 
 	Collisions c1;
 
@@ -47,6 +66,7 @@ public class Controleur implements Initializable {
 
 	private int temps;
 	private int temps2;
+	private int temps3;
 	private int posYInit;
 	private boolean remettreDirection0 = false; // remet la direction à 0 au bout d'un certain temps.
 
@@ -89,6 +109,17 @@ public class Controleur implements Initializable {
 		c1 = new Collisions(personnage, terrain);
 		ressourcesDeBaseVue = new RessourcesDeBaseVue(personnage,labelBois,labelFer,labelPierre);
 		personnage.pointdeVieProperty().addListener((o, oldVal, newVal) -> { vieVue.afficheCoeur();});
+		arbre1 = new Arbre(320,260);
+		arbre2 = new Arbre(5,290);
+		arbre3 = new Arbre(130,290);
+		arbrevue1 = new ArbreVue(panneauJeu,arbre1,personnage);
+		arbrevue2 = new ArbreVue(panneauJeu,arbre2,personnage);
+		arbrevue3 = new ArbreVue(panneauJeu,arbre3,personnage);
+		fraise = new Fraise();
+		pommeDeTerre = new PommeDeTerre();
+		pommeDeTerreVue = new PommeDeTerreVue(panneauJeu, pommeDeTerre);
+		
+		
 		inventaireVue = new InventaireVue(panneauJeu, personnage);
 
 		initAnimation();
@@ -111,6 +142,7 @@ public class Controleur implements Initializable {
 		gameLoop = new Timeline();
 		temps=0;
 		temps2 = 0;
+		temps3=0;
 
 		posYInit=0;
 		gameLoop.setCycleCount(Timeline.INDEFINITE);
@@ -161,7 +193,24 @@ public class Controleur implements Initializable {
 			if(temps%20==0) {
 				temps = 0 ;
 				sauter = false;
-			}									
+			}
+			if(temps3%200==0) {
+				temps = 0 ;
+				sauter = false;
+				if(arbre1.getArbreProperty().intValue()==2) {
+					arbre1.changerArbre();
+	        		arbrevue1.afficherArbre();
+				}
+				if(arbre2.getArbreProperty().intValue()==2) {
+					arbre2.changerArbre();
+	        		arbrevue2.afficherArbre();
+				}
+				if(arbre3.getArbreProperty().intValue()==2) {
+					arbre3.changerArbre();
+	        		arbrevue3.afficherArbre();
+				}
+			}
+			temps3++;
 		})
 				);
 		gameLoop.getKeyFrames().add(kf);	
@@ -210,10 +259,29 @@ public class Controleur implements Initializable {
 		}else if(event.getCode()==KeyCode.A) {
 			personnage.perdVie();
 			System.out.println(personnage.getPointDeVie());
-    		} else if(event.getCode()==KeyCode.E) {
+    	} 
+		else if(event.getCode()==KeyCode.E) {
 			personnage.gagneVie();
 			System.out.println(personnage.getPointDeVie());
-    	}
+		}	
+		else if(event.getCode()==KeyCode.L) {
+		System.out.println(fraise.getQuantiteProperty());
+		if(arbrevue1.changerArbre() && arbre1.getArbreProperty().intValue()==1) {
+			arbre1.changerArbre();
+    		arbrevue1.afficherArbre();
+   			fraise.setQuantiteProperty(fraise.getQuantiteProperty().intValue()+1);
+   		}else if(arbrevue2.changerArbre() && arbre2.getArbreProperty().intValue()==1) {
+			arbre2.changerArbre();
+			arbrevue2.afficherArbre();
+   			fraise.setQuantiteProperty(fraise.getQuantiteProperty().intValue()+1); 			
+		}else if(arbrevue3.changerArbre() && arbre3.getArbreProperty().intValue()==1) {
+			arbre3.changerArbre();
+			arbrevue3.afficherArbre();
+			fraise.setQuantiteProperty(fraise.getQuantiteProperty().intValue()+1);
+   		}
+		System.out.println(fraise.getQuantiteProperty());
+		
+	}
 	}		
 	
 	@FXML
