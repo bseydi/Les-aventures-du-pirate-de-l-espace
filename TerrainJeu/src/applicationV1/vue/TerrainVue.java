@@ -1,11 +1,12 @@
-package applicationV1.vue;
+package vue;
 
 import java.io.FileNotFoundException;
-import applicationV1.modele.Personnage;
-import applicationV1.modele.Terrain;
-import controleur.ControleurClick;
-import controleur.ControleurTileQuitté;
-import controleur.ControleurTileSurvolé;
+
+import TerrainJeu.src.controleur.ControleurClick;
+import TerrainJeu.src.controleur.ControleurTileQuitté;
+import TerrainJeu.src.controleur.ControleurTileSurvolé;
+import modele.Personnage;
+import modele.Terrain;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;

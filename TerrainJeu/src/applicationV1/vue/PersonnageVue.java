@@ -1,7 +1,7 @@
-package applicationV1.vue;
+package vue;
 
 
-import applicationV1.modele.Personnage;
+import modele.Personnage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;

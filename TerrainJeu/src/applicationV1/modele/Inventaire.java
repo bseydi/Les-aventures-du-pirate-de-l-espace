@@ -1,6 +1,5 @@
-package applicationV1.modele;
+package modele;
 
-import java.util.ArrayList;
 
 public class Inventaire {
 	

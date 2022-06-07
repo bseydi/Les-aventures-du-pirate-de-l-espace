@@ -1,4 +1,4 @@
-package controleur;
+package TerrainJeu.src.controleur;
 
 import javafx.event.EventHandler;
 import javafx.scene.image.ImageView;

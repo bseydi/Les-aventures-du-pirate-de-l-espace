@@ -1,12 +1,12 @@
-package controleur;
+package TerrainJeu.src.controleur;
 
-import applicationV1.modele.Terrain;
+import modele.Terrain;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import applicationV1.modele.Personnage;
+import modele.Personnage;
 
 
 public class ControleurClick implements EventHandler<MouseEvent> {

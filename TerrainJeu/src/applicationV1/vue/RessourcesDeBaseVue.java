@@ -1,7 +1,7 @@
-package applicationV1.vue;
+package vue;
 
 import java.io.FileNotFoundException;
-import applicationV1.modele.Personnage;
+import modele.Personnage;
 
 import javafx.scene.control.Label;
 

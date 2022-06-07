@@ -1,4 +1,4 @@
-package applicationV1.vue;
+package vue;
 
 
 import javafx.beans.property.IntegerProperty;
@@ -32,7 +32,7 @@ public class VieVue {
 	} 
 	
 	public void afficheCoeur()  {
-		ImageView img = new ImageView(tabImg[0]);
+		ImageView img = null ;
 		
 		if(vie.get() == 0) {
 			img = new ImageView(tabImg[7]);
@@ -40,29 +40,27 @@ public class VieVue {
 		else if(vie.get() > 0 && vie.get() <= 15) {
 			img = new ImageView(tabImg[6]);
 		}
-		else if (vie.get() <= 30) {
+		else if (vie.get() > 15 && vie.get() <= 30) {
 			img = new ImageView(tabImg[5]);
 		}
-		else if( vie.get() <= 45) {
+		else if(vie.get() > 30 && vie.get() <= 45) {
 			img = new ImageView(tabImg[4]);
 		}
-		else if(vie.get() <= 60) {
+		else if( vie.get() > 45 && vie.get() <= 60) {
 			img = new ImageView(tabImg[3]);
 		}
-		else if (vie.get() <= 75) {
+		else if (vie.get() > 60 && vie.get() <= 75) {
 			img = new ImageView(tabImg[2]);
 		}
-		else if( vie.get() <= 90) {
+		else if(vie.get() > 75 && vie.get() <= 90) {
 			img = new ImageView(tabImg[1]);
 
 		}
-		else if( vie.get() <=100) {
+		else if(vie.get() > 90 && vie.get() <=100) {
 			img = new ImageView(tabImg[0]);
 		}
 		placeCoeur.getChildren().add(img);
 		
 	}
 	
-	
-	
-}
+}	

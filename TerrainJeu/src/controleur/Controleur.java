@@ -1,20 +1,20 @@
-package controleur;
+package TerrainJeu.src.controleur;
 
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import applicationV1.modele.Personnage;
+import modele.Personnage;
 
-import applicationV1.modele.fonctionnalités.Collisions;
-import applicationV1.modele.Terrain;
-import applicationV1.vue.PersonnageVue;
-import applicationV1.vue.RessourcesDeBaseVue;
-import applicationV1.vue.TerrainVue;
-import applicationV1.vue.VieVue;
+import modele.fonctionnalités.Collisions;
+import modele.Terrain;
+import vue.InventaireVue;
+import vue.PersonnageVue;
+import vue.RessourcesDeBaseVue;
+import vue.TerrainVue;
+import vue.VieVue;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -31,7 +31,7 @@ public class Controleur implements Initializable {
 	TerrainVue terrainVue;
 	PersonnageVue personnageVue;
 	
-	//InventaireVue inventaireVue;
+	InventaireVue inventaireVue;
 	
 	Collisions c1;
 	VieVue vieVue;
@@ -71,14 +71,13 @@ public class Controleur implements Initializable {
 		this.terrain = new Terrain ();
 		terrainVue = new TerrainVue(personnage,terrainJeu, terrain);
 		personnageVue = new PersonnageVue(panneauJeu,personnage);
-		vieVue = new VieVue(placeCoeur,personnage.getPointDeVie());
+		vieVue = new VieVue(placeCoeur,personnage.pointdeVieProperty());
 		c1 = new Collisions(personnage, terrain);
 		ressourcesDeBaseVue = new RessourcesDeBaseVue(personnage,labelBois,labelFer,labelPierre);
 		
-		personnage.pointdeVieProperty().addListener((ChangeListener) (o, oldVal, newVal) -> { vieVue.afficheCoeur();});
-
+		personnage.pointdeVieProperty().addListener((o, oldVal, newVal) -> { vieVue.afficheCoeur();});
 		
-		//inventaireVue = new InventaireVue(panneauJeu, personnage);
+		inventaireVue = new InventaireVue(panneauJeu, personnage);
 		
 		initAnimation();
 		gameLoop.play();
@@ -86,6 +85,7 @@ public class Controleur implements Initializable {
 			terrainVue.creerTerrainJeu();
 			vieVue.afficheCoeur();
 			ressourcesDeBaseVue.afficheRessources();
+			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -179,9 +179,9 @@ public class Controleur implements Initializable {
 		} else if(event.getCode()==KeyCode.A) {
 			personnage.perdVie();
 			System.out.println(personnage.getPointDeVie());
-    	} else if(event.getCode()==KeyCode.B) {
+    		} else if(event.getCode()==KeyCode.B) {
 			personnage.gagneVie();;
 			System.out.println(personnage.getPointDeVie());
     	}
-	}	
+	}		
 }

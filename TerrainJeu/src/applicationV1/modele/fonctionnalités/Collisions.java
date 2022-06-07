@@ -1,7 +1,7 @@
-package applicationV1.modele.fonctionnalités;
+package modele.fonctionnalités;
 
-import applicationV1.modele.Personnage;
-import applicationV1.modele.Terrain;
+import modele.Personnage;
+import modele.Terrain;
 public class Collisions {
 
 	private int [] blockMap;

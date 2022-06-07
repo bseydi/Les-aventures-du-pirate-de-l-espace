@@ -1,4 +1,4 @@
-package applicationV1.modele;
+package modele;
 
 public class Pelle  extends Outils{
 

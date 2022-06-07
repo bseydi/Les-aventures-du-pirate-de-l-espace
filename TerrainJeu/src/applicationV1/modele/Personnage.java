@@ -1,4 +1,4 @@
-package applicationV1.modele;
+package modele;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -18,6 +18,7 @@ public class Personnage {
 		this.vitesse=v;
 		this.pointDeVieProperty=new SimpleIntegerProperty(100);
 		this.ressource = new Ressources ();
+		
 	}
 	
 	public Ressources getRessource() {
@@ -71,6 +72,7 @@ public class Personnage {
 	public final int getPointDeVie() {
 		return this.pointDeVieProperty.getValue();
 	}
+
 	public int changerNourriture() {
 		nourritureEnMains++;
 		if(nourritureEnMains > 5) {
@@ -105,13 +107,24 @@ public class Personnage {
 
 	public int getObjetEnMains() {
 		return objetEnMains;
-	}
+	}	
 	
 	//Methode qui permet de tester la perte de vie et sont affichage sur la vue
 	public void perdVie() {
-		pointDeVieProperty.set(this.getPointDeVie() - 10);
+		if(getPointDeVie() <= 0) {
+			System.out.println("Impossible de retirer de la vie");
+		}else {
+			pointDeVieProperty.set(this.getPointDeVie() - 1);
+		}
 	}
-	
+	// methodo pour tester l'ajoute de vie et son affichage
+	public void gagneVie() {
+		if(getPointDeVie() >= 100) {
+			System.out.println("Impossible d'ajouter de la vie");
+		}else {
+			pointDeVieProperty.set(this.getPointDeVie() + 1);
+		}
+	}
 	/* Sera utiliser plus tard pour faire perdre des point de vie au personnage
 	 * public void perdVie(int pvPerdu) {
 	 * 		setPointDeVie(getPointDeVie() += pvPerdu);
