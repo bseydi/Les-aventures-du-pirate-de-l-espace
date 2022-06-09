@@ -23,7 +23,7 @@ public class PommeDeTerreVue {
 		this.xMin=0;
 		this.xMax=500;
 		this.yMin=400;
-		this.yMax=850;
+		this.yMax=600;
 		Random randomX = new Random();
 		Random randomY = new Random();
 		nbX=xMin+randomX.nextInt(xMax-xMin);

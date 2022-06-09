@@ -1,6 +1,5 @@
 package applicationV1.modele;
 
-import applicationV1.modele.Ressources;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
