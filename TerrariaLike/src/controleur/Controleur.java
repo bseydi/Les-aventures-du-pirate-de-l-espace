@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import applicationV1.modele.fonctionnalités.Collisions;
+import applicationV1.modele.fonctionnalités.Range;
 import applicationV1.modele.Personnage;
 import applicationV1.modele.PnjCraft;
 import applicationV1.modele.Terrain;
@@ -19,9 +20,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
@@ -53,6 +54,9 @@ public class Controleur implements Initializable {
 	private int direction = 0;
 	private boolean sauter = false;
 
+	@FXML
+	private ImageView fermerPopUp;
+	
 	@FXML
 	private Pane popUpCraft;
 	
@@ -202,16 +206,22 @@ public class Controleur implements Initializable {
 
 		}else if(event.getCode()==KeyCode.C) { 
 			inventaireVue.changerItems(3);	
-		}else if(event.getCode()==KeyCode.V) {
-			popUpCraft.setVisible(false);
+		}else if(event.getCode()==KeyCode.SPACE && Range.rangeToPnj(personnage,pnj)) {
+			popUpCraft.setVisible(!popUpCraft.isVisible());
+			
+			
 		}
-		else if(event.getCode()==KeyCode.B) {
-			popUpCraft.setVisible(true);
-		}
+		
 	}		
-	
+	@FXML
+	void fermerPopUp () {
+		popUpCraft.setVisible(false);
+		panneauJeu.requestFocus();
+	}
 	@FXML
 	void confirmer () {
 		 pnj.dialogue(personnage,Integer.parseInt(repMenu.getText()));
+		 fermerPopUp();
+		 
 	}		
 }
