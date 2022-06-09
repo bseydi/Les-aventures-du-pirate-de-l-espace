@@ -288,7 +288,7 @@ public class Controleur implements Initializable {
 				arbrevue3.afficherArbre();
 				fraise.setQuantiteProperty(fraise.getQuantiteProperty().intValue()+1);
 	   		}
-			else if(event.getCode()==KeyCode.M && Range.rangeToPommeDeTerre(pommeDeTerreVue, personnage)) {
+			else if(event.getCode()==KeyCode.M && PommeDeTerreVue.pouvoirSrupprimerPommeDeTerre(pommeDeTerreVue, personnage)) {
 				System.out.println("fhuihruhrg");
 				pommeDeTerreVue.afficherPommeDeTerre();
 			}

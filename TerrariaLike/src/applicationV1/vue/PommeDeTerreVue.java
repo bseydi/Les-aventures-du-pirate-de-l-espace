@@ -3,6 +3,7 @@ package applicationV1.vue;
 import java.util.ArrayList;
 import java.util.Random;
 
+import applicationV1.modele.Personnage;
 import applicationV1.modele.nourriture.PommeDeTerre;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -48,6 +49,16 @@ public class PommeDeTerreVue {
 		panneauJeu.getChildren().remove(img);
 	}
 	
+	// permet de savoir si l'image de la pomme de terre se trouve au même endroit que la souris
+		public static boolean pouvoirSrupprimerPommeDeTerre(PommeDeTerreVue pommeDeTerreVue,Personnage perso) {
+			for(int i=0;i<pommeDeTerreVue.getListImgPommeDeTerre().size();i=i+2) {
+				if((pommeDeTerreVue.getListImgPommeDeTerre().get(i)-perso.getX())<=70 && (pommeDeTerreVue.getListImgPommeDeTerre().get(i+1)-perso.getY())<=70) {
+					return true;
+				}
+			}
+			return false;
+		}
+		
 	public void afficherPommeDeTerre() {
 		this.img=new ImageView(new Image("./image/PommeDeTerre.png"));
 		panneauJeu.getChildren().add(img);
