@@ -22,6 +22,7 @@ public class ControleurClick implements EventHandler<MouseEvent> {
 		this.personnage = personnage;
 	}
 
+	
 	@Override
 	public void handle(MouseEvent event) {
 		ImageView img =(ImageView) event.getSource();

@@ -15,7 +15,7 @@ public class Inventaire {
         this.outils.put("HacheEnPierre", 0);
         this.outils.put("PiocheEnBois", 0);
         this.outils.put("PiocheEnPierre", 0);
-        this.outils.put("Pelle", 0);
+        this.outils.put("Pelle", 1);
         
         this.objets = new HashMap<>();
         this.objets.put("Planche", 0);
@@ -44,7 +44,7 @@ public class Inventaire {
     	return this.outils.get(pelle);
     }
     
-    
+     
     
     
 }    

@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public class PnjCraft {
 
+	
 	private IntegerProperty xProperty,yProperty;
 	
 	
@@ -18,9 +19,6 @@ public class PnjCraft {
 
 
 	public void dialogue(Personnage perso, int choix) {
-		
-		System.out.println("Bonjour ! \n Je suis prêt a t'échanger de l'équipement flambant neuf contre des ressources " );
-		
 		try {
 			switch(choix) {
 			case 1 :

@@ -16,17 +16,17 @@ public class InventaireVue {
 		this.panneauJeu = panneauJeu;
 		this.personnage = personnage;
 		
-		img1 = new ImageView(new Image("./image/BlocFer.png"));
+		img1 = new ImageView(new Image("./image/Fraise.png"));
 		panneauJeu.getChildren().add(img1);
 		img1.setTranslateX(192);
     	img1.setTranslateY(18);
     	
-    	img2 = new ImageView(new Image("./image/BlocFer.png"));  	
+    	img2 = new ImageView(new Image("./image/coblestone.png"));  	
 		panneauJeu.getChildren().add(img2);
 		img2.setTranslateX(240);
     	img2.setTranslateY(18); 
     	
-    	img3  = new ImageView(new Image("./image/pelle.jpeg"));  	
+    	img3  = new ImageView(new Image("./image/pelleBois.png"));  	
 		panneauJeu.getChildren().add(img3);
 		img3.setTranslateX(288);
     	img3.setTranslateY(18);
@@ -47,47 +47,47 @@ public class InventaireVue {
 		switch(i) {
 		case 1 :
 			if (typeItems == 1) {
-				img = new ImageView(new Image("./image/BlocFer.png"));
+				img = new ImageView(new Image("./image/Fraise.png"));
 			} else if (typeItems == 2) {
-				img = new ImageView(new Image("./image/BlocFer.png"));
+				img = new ImageView(new Image("./image/coblestone.png"));
 			} else if (typeItems == 3) {
-				img = new ImageView(new Image("./image/pelle.jpeg"));
+				img = new ImageView(new Image("./image/EpeePierre.png"));
 			}	
 			break;
 		case 2 :
 			if (typeItems == 1) {
-				img = new ImageView(new Image("./image/Pierre.png"));
+				img = new ImageView(new Image("./image/PommeDeTerre.png"));
 			} else if (typeItems == 2) {
-				img = new ImageView(new Image("./image/Pierre.png"));
+				img = new ImageView(new Image("./image/planche.png"));
 			} else if (typeItems == 3) {
-				img = new ImageView(new Image("./image/epeePierre.jpg"));
+				img = new ImageView(new Image("./image/epeeFer.png"));
 			}			
 			break;
 		case 3 :
 			if (typeItems == 1) {
-				img = new ImageView(new Image("./image/PommeDeTerre.png"));
+				img = new ImageView(new Image("./image/PatateCuite.png"));
 			} else if (typeItems == 2) {
 				img = new ImageView(new Image("./image/PommeDeTerre.png"));
 			} else if (typeItems == 3) {
-				img = new ImageView(new Image("./image/epeeFer.jpg"));
+				img = new ImageView(new Image("./image/hachePierre.png"));
 			}		
 			break;
 		case 4 :
 			if (typeItems == 1) {
-				img = new ImageView(new Image("./image/Fraise.png"));
+				img = new ImageView(new Image("./image/ViandeCreature.png"));
 			} else if (typeItems == 2) {
 				img = new ImageView(new Image("./image/Fraise.png"));
 			} else if (typeItems == 3) {
-				img = new ImageView(new Image("./image/piocheEnBois.jpg"));
+				img = new ImageView(new Image("./image/piocheBois.png"));
 			}		
 			break;
 		case 5 :
 			if (typeItems == 1) {
-				img = new ImageView(new Image("./image/Bois(1).png"));
+				img = new ImageView(new Image("./image/ViandeCreatureCuite.png"));
 			} else if (typeItems == 2) {
-				img = new ImageView(new Image("./image/Bois(1).png"));
+				img = new ImageView(new Image("./image/planche.png"));
 			} else if (typeItems == 3) {
-				img = new ImageView(new Image("./image/pioche.jpg"));
+				img = new ImageView(new Image("./image/piochePierre.png"));
 			}	
 			break;
 		case 6 :
@@ -96,7 +96,7 @@ public class InventaireVue {
 			} else if (typeItems == 2) {
 				img = new ImageView(new Image("./image/ressource_bois.png"));
 			} else if (typeItems == 3) {
-				img = new ImageView(new Image("./image/hache.jpeg"));
+				img = new ImageView(new Image("./image/pelleBois.png"));
 			}
 			break;
 
