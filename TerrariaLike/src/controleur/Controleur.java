@@ -3,10 +3,13 @@ package controleur;
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import applicationV1.modele.Environnement;
 import applicationV1.modele.fonctionnalités.Range;
 import applicationV1.vue.ArbreVue;
+import applicationV1.modele.fonctionnalités.Collisions;
+import applicationV1.modele.Personnage;
+import applicationV1.modele.PnjCraft;
+import applicationV1.modele.Terrain;
 import applicationV1.vue.InventaireVue;
 import applicationV1.vue.PersonnageVue;
 import applicationV1.vue.PnjCraftVue;
@@ -142,7 +145,9 @@ public class Controleur implements Initializable {
 						remettreDirection0 = false;
 					}
 				}
-			}*/					
+			}*/	
+			
+			
 			if (!sauter) {
 				if (this.env.getC1().blocDessous(this.env.getPersonnage().getX(), this.env.getPersonnage().getY())) {			
 					if(direction == 1) {
@@ -221,6 +226,7 @@ public class Controleur implements Initializable {
 				}
 			} 
 		}
+		
 		else if(event.getCode()==KeyCode.Z) {   		
 			if (!this.env.getC1().blocDessous(this.env.getPersonnage().getX(), this.env.getPersonnage().getY())) {
 				sauter = true;
@@ -244,13 +250,7 @@ public class Controleur implements Initializable {
 
 		else if(event.getCode()==KeyCode.B) {
 			popUpCraft.setVisible(true);
-		}else if(event.getCode()==KeyCode.A) {
-			this.env.getPersonnage().perdVie();
-			System.out.println(this.env.getPersonnage().getPointDeVie());
-    	} 
-		else if(event.getCode()==KeyCode.E) {
-			this.env.getPersonnage().gagneVie();
-			System.out.println(this.env.getPersonnage().getPointDeVie());
+		System.out.println(this.env.getPersonnage().getPointDeVie());
 		}	
 		else if(event.getCode()==KeyCode.L) {
 		System.out.println(this.env.getFraise().getQuantiteProperty());

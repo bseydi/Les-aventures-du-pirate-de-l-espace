@@ -28,7 +28,7 @@ public class InventaireVue {
     	img3  = new ImageView(new Image("./image/pelleBois.png"));  	
 		panneauJeu.getChildren().add(img3);
 		img3.setTranslateX(288);
-    	img3.setTranslateY(18);    	
+    	img3.setTranslateY(18);
 	}
 	
 	
@@ -103,8 +103,9 @@ public class InventaireVue {
 		}
 
 		if (typeItems == 1) {
+			
 			panneauJeu.getChildren().remove(img1);			
-			img1 = img;
+			img1 = img;		
 			panneauJeu.getChildren().add(img1);	
 			img1.setTranslateX(192);
 			img1.setTranslateY(18);						
