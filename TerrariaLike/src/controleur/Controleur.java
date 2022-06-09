@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import applicationV1.modele.fonctionnalités.Arbre;
 import applicationV1.modele.fonctionnalités.Collisions;
+import applicationV1.modele.fonctionnalités.Range;
 import applicationV1.modele.nourriture.Fraise;
 import applicationV1.modele.nourriture.PommeDeTerre;
 import applicationV1.modele.Personnage;
@@ -194,7 +195,7 @@ public class Controleur implements Initializable {
 				temps = 0 ;
 				sauter = false;
 			}
-			if(temps3%200==0) {
+			if(temps3%400==0) {
 				temps = 0 ;
 				sauter = false;
 				if(arbre1.getArbreProperty().intValue()==2) {
@@ -209,6 +210,7 @@ public class Controleur implements Initializable {
 					arbre3.changerArbre();
 	        		arbrevue3.afficherArbre();
 				}
+				pommeDeTerreVue.afficherPommeDeTerre();
 			}
 			temps3++;
 		})
@@ -241,22 +243,28 @@ public class Controleur implements Initializable {
 				sauter = true;
 				posYInit = personnage.getY();
 			}	
-		}else if(event.getCode()==KeyCode.S) {   		
+		}
+		else if(event.getCode()==KeyCode.S) {   		
 			direction = 0;			
-		}else if(event.getCode()==KeyCode.W) {   		
+		}
+		else if(event.getCode()==KeyCode.W) {   		
 			inventaireVue.changerItems(1);
 
-		}else if(event.getCode()==KeyCode.X) {   		
+		}
+		else if(event.getCode()==KeyCode.X) {   		
 			inventaireVue.changerItems(2);	
 
-		}else if(event.getCode()==KeyCode.C) { 
+		}
+		else if(event.getCode()==KeyCode.C) { 
 			inventaireVue.changerItems(3);	
-		}else if(event.getCode()==KeyCode.V) {
+		}
+		else if(event.getCode()==KeyCode.V) {
 			popUpCraft.setVisible(false);
 		}
 		else if(event.getCode()==KeyCode.B) {
 			popUpCraft.setVisible(true);
-		}else if(event.getCode()==KeyCode.A) {
+		}
+		else if(event.getCode()==KeyCode.A) {
 			personnage.perdVie();
 			System.out.println(personnage.getPointDeVie());
     	} 
@@ -265,23 +273,26 @@ public class Controleur implements Initializable {
 			System.out.println(personnage.getPointDeVie());
 		}	
 		else if(event.getCode()==KeyCode.L) {
-		System.out.println(fraise.getQuantiteProperty());
-		if(arbrevue1.changerArbre() && arbre1.getArbreProperty().intValue()==1) {
-			arbre1.changerArbre();
-    		arbrevue1.afficherArbre();
-   			fraise.setQuantiteProperty(fraise.getQuantiteProperty().intValue()+1);
-   		}else if(arbrevue2.changerArbre() && arbre2.getArbreProperty().intValue()==1) {
-			arbre2.changerArbre();
-			arbrevue2.afficherArbre();
-   			fraise.setQuantiteProperty(fraise.getQuantiteProperty().intValue()+1); 			
-		}else if(arbrevue3.changerArbre() && arbre3.getArbreProperty().intValue()==1) {
-			arbre3.changerArbre();
-			arbrevue3.afficherArbre();
-			fraise.setQuantiteProperty(fraise.getQuantiteProperty().intValue()+1);
-   		}
-		System.out.println(fraise.getQuantiteProperty());
-		
-	}
+			if(arbrevue1.changerArbre() && arbre1.getArbreProperty().intValue()==1) {
+				arbre1.changerArbre();
+	    		arbrevue1.afficherArbre();
+	   			fraise.setQuantiteProperty(fraise.getQuantiteProperty().intValue()+1);
+			}
+			else if(arbrevue2.changerArbre() && arbre2.getArbreProperty().intValue()==1) {
+				arbre2.changerArbre();
+				arbrevue2.afficherArbre();
+	   			fraise.setQuantiteProperty(fraise.getQuantiteProperty().intValue()+1); 			
+			}
+			else if(arbrevue3.changerArbre() && arbre3.getArbreProperty().intValue()==1) {
+				arbre3.changerArbre();
+				arbrevue3.afficherArbre();
+				fraise.setQuantiteProperty(fraise.getQuantiteProperty().intValue()+1);
+	   		}
+			else if(event.getCode()==KeyCode.M && Range.rangeToPommeDeTerre(pommeDeTerreVue, personnage)) {
+				System.out.println("fhuihruhrg");
+				pommeDeTerreVue.afficherPommeDeTerre();
+			}
+		}
 	}		
 	
 	@FXML

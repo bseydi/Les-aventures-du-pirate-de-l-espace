@@ -2,7 +2,6 @@ package applicationV1.vue;
 
 import applicationV1.modele.Personnage;
 import applicationV1.modele.fonctionnalités.Arbre;
-import javafx.beans.property.IntegerProperty;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;

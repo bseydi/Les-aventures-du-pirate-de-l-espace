@@ -3,6 +3,7 @@ package controleur;
 import applicationV1.modele.Personnage;
 import applicationV1.modele.Terrain;
 import applicationV1.modele.fonctionnalités.Range;
+import applicationV1.vue.PommeDeTerreVue;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,12 +15,15 @@ public class ControleurClick implements EventHandler<MouseEvent> {
 	private int numéro;
 	private Terrain terrain;
 	private Personnage personnage;
+
 	
-	public ControleurClick(Personnage personnage,Terrain t,int idBlock,int numéro ) {
+	public ControleurClick(Personnage personnage,Terrain t,int idBlock,int numéro) {
 		this.idBlock= idBlock;
 		this.numéro = numéro;
 		this.terrain = t;
 		this.personnage = personnage;
+	
+		
 	}
 
 	@Override
@@ -45,6 +49,8 @@ public class ControleurClick implements EventHandler<MouseEvent> {
 				}
 			}
 		}
+		
+		
 
 	}
 
