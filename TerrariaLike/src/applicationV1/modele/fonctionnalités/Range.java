@@ -2,6 +2,7 @@ package applicationV1.modele.fonctionnalités;
 
 import applicationV1.modele.Personnage;
 import applicationV1.vue.PommeDeTerreVue;
+import applicationV1.modele.PnjCraft;
 public class Range {
 
 		public static boolean coordTile (Personnage perso, int num) {
@@ -17,6 +18,10 @@ public class Range {
 			
 			return false;
 		}
+		public static boolean rangeToPnj (Personnage perso, PnjCraft pnj) {
+			return Math.abs(perso.getX() - pnj.getX()) <= 70 && Math.abs(perso.getY() - pnj.getY()) <= 70;
+		}
+		
 		// permet de savoir si l'image de la pomme de terre se trouve au même endroit que la souris
 		public static boolean rangeToPommeDeTerre(PommeDeTerreVue pommeDeTerreVue,Personnage perso) {
 			for(int i=0;i<pommeDeTerreVue.getListImgPommeDeTerre().size();i=i+2) {

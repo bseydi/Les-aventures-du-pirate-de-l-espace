@@ -1,6 +1,5 @@
 package applicationV1.modele;
 
-import applicationV1.modele.Ressources;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -89,7 +88,7 @@ public class Personnage {
 			itemEnMain = nourritureEnMains;
 		}else if (typeItem == 2) {
 			blocEnMains++;
-			if(blocEnMains > 5) {
+			if(blocEnMains > 2) {
 				blocEnMains=1;
 			}		
 			itemEnMain = blocEnMains;

@@ -25,6 +25,7 @@ public class PommeDeTerreVue {
 		this.pommeDeTerre=pommeDeTerre;
 		this.img=new ImageView(new Image("./image/PommeDeTerre.png"));
 		panneauJeu.getChildren().add(img);
+<<<<<<< HEAD
 		this.xMin=0; // valeur minimal de x
 		this.xMax=500; // valeur maximal de x
 		this.yMin=400; // valeur minimal de y
@@ -34,6 +35,18 @@ public class PommeDeTerreVue {
 		nbY=yMin+randomY.nextInt(yMax-yMin); // valeur aléatoire de y pour positionner l'image sur le plateau de jeu
 		//System.out.println(nbX);
 		//System.out.println(nbY);
+=======
+		this.xMin=0;
+		this.xMax=500;
+		this.yMin=400;
+		this.yMax=600;
+		Random randomX = new Random();
+		Random randomY = new Random();
+		nbX=xMin+randomX.nextInt(xMax-xMin);
+		nbY=yMin+randomY.nextInt(yMax-yMin);
+		System.out.println(nbX);
+		System.out.println(nbY);
+>>>>>>> refs/remotes/origin/develop
 		img.setTranslateX(nbX);
     	img.setTranslateY(nbY);
     	this.listImgPommeDeTerre=new ArrayList<Integer>();

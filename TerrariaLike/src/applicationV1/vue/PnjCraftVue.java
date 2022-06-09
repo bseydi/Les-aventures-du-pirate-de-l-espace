@@ -1,7 +1,6 @@
 package applicationV1.vue;
 
 import applicationV1.modele.PnjCraft;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
