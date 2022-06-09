@@ -1,75 +1,77 @@
 package applicationV1.modele;
 
 import applicationV1.modele.Ressources;
+import applicationV1.modele.fonctionnalités.Collisions;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-public class Personnage {
-	private IntegerProperty xProperty,yProperty;
-	private int vitesse; 
-	private IntegerProperty pointDeVieProperty;
+public class Personnage extends Acteur{
 	private int nourritureEnMains = 1; //Sa valeur correspond à la nourriturre en mains 1=fraise 2=viandes 3=viande cuite 4=pdt 5=pdt cuites.
 	private int blocEnMains = 1; //Sa valeur correspond au bloc en mains.
 	private int objetEnMains = 1; //Sa valeur correspond à l'objet en mains 1 = mains, 2 = épée, 3 = hache bois, 4 = pioche en bois, 5 = pioche en pierre.                          
 	private Ressources ressource;
 	private Inventaire inventaire;
+	private int direction = 0;
+	private int posYInit = 0; 
+	private int temps = 0;
 	
-	public Personnage (int x,int y,int v){
-		super();
-		this.xProperty=new SimpleIntegerProperty(x);
-		this.yProperty =new SimpleIntegerProperty(y);
-		this.vitesse=v;
-		this.pointDeVieProperty=new SimpleIntegerProperty(100);
+	public Personnage(int x, int y, int v){
+		super(x,y,v);
 		this.ressource = new Ressources ();
 		this.inventaire = new Inventaire();
 	}
-	
-	public void seDeplacerAGauche() {
-		this.xProperty.set(this.getX()-this.vitesse);
+		
+	public void tomber (Collisions c, int direction , int posYInit) {
+		if (c.blocDessous(this.getX(), this.getY())) {			
+			if(direction == 1) {
+				this.setY(this.getY()+2);
+				this.setX(this.getX()+2);
+				if (this.getY() == posYInit-2) {
+					direction = 0;
+				}
+			} else if (direction == 2) {
+				this.setY(this.getY()+2);
+				this.setX(this.getX()-2);
+				if (this.getY() == posYInit-2) {
+					direction = 0;
+				}
+			}else {
+				this.setY(this.getY()+2);
+			}				
+		}
+		this.direction = direction;
+		this.posYInit = posYInit;
 	}
 	
-	public void seDeplacerADroite() {
-		this.xProperty.set(this.getX()+this.vitesse);
+	public int getDirection() {
+		return direction;
 	}
 	
-	public boolean estVivant() {
-		return this.pointDeVieProperty.get()>0;
-	}
-
-	public final IntegerProperty xProperty() {
-		return xProperty;
-	}
-
-	public final void setX(int n){
-		xProperty.setValue(n);
-	}
-
-	public final int getX() {
-		return this.xProperty.getValue();
+	public int getPosYInit() {
+		return posYInit;
 	}
 	
-	public final IntegerProperty yProperty() {
-		return yProperty;
-	}
-	public final void setY(int n){
-		yProperty.setValue(n);
-	}
-	
-	public final int getY() {
-		return this.yProperty.getValue();
-	}	
-	
-	public final IntegerProperty pointdeVieProperty() {
-		return this.pointDeVieProperty;
-	}
-
-	public void setPointDeVie(int n) {
-		pointDeVieProperty.setValue(n);
+	public void sauter (int direction, int temps) {
+		if(direction == 1) {
+			this.setY(this.getY()-2);
+			this.setX(this.getX()+1);
+		} else if (direction == 2) {
+			this.setY(this.getY()-2);
+			this.setX(this.getX()-1);
+		}else {
+			this.setY(this.getY()-2);
+		}
+		temps++;	
+		this.temps = temps;
 	}
 	
-	public final int getPointDeVie() {
-		return this.pointDeVieProperty.getValue();
+	public int getTemp() {
+		return this.temps;
 	}
+	
+	
+	
+	
 	
 	public Ressources getRessource() {
 		return ressource;
@@ -114,4 +116,10 @@ public class Personnage {
 	public int getObjetEnMains() {
 		return objetEnMains;
 	}	
+	
+	
+	
+	
+	
+	
 }

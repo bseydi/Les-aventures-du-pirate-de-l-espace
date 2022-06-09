@@ -1,5 +1,6 @@
 package applicationV1.modele.fonctionnalités;
 
+import applicationV1.modele.Creature1;
 import applicationV1.modele.Personnage;
 import applicationV1.modele.Terrain;
 public class Collisions {
@@ -8,6 +9,10 @@ public class Collisions {
 	private int id;
 
 	public Collisions (Personnage p, Terrain terrain) {
+		this.blockMap = terrain.getCarte();
+	}
+	
+	public Collisions (Creature1 p, Terrain terrain) {
 		this.blockMap = terrain.getCarte();
 	}
 

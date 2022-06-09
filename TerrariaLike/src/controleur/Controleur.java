@@ -4,9 +4,11 @@ import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import applicationV1.modele.fonctionnalités.Collisions;
+import applicationV1.modele.Creature1;
 import applicationV1.modele.Personnage;
 import applicationV1.modele.PnjCraft;
 import applicationV1.modele.Terrain;
+import applicationV1.vue.Creature1Vue;
 import applicationV1.vue.InventaireVue;
 import applicationV1.vue.PersonnageVue;
 import applicationV1.vue.PnjCraftVue;
@@ -21,7 +23,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
@@ -29,6 +30,7 @@ import javafx.util.Duration;
 public class Controleur implements Initializable {
 	Terrain terrain;
 	Personnage personnage;
+	Creature1 creature1;
 
 	TerrainVue terrainVue;
 	PersonnageVue personnageVue;
@@ -36,8 +38,11 @@ public class Controleur implements Initializable {
 	InventaireVue inventaireVue;
 	PnjCraft pnj;
 	PnjCraftVue pnjVue;
+	
+	Creature1Vue creature1Vue;
 
 	Collisions c1;
+	Collisions c2;
 
 	VieVue vieVue;
 
@@ -87,10 +92,14 @@ public class Controleur implements Initializable {
 		personnageVue = new PersonnageVue(panneauJeu,personnage);
 		vieVue = new VieVue(placeCoeur,personnage.getPointDeVie());
 		c1 = new Collisions(personnage, terrain);
+		
 		ressourcesDeBaseVue = new RessourcesDeBaseVue(personnage,labelBois,labelFer,labelPierre);
 
 		inventaireVue = new InventaireVue(panneauJeu, personnage);
 
+		creature1 = new Creature1(400, 290, 5);
+		creature1Vue = new Creature1Vue(panneauJeu, creature1 );
+		c2 = new Collisions(creature1, terrain);
 		initAnimation();
 		gameLoop.play();
 		try {
@@ -104,7 +113,7 @@ public class Controleur implements Initializable {
 		pnjVue = new PnjCraftVue(panneauJeu, pnj);
 
 		pnjVue.pnj();
-	
+		creature1Vue.creature1();
 	}	
 
 	private void initAnimation() {
@@ -125,37 +134,18 @@ public class Controleur implements Initializable {
 						remettreDirection0 = false;
 					}
 				}
-			}*/					
+			}*/	
+			creature1.tomber2(c2, 0, 0);
+			
 			if (!sauter) {
-				if (c1.blocDessous(personnage.getX(), personnage.getY())) {			
-					if(direction == 1) {
-						personnage.setY(personnage.getY()+2);
-						personnage.setX(personnage.getX()+2);
-						if (personnage.getY() == posYInit-2) {
-							direction = 0;
-						}
-					} else if (direction == 2) {
-						personnage.setY(personnage.getY()+2);
-						personnage.setX(personnage.getX()-2);
-						if (personnage.getY() == posYInit-2) {
-							direction = 0;
-						}
-					}else {
-						personnage.setY(personnage.getY()+2);
-					}				
-				}
-			}			
+				personnage.tomber(c1, direction, posYInit);
+				direction = personnage.getDirection();
+				posYInit = personnage.getPosYInit();
+			}
+			
 			if (sauter) {				
-				if(direction == 1) {
-					personnage.setY(personnage.getY()-2);
-					personnage.setX(personnage.getX()+1);
-				} else if (direction == 2) {
-					personnage.setY(personnage.getY()-2);
-					personnage.setX(personnage.getX()-1);
-				}else {
-					personnage.setY(personnage.getY()-2);
-				}
-				temps++;
+				personnage.sauter(direction, temps);
+				temps = personnage.getTemp();
 			}
 
 			if(temps%20==0) {
@@ -207,6 +197,8 @@ public class Controleur implements Initializable {
 		}
 		else if(event.getCode()==KeyCode.B) {
 			popUpCraft.setVisible(true);
+		}else if(event.getCode()==KeyCode.M) {
+			personnage.getInventaire().ajouterOutils("Pelle");
 		}
 	}		
 	

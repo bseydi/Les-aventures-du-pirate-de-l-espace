@@ -1,12 +1,7 @@
 package applicationV1.modele;
 
-import java.util.ArrayList;
-
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 
 public class PnjCraft {
 
@@ -66,20 +61,20 @@ public class PnjCraft {
 			case 6 :
 				if ( perso.getRessource().getNbPierre() >= 4 ) {
 					perso.getRessource().retirerPierre(4);	
-					perso.getInventaire().ajouterObjets("MurDepierre",1);
+					perso.getInventaire().ajouterObjets("MurDepierre");
 				}
 				break;
 			case 7 :
 				if ( perso.getRessource().getNbBois() >= 4 ) {
 					perso.getRessource().retirerBois(4);
-					perso.getInventaire().ajouterObjets("Planche",1);
+					perso.getInventaire().ajouterObjets("Planche");
 				}
 				break;
 			case 8 :
 				if ( perso.getRessource().getNbBois() >= 2 && perso.getRessource().getNbPierre() >= 2 ) {
 					perso.getRessource().retirerBois(2);
 					perso.getRessource().retirerPierre(2);	
-					perso.getInventaire().ajouterObjets("FeuDeCamp",1);					
+					perso.getInventaire().ajouterObjets("FeuDeCamp");					
 				
 				}
 				default :	break;

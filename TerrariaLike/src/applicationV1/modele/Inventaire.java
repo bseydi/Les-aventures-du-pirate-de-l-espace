@@ -32,13 +32,18 @@ public class Inventaire {
         this.outils.replace(outils, this.outils.get(outils) - 1);
     }
     
-    public void ajouterObjets(String objets, int valeur) {
-        this.objets.replace(objets, this.objets.get(objets) + valeur);    
+    public void ajouterObjets(String objets) {
+        this.objets.replace(objets, this.objets.get(objets) + 1);    
     }
     
     public void supprimerObjets(String objets) {
         this.objets.replace(objets, this.objets.get(objets) - 1);
     }
+    
+    public int nbOutils(String pelle) {
+    	return this.outils.get(pelle);
+    }
+    
     
     
     
