@@ -23,29 +23,36 @@ public class ControleurClick implements EventHandler<MouseEvent> {
 	}
 
 	@Override
-	public void handle(MouseEvent event) {
-		ImageView img =(ImageView) event.getSource();
-		if ( event.getButton() == MouseButton.PRIMARY && Range.coordTile(personnage,numéro)) {
-			if(personnage.getObjetEnMains() == 1) { 
-				if (this.idBlock == 2 || this.idBlock == 3) {
-					img.setImage(new Image("./image/Ciel.png"));
-					terrain.supprimerCase(numéro);
-				}
-			}else if (personnage.getObjetEnMains() == 4 || personnage.getObjetEnMains() == 5) {
-				if(this.idBlock == 4 || this.idBlock == 5) {
-					img.setImage(new Image("./image/Ciel.png"));
-					terrain.supprimerCase(numéro);
-					personnage.getRessource().ajoutFer(1);
-					this.idBlock = 1;
-				} else if ( this.idBlock == 6) {
-					img.setImage(new Image("./image/Ciel.png"));
-					terrain.supprimerCase(numéro);
-					personnage.getRessource().ajoutPierre(1);
-					this.idBlock = 1;
-				}
-			}
-		}
-
+    public void handle(MouseEvent event) {
+        ImageView img =(ImageView) event.getSource();
+        if ( event.getButton() == MouseButton.PRIMARY && Range.coordTile(personnage,numéro)) {
+            if(personnage.getObjetEnMains() == 1) {
+                if (personnage.getInventaire().nbOutils("Pelle") > 0) {
+                    if (this.idBlock == 2 || this.idBlock == 3) {
+                        img.setImage(new Image("./image/Ciel.png"));
+                        terrain.supprimerCase(numéro);
+                    }
+                }else {
+                    System.out.println("Vous n'avez pas de pelle !");
+                }
+            }else if (personnage.getObjetEnMains() == 4 || personnage.getObjetEnMains() == 5) {
+                if (personnage.getInventaire().nbOutils("PiocheEnBois") > 0|| personnage.getInventaire().nbOutils("PiocheEnPierre") > 0) {
+                    if(this.idBlock == 4 || this.idBlock == 5) {
+                        img.setImage(new Image("./image/Ciel.png"));
+                        terrain.supprimerCase(numéro);
+                        personnage.getRessource().ajoutFer(1);
+                        this.idBlock = 1;
+                    } else if ( this.idBlock == 6) {
+                        img.setImage(new Image("./image/Ciel.png"));
+                        terrain.supprimerCase(numéro);
+                        personnage.getRessource().ajoutPierre(1);
+                        this.idBlock = 1;
+                    }
+                }else {
+                    System.out.println("Vous n'avez pas de pioche !");
+                }
+            }
+        }
 	}
 
 }

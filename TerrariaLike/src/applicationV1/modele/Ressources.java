@@ -10,9 +10,9 @@ public class Ressources {
 	private IntegerProperty nbFerProperty;
 	
 	public Ressources() {
-		this.nbBoisProperty =  new SimpleIntegerProperty(0);
-		this.nbPierreProperty =  new SimpleIntegerProperty(0);
-		this.nbFerProperty =  new SimpleIntegerProperty(0);
+		this.nbBoisProperty =  new SimpleIntegerProperty(10);
+		this.nbPierreProperty =  new SimpleIntegerProperty(10);
+		this.nbFerProperty =  new SimpleIntegerProperty(10);
 	}
 
 	public final int getNbPierre() {

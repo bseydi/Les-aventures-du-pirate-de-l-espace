@@ -23,9 +23,6 @@ public class PnjCraft {
 
 
 	public void dialogue(Personnage perso, int choix) {
-		
-		System.out.println("Bonjour ! \n Je suis prêt a t'échanger de l'équipement flambant neuf contre des ressources " );
-		
 		try {
 			switch(choix) {
 			case 1 :
@@ -79,8 +76,7 @@ public class PnjCraft {
 				if ( perso.getRessource().getNbBois() >= 2 && perso.getRessource().getNbPierre() >= 2 ) {
 					perso.getRessource().retirerBois(2);
 					perso.getRessource().retirerPierre(2);	
-					perso.getInventaire().ajouterObjets("FeuDeCamp",1);					
-				
+					perso.getInventaire().ajouterObjets("FeuDeCamp",1);								
 				}
 				default :	break;
 				
