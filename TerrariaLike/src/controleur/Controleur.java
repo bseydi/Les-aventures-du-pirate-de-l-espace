@@ -7,7 +7,6 @@ import applicationV1.modele.Acteur;
 import applicationV1.modele.Creature1;
 import applicationV1.modele.Environnement;
 import applicationV1.modele.Personnage;
-import applicationV1.modele.fonctionnalités.Range;
 import applicationV1.vue.ArbreVue;
 import applicationV1.vue.Creature1Vue;
 import applicationV1.vue.InventaireVue;
@@ -25,7 +24,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Background;
@@ -174,9 +172,9 @@ public class Controleur implements Initializable {
 				}
 			}		
 			
-			creature.suivre(perso, this.env.getC2());
+			//creature.suivre(perso, this.env.getC2());
 			
-		/*-------------------------saut du personnage ------------------------------------*/
+		/*------------------------- saut et gravité du personnage ------------------------------------*/
 			if (!perso.isSauter()) {
 				Acteur.tomber(perso,this.env.getC1(), perso.getDirection(), perso.getPosYInit());
 			}			
@@ -189,7 +187,7 @@ public class Controleur implements Initializable {
 				perso.setTemps(0);
 				perso.setSauter(false);
 			}
-		/*-------------------------saut de la créature ------------------------------------*/	
+		/*------------------------- saut et gravité de la créature ------------------------------------*/	
 			if(!creature.isSauter()) {
 				Acteur.tomber(creature,this.env.getC2(),creature.getDirection(),creature.getPosYInit());
 			}

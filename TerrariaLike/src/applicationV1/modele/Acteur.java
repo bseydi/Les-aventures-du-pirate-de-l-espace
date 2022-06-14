@@ -26,15 +26,15 @@ public class Acteur {
 			if(direction == 1) {
 				acteur.setY(acteur.getY()+2);
 				acteur.setX(acteur.getX()+2);
-				/*if (acteur.getY() == posYInit-2) {
+				if (acteur.getY() == posYInit-2) {
 					direction = 0;
-				}*/
+				}
 			} else if (direction == 2) {
 				acteur.setY(acteur.getY()+2);
 				acteur.setX(acteur.getX()-2);
-				/*if (acteur.getY() == posYInit-2) {
+				if (acteur.getY() == posYInit-2) {
 					direction = 0;
-				}*/
+				}
 			}else {
 				acteur.setY(acteur.getY()+2);
 			}				
