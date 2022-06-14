@@ -88,7 +88,7 @@ public class Personnage {
 			itemEnMain = nourritureEnMains;
 		}else if (typeItem == 2) {
 			blocEnMains++;
-			if(blocEnMains > 2) {
+			if(blocEnMains > 3) {
 				blocEnMains=1;
 			}		
 			itemEnMain = blocEnMains;

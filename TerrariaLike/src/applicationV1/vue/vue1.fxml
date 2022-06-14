@@ -14,9 +14,9 @@
 
 <BorderPane onKeyPressed="#toucheAppuyée" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.Controleur">
 	<center>
-		<Pane fx:id="panneauJeu" prefHeight="960" prefWidth="640" BorderPane.alignment="CENTER">
+		<Pane fx:id="panneauJeu" prefHeight="1600" prefWidth="800" BorderPane.alignment="CENTER">
 			<children>
-				<TilePane fx:id="terrainJeu" prefColumns="30" prefRows="0" />
+				<TilePane fx:id="terrainJeu" prefColumns="50" prefRows="0" />
 				<Pane fx:id="placeCoeur" prefHeight="75.0" prefWidth="164.0" />
 				<TilePane fx:id="placeRessources" layoutX="1.0" layoutY="550.0" prefColumns="2">
 					<children>
@@ -40,10 +40,10 @@
 						<Label fx:id="labelPierre" text="Label" textFill="#fcfafa" />
 					</children>
 				</TilePane>
-				<Pane fx:id="popUpCraft" layoutX="-21.0" layoutY="125.0" prefHeight="355.0" prefWidth="420.0" style="-fx-background-color: Gray; -fx-border-color: black;">
+				<Pane fx:id="popUpCraft" layoutX="550.0" layoutY="0.0" prefHeight="355.0" prefWidth="420.0" style="-fx-background-color: Gray; -fx-border-color: black;">
 					<children>
 						<TextField fx:id="repMenu" layoutX="235.0" layoutY="320.0" prefHeight="26.0" prefWidth="32.0" style="-fx-border-color: black;" />
-						<TextArea layoutX="24.0" layoutY="40.0" prefHeight="280.0" prefWidth="145.0" style="-fx-background-color: black;" text="1 : épée en pierre&#10;2 : épée en fer&#10;3 : hache en pierre&#10;4 : pioche en bois&#10;5 : pioche en pierre&#10;6 : Bloc de pierre&#10;7 : Planches&#10;8 : Feu de camp">
+						<TextArea layoutX="24.0" layoutY="40.0" prefHeight="280.0" prefWidth="145.0" style="-fx-background-color: black;" text="1 : épée en pierre&#10;2 : épée en fer&#10;3 : hache en pierre&#10;4 : pioche en bois&#10;5 : pioche en pierre&#10;6 : Bloc de pierre&#10;7 : Planche&#10;8 : Feu de camp">
                      <font>
                         <Font name="Gubbi" size="12.0" />
                      </font></TextArea>
@@ -72,7 +72,7 @@
                         <Image url="@../../image/imageRessource/ressource_bois.png" />
                      </image>
                   </ImageView>
-                   <ImageView fx:id="fermerPopUp" fitHeight="25.0" fitWidth="39.0" layoutX="381.0" layoutY="9.0" onMouseClicked="#fermerPopUp" pickOnBounds="true" preserveRatio="true">
+                   <ImageView fx:id="fermerPopUpCraft" fitHeight="25.0" fitWidth="39.0" layoutX="381.0" layoutY="9.0" onMouseClicked="#fermerPopUp" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../image/Croix.png" />
                      </image>
@@ -229,6 +229,38 @@
                   </ImageView>
 					</children>
 				</Pane>
+            <Pane fx:id="popUpFeuDeCamp" layoutX="104.0" layoutY="309.0" prefHeight="136.0" prefWidth="289.0" style="-fx-background-color: grey; -fx-border-color: black;">
+               <children>
+                  <Text layoutX="102.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Feu de camp" />
+                  <ImageView layoutX="27.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../image/PommeDeTerre.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView layoutX="27.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../image/ViandeCreature.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView layoutX="230.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../image/PatateCuite.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView layoutX="230.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../image/ViandeCreatureCuite.png" />
+                     </image>
+                  </ImageView>
+                  <RadioButton layoutX="77.0" layoutY="43.0" mnemonicParsing="false" onAction="#cuirePatate" text="Cuire tes patates" />
+                  <RadioButton layoutX="83.0" layoutY="90.0" mnemonicParsing="false" onAction="#cuireViande" text="Cuire ta viande" />
+                  <ImageView fx:id="fermerPopUpFeu" fitHeight="25.0" fitWidth="39.0" layoutX="263.0" layoutY="2.0" onMouseClicked="#fermerPopUp" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../image/Croix.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
 
 
 			</children>
