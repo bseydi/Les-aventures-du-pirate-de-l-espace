@@ -8,6 +8,11 @@ public class Acteur {
 	private IntegerProperty xProperty,yProperty;
 	private int vitesse; 
 	private IntegerProperty pointDeVieProperty;
+	private int direction = 0;
+	private int posYInit = 0; 
+	private boolean remettreDirection0 = false;
+	private boolean sauter = false;
+	private int temps = 0;
 	
 	public Acteur (int x,int y,int v) {
 		this.xProperty=new SimpleIntegerProperty(x);
@@ -16,6 +21,79 @@ public class Acteur {
 		this.pointDeVieProperty=new SimpleIntegerProperty(100);
 	}
 	
+	public static void tomber (Acteur acteur, Collisions c, int direction , int posYInit) { // Gravité : fait tomber l'acteur dans une direction ou tout droit
+		if (c.blocDessous(acteur.getX(), acteur.getY())) {			
+			if(direction == 1) {
+				acteur.setY(acteur.getY()+2);
+				acteur.setX(acteur.getX()+2);
+				/*if (acteur.getY() == posYInit-2) {
+					direction = 0;
+				}*/
+			} else if (direction == 2) {
+				acteur.setY(acteur.getY()+2);
+				acteur.setX(acteur.getX()-2);
+				/*if (acteur.getY() == posYInit-2) {
+					direction = 0;
+				}*/
+			}else {
+				acteur.setY(acteur.getY()+2);
+			}				
+		}	
+	}
+	
+	
+	public int getDirection() {
+		return direction;
+	}
+
+	public void setDirection(int direction) {
+		this.direction = direction;
+	}
+
+	public int getPosYInit() {
+		return posYInit;
+	}
+
+	public void setPosYInit(int posYInit) {
+		this.posYInit = posYInit;
+	}
+
+	public boolean isRemettreDirection0() {
+		return remettreDirection0;
+	}
+
+	public void setRemettreDirection0(boolean remettreDirection0) {
+		this.remettreDirection0 = remettreDirection0;
+	}
+
+	public boolean isSauter() {
+		return sauter;
+	}
+
+	public void setSauter(boolean sauter) {
+		this.sauter = sauter;
+	}
+
+	public void saut(int direction) { // permet à l'acteur de décoller dans une direction ou sur place
+		if(direction == 1) {
+			this.setY(this.getY()-2);
+			this.setX(this.getX()+1);
+		} else if (direction == 2) {
+			this.setY(this.getY()-2);
+			this.setX(this.getX()-1);
+		}else {
+			this.setY(this.getY()-2);
+		}	
+	}
+	
+	public int getTemp() {
+		return this.temps;
+	}
+			
+	public void setTemps(int temps) {
+		this.temps = temps;
+	}
+
 	public void seDeplacerAGauche() {
 		this.xProperty.set(this.getX()-this.vitesse);
 	}

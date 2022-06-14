@@ -40,11 +40,11 @@ public class Inventaire {
         this.objets.replace(objets, this.objets.get(objets) - 1);
     }
     
-    public int nbOutils(String pelle) {
-    	return this.outils.get(pelle);
+    public int nbOutils(String outil) {
+    	return this.outils.get(outil);
     }
     
-     
-    
-    
+    public int nbObjets(String objet) {
+    	return this.objets.get(objet);
+    }     
 }    

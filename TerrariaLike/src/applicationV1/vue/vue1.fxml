@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.TilePane?>
 
-<BorderPane onKeyPressed="#toucheAppuyée" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.Controleur">
+<BorderPane fx:id="root" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.Controleur">
 	<center>
 		<Pane fx:id="panneauJeu" prefHeight="960" prefWidth="640" BorderPane.alignment="CENTER">
 			<children>
@@ -40,7 +40,7 @@
 						<Label fx:id="labelPierre" text="Label" textFill="#fcfafa" />
 					</children>
 				</TilePane>
-				<Pane fx:id="popUpCraft" layoutX="-21.0" layoutY="125.0" prefHeight="355.0" prefWidth="420.0" style="-fx-background-color: Gray; -fx-border-color: black;">
+				<Pane fx:id="popUpCraft" layoutX="550" layoutY="0" prefHeight="355.0" prefWidth="420.0" style="-fx-background-color: Gray; -fx-border-color: black;">
 					<children>
 						<TextField fx:id="repMenu" layoutX="235.0" layoutY="320.0" prefHeight="26.0" prefWidth="32.0" style="-fx-border-color: black;" />
 						<TextArea layoutX="24.0" layoutY="40.0" prefHeight="280.0" prefWidth="145.0" style="-fx-background-color: black;" text="1 : épée en pierre&#10;2 : épée en fer&#10;3 : hache en pierre&#10;4 : pioche en bois&#10;5 : pioche en pierre&#10;6 : Bloc de pierre&#10;7 : Planches&#10;8 : Feu de camp">
