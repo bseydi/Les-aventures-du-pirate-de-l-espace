@@ -9,7 +9,7 @@ import javafx.scene.layout.Pane;
 public class PersonnageVue {
 	
 	private Pane panneauJeu;
-	Personnage personnage;
+	private Personnage personnage;
 		
 	public PersonnageVue(Pane panneauJeu, Personnage personnage) {
 		this.panneauJeu = panneauJeu;

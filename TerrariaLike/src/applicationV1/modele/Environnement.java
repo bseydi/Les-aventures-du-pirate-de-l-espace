@@ -19,17 +19,20 @@ public class Environnement {
 	
 	private Nourriture fraise;
 	private Nourriture pommeDeTerre;
-
-	private Collisions c1;
 	private ArrayList<Arbre> listeArbres;
 	
+	private Collisions c1;
+	private Collisions c2;
+	private Creature1 creature1;
 	
 	public Environnement() {
 		
 		this.personnage = new Personnage(300,290,5);
 		this.pnj = new PnjCraft(20,430);
+		this.creature1 = new Creature1(600,290,1);
 		this.terrain = new Terrain ();
 		this.c1 = new Collisions(this.personnage, this.terrain);
+		this.c2 = new Collisions(this.creature1, this.terrain);
 		this.fraise = new Fraise();
 		this.pommeDeTerre = new PommeDeTerre();
 		this.listeArbres = new ArrayList<>();
@@ -47,6 +50,10 @@ public class Environnement {
 		return personnage;
 	}
 
+	public Creature1 getCreature1() {
+		return creature1;
+	}
+	
 	public PnjCraft getPnj() {
 		return pnj;
 	}
@@ -73,5 +80,9 @@ public class Environnement {
 	
 	public Collisions getC1() {
 		return c1;
+	}
+	
+	public Collisions getC2() {
+		return c2;
 	}
 }

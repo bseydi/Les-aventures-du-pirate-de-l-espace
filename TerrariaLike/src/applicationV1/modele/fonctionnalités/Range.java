@@ -4,6 +4,7 @@ import applicationV1.modele.Personnage;
 import applicationV1.modele.PnjCraft;
 public class Range {
 
+	
 		public static boolean coordTile (Personnage perso, int num) {
 			int x = 0;
 			int y = 0;

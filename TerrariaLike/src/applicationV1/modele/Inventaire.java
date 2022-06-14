@@ -58,8 +58,8 @@ public class Inventaire {
         this.objets.replace(objets, this.objets.get(objets) - 1);
     }
     
-    public int nbOutils (String outils) {
-    	return this.outils.get(outils);
+    public int nbOutils(String outil) {
+    	return this.outils.get(outil);
     }
     
     public void ajouterNourriture(int n) {
@@ -69,6 +69,7 @@ public class Inventaire {
     		}
     	}
     }
+
     
     public void retirerNourriture(int n) {
     	for(int i = 0; i < this.listeNourriture.size(); i++) {

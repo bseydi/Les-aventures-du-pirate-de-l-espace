@@ -1,6 +1,5 @@
 package applicationV1.modele;
 
-
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -8,15 +7,11 @@ public class PnjCraft {
 
 	private IntegerProperty xProperty,yProperty;
 	
-	
-
 	public PnjCraft(int x, int y) {
 		
 		this.xProperty=new SimpleIntegerProperty(x);
 		this.yProperty =new SimpleIntegerProperty(y);
-
 	}
-
 
 	public void dialogue(Personnage perso, int choix) {
 		try {
