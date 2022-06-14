@@ -1,3 +1,4 @@
+
 package controleur;
 
 import applicationV1.modele.Personnage;
@@ -78,7 +79,6 @@ public class ControleurClick implements EventHandler<MouseEvent> {
 						img.setImage(new Image("./image/transparent.png"));
 						terrain.supprimerCase(numéro,0);
 						personnage.getRessource().ajoutBois(1);
-						System.out.println("test22");
 						this.idBlock = 0;    
 					}		
 				}
@@ -87,7 +87,6 @@ public class ControleurClick implements EventHandler<MouseEvent> {
 
 		if ( event.getButton() == MouseButton.MIDDLE && Range.coordTile(personnage,numéro)) {
 			if ( personnage.getBlocEnMains() == 1 && personnage.getInventaire().getNbBloc("MurDePierre") >= 1 ) {
-				System.out.println("test2");
 				img.setImage(new Image("./image/pierre.png"));
 				terrain.supprimerCase(numéro,3);
 				this.idBlock = 3;
@@ -95,8 +94,6 @@ public class ControleurClick implements EventHandler<MouseEvent> {
 			}
 
 			if (personnage.getBlocEnMains()== 2 && personnage.getInventaire().getNbBloc("Planche") >= 1 ) {
-				System.out.println("test3");
-
 				img.setImage(new Image("./image/PlancheBlock.jpg"));
 				terrain.supprimerCase(numéro,19);
 				this.idBlock = 19;

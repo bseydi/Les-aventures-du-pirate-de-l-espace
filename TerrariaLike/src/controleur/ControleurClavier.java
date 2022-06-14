@@ -46,25 +46,26 @@ public class ControleurClavier implements EventHandler <KeyEvent> {
 				this.env.getPersonnage().setSauter(true);
 				this.env.getPersonnage().setPosYInit(this.env.getPersonnage().getY());
 			}	
-		}else if(event.getCode()==KeyCode.S) {   		
+		}
+		else if(event.getCode()==KeyCode.S) {   		
 			this.env.getPersonnage().setDirection(0);			
-		}else if(event.getCode()==KeyCode.W) {   		
+		}
+		else if(event.getCode()==KeyCode.W) {   		
 			inventaireVue.changerItems(1);
 
-		}else if(event.getCode()==KeyCode.X) {   		
+		}
+		else if(event.getCode()==KeyCode.X) {   		
 			inventaireVue.changerItems(2);	
 
-		}else if(event.getCode()==KeyCode.C) { 
-			inventaireVue.changerItems(3);	
-		}else if(event.getCode()==KeyCode.SPACE && Range.rangeToPnj(this.env.getPersonnage(),this.env.getPnj())) {
-			popUpCraft.setVisible(!popUpCraft.isVisible());
-			
-			
 		}
-
+		else if(event.getCode()==KeyCode.C) { 
+			inventaireVue.changerItems(3);	
+		}
+		else if(event.getCode()==KeyCode.SPACE && Range.rangeToPnj(this.env.getPersonnage(),this.env.getPnj())) {
+			popUpCraft.setVisible(!popUpCraft.isVisible());
+		}
 		else if(event.getCode()==KeyCode.B) {
 			popUpCraft.setVisible(true);
-		System.out.println(this.env.getPersonnage().getPointDeVie());
 		}	
 		else if(event.getCode()==KeyCode.L) {
 		/*System.out.println(this.env.getFraise().getQuantiteProperty());
@@ -84,13 +85,19 @@ public class ControleurClavier implements EventHandler <KeyEvent> {
 		System.out.println(this.env.getFraise().getQuantiteProperty());*/
 			this.env.getCreature1().attaquer(this.env.getPersonnage());;
 		}
-		else if(event.getCode()==KeyCode.A) {
+		else if(event.getCode()==KeyCode.R) {
 			this.env.getPersonnage().perdVie();
 			System.out.println(this.env.getPersonnage().getPointDeVie());
     	} 
-		else if(event.getCode()==KeyCode.E) {
+		else if(event.getCode()==KeyCode.T) {
 			this.env.getPersonnage().gagneVie();
 			System.out.println(this.env.getPersonnage().getPointDeVie());
+		}
+		else if (event.getCode()==KeyCode.A) {
+			this.env.getPersonnage().perdNourriture();
+		}
+		else if (event.getCode()==KeyCode.E) {
+			this.env.getPersonnage().manger();
 		}
 		
 	}	

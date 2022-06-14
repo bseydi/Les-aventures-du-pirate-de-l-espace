@@ -1,14 +1,22 @@
 package applicationV1.modele;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import applicationV1.modele.nourriture.Fraise;
+import applicationV1.modele.nourriture.Nourriture;
+import applicationV1.modele.nourriture.PommeDeTerre;
+import applicationV1.modele.nourriture.PommeDeTerreCuite;
+import applicationV1.modele.nourriture.ViandeDeCreature;
+import applicationV1.modele.nourriture.ViandeDeCreatureCuite;
 
 public class Inventaire {
     
     private Map<String, Integer> outils;
     private Map<String, Integer> objets;
-    private Map<String, Integer> nourritures;
-
+    private ArrayList<Nourriture> listeNourriture;
+    private Nourriture n;
         
     public Inventaire () {
         this.outils = new HashMap<>();        
@@ -24,7 +32,14 @@ public class Inventaire {
         this.objets.put("MurDePierre", 5);
         this.objets.put("FeuDeCamp", 1);
         this.objets.put("Pièges", 0);
-
+        
+        this.listeNourriture = new ArrayList<Nourriture>();
+        this.listeNourriture.add(this.n = new Fraise());
+        this.listeNourriture.add(this.n = new ViandeDeCreature());
+        this.listeNourriture.add(this.n = new ViandeDeCreatureCuite());
+        this.listeNourriture.add(this.n = new PommeDeTerre());
+        this.listeNourriture.add(this.n = new PommeDeTerreCuite());
+   
     }
     
     public void ajouterOutils(String outils) {
@@ -47,18 +62,36 @@ public class Inventaire {
     	return this.outils.get(outil);
     }
     
-    public void ajouterNourriture(String nourriture, int valeur) {
-    	this.nourritures.replace(nourriture, this.nourritures.get(nourriture) + valeur);
+    public void ajouterNourriture(int n) {
+    	for(int i = 0; i < this.listeNourriture.size(); i++) {
+    		if(this.listeNourriture.get(i).getId() == n) {
+    			this.listeNourriture.get(i).setQuantiteProperty(this.listeNourriture.get(i).getQuantiteProperty() + 1);
+    		}
+    	}
     }
-       
-    public void supprimerNourriture (String nourriture, int valeur ) {
-    	this.nourritures.replace(nourriture, this.nourritures.get(nourriture) - 1);
-    }  
-    public int getNbNourritures(String nourriture) {
-		return nourritures.get(nourriture);
-	}
+
     
-   public int getNbBloc (String bloc) {
+    public void retirerNourriture(int n) {
+    	for(int i = 0; i < this.listeNourriture.size(); i++) {
+    		if(this.listeNourriture.get(i).getId() == n) {
+    			if(this.listeNourriture.get(i).getQuantiteProperty() == 0) {
+    				this.listeNourriture.get(i).setQuantiteProperty(0);
+    			}
+    			else {
+    				this.listeNourriture.get(i).setQuantiteProperty(this.listeNourriture.get(i).getQuantiteProperty() - 1);
+    			}
+    			
+    		}
+    	}
+    		
+    }
+ 
+    public ArrayList<Nourriture> getListeNourriture() {
+    	return this.listeNourriture;
+    }
+    
+    public int getNbBloc (String bloc) {
 	   return objets.get(bloc);
    }
+
 }    

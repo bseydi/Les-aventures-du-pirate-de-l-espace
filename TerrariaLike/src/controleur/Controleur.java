@@ -15,6 +15,7 @@ import applicationV1.modele.nourriture.PommeDeTerre;
 import applicationV1.modele.nourriture.PommeDeTerreList;
 import applicationV1.modele.Personnage;
 import applicationV1.vue.ArbreVue;
+import applicationV1.vue.BarNourritureVue;
 import applicationV1.vue.EstMort;
 import applicationV1.vue.Creature1Vue;
 import applicationV1.vue.InventaireVue;
@@ -63,6 +64,7 @@ public class Controleur implements Initializable {
 	private PommeDeTerreList pommeDeTerreList;
 	
 	private VieVue vieVue;
+	private BarNourritureVue bNourriture;
 
 	private RessourcesDeBaseVue ressourcesDeBaseVue;
 	
@@ -76,14 +78,7 @@ public class Controleur implements Initializable {
 
 	private int temps3;
 	private int temps4;
-	
-	private int posYInit;
-	private boolean remettreDirection0 = false; // remet la direction à 0 au bout d'un certain temps.
 
-
-
-	private int direction = 0;
-	private boolean sauter = false;
 	private EstMort estMort;
 
 
@@ -110,6 +105,9 @@ public class Controleur implements Initializable {
 
 	@FXML
 	private Pane placeCoeur;
+	
+   @FXML
+    private Pane placeBar;
 
 	@FXML
 	private Label labelBois;
@@ -134,19 +132,20 @@ public class Controleur implements Initializable {
 				BackgroundSize.DEFAULT);
 		
 		Background background = new Background(arrièrePlan);
-		panneauJeu.setBackground(background);
+		this.panneauJeu.setBackground(background);
 		
-		popUpCraft.setVisible(false);
-		popUpFeuDeCamp.setVisible(false);
+		this.popUpCraft.setVisible(false);
+		this.popUpFeuDeCamp.setVisible(false);
 
 		this.env = new Environnement();
 		this.pnjVue = new PnjCraftVue(panneauJeu, this.env.getPnj());
 		
-		this.terrainVue = new TerrainVue(this.env.getPersonnage(), terrainJeu, this.env.getTerrain());
-		this.personnageVue = new PersonnageVue(panneauJeu,this.env.getPersonnage());
+		this.terrainVue = new TerrainVue(this.env.getPersonnage(), this.terrainJeu, this.env.getTerrain());
+		this.personnageVue = new PersonnageVue(this.panneauJeu,this.env.getPersonnage());
 		this.vieVue = new VieVue(placeCoeur,this.env.getPersonnage().pointdeVieProperty());
-		
+		this.bNourriture = new BarNourritureVue(this.placeBar,this.env.getPersonnage().pointdeNourritureProperty());
 		this.ressourcesDeBaseVue = new RessourcesDeBaseVue(this.env.getPersonnage(),labelBois,labelFer,labelPierre);
+		
 		this.env.getPersonnage().pointdeVieProperty().addListener((o, oldVal, newVal) -> { vieVue.afficheCoeur();});
 		
 		this.arbrevue1 = new ArbreVue(panneauJeu, this.env.getArbre1(), this.env.getPersonnage());
@@ -166,13 +165,14 @@ public class Controleur implements Initializable {
 		try {
 			this.terrainVue.creerTerrainJeu();
 			this.vieVue.afficheCoeur();
+			this.bNourriture.afficheNourritureBar();
 			this.ressourcesDeBaseVue.afficheRessources();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		this.personnageVue.perso();
-
 		this.pnjVue.pnj();
+
 			 
 		creature1Vue = new Creature1Vue(panneauJeu, this.env.getCreature1());
 		creature1Vue.creature1();
@@ -351,10 +351,11 @@ public class Controleur implements Initializable {
 		
 	@FXML
 	void fermerPopUp () {		// Appelé par le joueur depuis l'interface du pnj des crafts
-		popUpCraft.setVisible(false);
-		popUpFeuDeCamp.setVisible(false);
-		panneauJeu.requestFocus();
+		this.popUpCraft.setVisible(false);
+		this.popUpFeuDeCamp.setVisible(false);
+		this.panneauJeu.requestFocus();
 	}
+	
 	@FXML
 	void confirmer () {			// Appelé par le joueur depuis l'interface du pnj des crafts
 		 this.env.getPnj().dialogue(this.env.getPersonnage(),Integer.parseInt(repMenu.getText()));
@@ -364,17 +365,17 @@ public class Controleur implements Initializable {
 	
 	@FXML
 	void cuirePatate () {		// Appelé par le joueur depuis l'interface du feu de camp
-		if (this.env.getPersonnage().getInventaire().getNbNourritures("Patate") >= 1 ) {
-			this.env.getPersonnage().getInventaire().ajouterNourriture("Patate cuite", 1);
-			this.env.getPersonnage().getInventaire().supprimerNourriture("Patate",1);
+		if (this.env.getPersonnage().getInventaire().getListeNourriture().get(3).getQuantiteProperty() >= 1 ) {
+			this.env.getPersonnage().getInventaire().ajouterNourriture(4);
+			this.env.getPersonnage().getInventaire().retirerNourriture(3);
 		}
 	}
 	
 	@FXML
 	void cuireViande () {		// Appelé par le joueur depuis l'interface du feu de camp 
-		if (this.env.getPersonnage().getInventaire().getNbNourritures("Viande cru") >= 1 ) {
-			this.env.getPersonnage().getInventaire().ajouterNourriture("Viande cuite",1);
-			this.env.getPersonnage().getInventaire().supprimerNourriture("Viande cru",1);			
+		if (this.env.getPersonnage().getInventaire().getListeNourriture().get(1).getQuantiteProperty() >= 1 ) {
+			this.env.getPersonnage().getInventaire().ajouterNourriture(2);
+			this.env.getPersonnage().getInventaire().retirerNourriture(1);			
 		}	 
 	}
 }		
