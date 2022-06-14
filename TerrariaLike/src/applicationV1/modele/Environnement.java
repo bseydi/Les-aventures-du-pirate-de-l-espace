@@ -1,5 +1,7 @@
 package applicationV1.modele;
 
+import java.util.ArrayList;
+
 import applicationV1.modele.fonctionnalités.Collisions;
 import applicationV1.modele.nourriture.Fraise;
 import applicationV1.modele.nourriture.Nourriture;

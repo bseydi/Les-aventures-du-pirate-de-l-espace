@@ -157,20 +157,6 @@ public class Acteur {
 	public final int getPointDeVie() {
 		return this.pointDeVieProperty.getValue();
 	}
-	//Methode qui permet de tester la perte de vie et sont affichage sur la vue
-	public void perdVie() {
-		if(getPointDeVie() <= 0) {
-			System.out.println("Impossible de retirer de la vie");
-		}else {
-			setPointDeVie(getPointDeVie() - 10);
-		}
-	}
-	// methodo pour tester l'ajoute de vie et son affichage
-	public void gagneVie() {
-		if(getPointDeVie() >= 100) {
-			System.out.println("Impossible d'ajouter de la vie");
-		}else {
-			setPointDeVie(getPointDeVie() + 10);
-		}
-	}
+	
+	
 }
