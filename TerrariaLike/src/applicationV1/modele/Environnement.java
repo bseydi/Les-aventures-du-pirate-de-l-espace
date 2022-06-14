@@ -14,10 +14,6 @@ public class Environnement {
 	
 	private Personnage personnage;
 	private PnjCraft pnj;
-	
-	private Arbre arbre1;
-	private Arbre arbre2;
-	private Arbre arbre3;
 
 	private Nourriture fraise;
 	private Nourriture pommeDeTerre;
@@ -41,9 +37,7 @@ public class Environnement {
 		this.fraise = new Fraise();
 		this.pommeDeTerre = new PommeDeTerre();
 
-		this.arbre1 = new Arbre(400, 418);
-		this.arbre2 = new Arbre(950,322);
-		this.arbre3 = new Arbre(700, 386);
+		
 
 		this.listeArbres = new ArrayList<>();
 		this.listeArbres.add(this.a = new Arbre(400, 418));
