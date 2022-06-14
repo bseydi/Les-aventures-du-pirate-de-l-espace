@@ -59,21 +59,20 @@ public class PnjCraft {
 			case 6 :
 				if ( perso.getRessource().getNbPierre() >= 4 ) {
 					perso.getRessource().retirerPierre(4);	
-					perso.getInventaire().ajouterObjets("MurDepierre");
+					perso.getInventaire().ajouterObjets("MurDepierre",1);
 				}
 				break;
 			case 7 :
 				if ( perso.getRessource().getNbBois() >= 4 ) {
 					perso.getRessource().retirerBois(4);
-					perso.getInventaire().ajouterObjets("Planche");
+					perso.getInventaire().ajouterObjets("Planche",1);
 				}
 				break;
 			case 8 :
 				if ( perso.getRessource().getNbBois() >= 2 && perso.getRessource().getNbPierre() >= 2 ) {
 					perso.getRessource().retirerBois(2);
 					perso.getRessource().retirerPierre(2);	
-					perso.getInventaire().ajouterObjets("FeuDeCamp");					
-				
+					perso.getInventaire().ajouterObjets("FeuDeCamp",1);								
 				}
 				default :	break;
 				

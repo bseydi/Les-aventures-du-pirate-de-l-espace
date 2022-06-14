@@ -50,7 +50,7 @@ public class InventaireVue {
 				img = new ImageView(new Image("./image/Fraise.png"));
 			} else if (typeItems == 2) {
 				img = new ImageView(new Image("./image/coblestone.png"));
-				if (personnage.getInventaire().nbObjets("MurDepierre") == 0) {
+				if (personnage.getInventaire().getNbBloc("MurDepierre") == 0) {
 					img.setOpacity(0.5);
 				}
 			} else if (typeItems == 3) {
@@ -66,7 +66,7 @@ public class InventaireVue {
 				img = new ImageView(new Image("./image/PommeDeTerre.png"));
 			} else if (typeItems == 2) {
 				img = new ImageView(new Image("./image/planche.png"));
-				if (personnage.getInventaire().nbObjets("Planche") == 0) {
+				if (personnage.getInventaire().getNbBloc("Planche") == 0) {
 					img.setOpacity(0.5);
 				}
 			} else if (typeItems == 3) {
@@ -80,7 +80,7 @@ public class InventaireVue {
 			if (typeItems == 1) {
 				img = new ImageView(new Image("./image/PatateCuite.png"));
 			} else if (typeItems == 2) {
-				img = new ImageView(new Image("./image/PommeDeTerre.png"));
+				img = new ImageView(new Image("./image/feuDeCampCadre.gif"));
 			} else if (typeItems == 3) {
 				img = new ImageView(new Image("./image/hachePierre.png"));
 				if (personnage.getInventaire().nbOutils("HacheEnPierre") == 0) {

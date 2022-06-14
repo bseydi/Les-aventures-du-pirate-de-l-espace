@@ -1,9 +1,9 @@
 package applicationV1.modele.outils;
 
-public class Epée extends Outils{
+public class EpéePierre extends Outils{
 
-	public Epée() {
-		super(50,20);
+	public EpéePierre() {
+		super(30);
 	}
 	public boolean craftEpée() {
 		
