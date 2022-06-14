@@ -1,11 +1,11 @@
 package applicationV1.modele;
 
-
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class PnjCraft {
 
+	
 	private IntegerProperty xProperty,yProperty;
 	
 	

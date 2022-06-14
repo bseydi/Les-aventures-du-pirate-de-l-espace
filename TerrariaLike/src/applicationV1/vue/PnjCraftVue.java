@@ -24,6 +24,4 @@ public class PnjCraftVue {
     	img.translateYProperty().bind(pnj.yProperty());
    	 	panneauJeu.getChildren().add(img);
 	}
-	
-
 }

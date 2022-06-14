@@ -4,14 +4,19 @@ import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.CloseAction;
 
+import applicationV1.modele.Acteur;
+import applicationV1.modele.Creature1;
 import applicationV1.modele.Environnement;
 import applicationV1.modele.fonctionnalités.Range;
 import applicationV1.modele.nourriture.PommeDeTerre;
 import applicationV1.modele.nourriture.PommeDeTerreList;
+import applicationV1.modele.Personnage;
 import applicationV1.vue.ArbreVue;
 import applicationV1.vue.EstMort;
+import applicationV1.vue.Creature1Vue;
 import applicationV1.vue.InventaireVue;
 import applicationV1.vue.PersonnageVue;
 import applicationV1.vue.PnjCraftVue;
@@ -29,6 +34,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -59,21 +65,31 @@ public class Controleur implements Initializable {
 	private VieVue vieVue;
 
 	private RessourcesDeBaseVue ressourcesDeBaseVue;
+	
+	
+	private Creature1Vue creature1Vue;
+	
 
 	private Timeline gameLoop;
-
 	private int temps;
 	private int temps2;
+
 	private int temps3;
 	private int temps4;
 	
 	private int posYInit;
 	private boolean remettreDirection0 = false; // remet la direction à 0 au bout d'un certain temps.
 
+
+
 	private int direction = 0;
 	private boolean sauter = false;
 	private EstMort estMort;
 
+
+	@FXML
+    private BorderPane root;
+	
 	@FXML
 	private ImageView fermerPopUp;
 	
@@ -108,7 +124,7 @@ public class Controleur implements Initializable {
     private Pane paneGameOver;
 	
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {	
+	public void initialize(URL location, ResourceBundle resources) {
 		Image image = new Image("./image/background.jpg");
 		paneGameOver.setVisible(false);
 		
@@ -151,65 +167,77 @@ public class Controleur implements Initializable {
 			this.terrainVue.creerTerrainJeu();
 			this.vieVue.afficheCoeur();
 			this.ressourcesDeBaseVue.afficheRessources();
-			this.pommeDeTerreList.recupereClickPommeDeTerre();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		this.personnageVue.perso();
 
 		this.pnjVue.pnj();
-	
+			 
+		creature1Vue = new Creature1Vue(panneauJeu, this.env.getCreature1());
+		creature1Vue.creature1();
+		root.addEventHandler(KeyEvent.KEY_PRESSED, new ControleurClavier(env, inventaireVue, popUpCraft));
 	}	
 
+	
+	
 	private void initAnimation() {
 		gameLoop = new Timeline();
 		temps=0;
-		temps2 = 0;
+		temps2=0;
 		temps3=0;
 		temps4=0;
 		
 
-		posYInit=0;
+		this.env.getPersonnage().setPosYInit(0);
 		gameLoop.setCycleCount(Timeline.INDEFINITE);
 		
-		KeyFrame kf = new KeyFrame (Duration.seconds(0.017),(ev ->{						
-						
-			if (!sauter) {
-				if (this.env.getC1().blocDessous(this.env.getPersonnage().getX(), this.env.getPersonnage().getY())) {			
-					if(direction == 1) {
-						this.env.getPersonnage().setY(this.env.getPersonnage().getY()+2);
-						this.env.getPersonnage().setX(this.env.getPersonnage().getX()+2);
-						if (this.env.getPersonnage().getY() == posYInit-2) {
-							direction = 0;
-						}
-					} else if (direction == 2) {
-						this.env.getPersonnage().setY(this.env.getPersonnage().getY()+2);
-						this.env.getPersonnage().setX(this.env.getPersonnage().getX()-2);
-						if (this.env.getPersonnage().getY() == posYInit-2) {
-							direction = 0;
-						}
-					}else {
-						this.env.getPersonnage().setY(this.env.getPersonnage().getY()+2);
-					}				
-				}
-			}			
-			if (sauter) {				
-				if(direction == 1) {
-					this.env.getPersonnage().setY(this.env.getPersonnage().getY()-2);
-					this.env.getPersonnage().setX(this.env.getPersonnage().getX()+1);
-				} else if (direction == 2) {
-					this.env.getPersonnage().setY(this.env.getPersonnage().getY()-2);
-					this.env.getPersonnage().setX(this.env.getPersonnage().getX()-1);
-				}else {
-					this.env.getPersonnage().setY(this.env.getPersonnage().getY()-2);
-				}
-				temps++;
-			}
 
-			if(temps%20==0) {
-				temps = 0 ;
-				sauter = false;
-			}
+		KeyFrame kf = new KeyFrame (Duration.seconds(0.017),(ev ->{						
+			Personnage perso = this.env.getPersonnage();
+			Creature1 creature = this.env.getCreature1();
+			
+			if (perso.isRemettreDirection0()) {//Remet la direction du perso à 0 au bout d'un certain temps.
+				temps++;
+				if (!perso.isSauter() && !this.env.getC1().blocDessous(perso.getX(), perso.getY())) {
+					if (temps%40==0) {
+						perso.setDirection(0);
+						temps = 0;
+						perso.setRemettreDirection0(false);
+					}
+				}
+			}		
+			
+			//creature.suivre(perso, this.env.getC2());
+			
+			
+			/*------------------------- saut et gravité du personnage ------------------------------------*/
+				if (!perso.isSauter()) {
+					Acteur.tomber(perso,this.env.getC1(), perso.getDirection(), perso.getPosYInit());
+				}			
+				if (perso.isSauter()) {	
+					perso.saut(perso.getDirection());
+					perso.setTemps(perso.getTemp()+1);
+				}
+				
+				if(perso.getTemp()%20==0) {
+					perso.setTemps(0);
+					perso.setSauter(false);
+				}
+			/*------------------------- saut et gravité de la créature ------------------------------------*/	
+				if(!creature.isSauter()) {
+					Acteur.tomber(creature,this.env.getC2(),creature.getDirection(),creature.getPosYInit());
+				}
+				
+				if (creature.isSauter()) {
+					creature.saut(creature.getDirection());
+					creature.setTemps(creature.getTemp()+1); //temps++
+				}
+				
+				if(creature.getTemp()%20==0) {
+					creature.setTemps(0);
+					creature.setSauter(false);
+				}
 			
 			
 			if(temps3%400==0) {
@@ -217,6 +245,7 @@ public class Controleur implements Initializable {
 				pommeDeTerreVue.afficherPommeDeTerre();
 				pommeDeTerreList.ajouterImagePommeDeTerre();
 			}
+			temps3++;
 			if(temps4%20==0) {
 				
 				if(pommeDeTerreList.PommeDeTerreACotePerso()) {
@@ -226,21 +255,15 @@ public class Controleur implements Initializable {
 					this.env.getPommeDeTerre().setQuantiteProperty(this.env.getPommeDeTerre().getQuantiteProperty()+1);
 					System.out.println(this.env.getPommeDeTerre().getQuantiteProperty());
 				}
-				
-				if(this.env.getPersonnage().getPointDeVie()==0) {
-					paneGameOver.setVisible(true);
-					
-				}
 			}
-			
-			temps3++;
 			temps4++;
-			
+
 		})
 				);
 		gameLoop.getKeyFrames().add(kf);	
 	}
 
+/*
 	@FXML
 	void toucheAppuyée(KeyEvent event) {		
 		if(event.getCode()==KeyCode.D) {
@@ -323,7 +346,9 @@ public class Controleur implements Initializable {
 	   		}
 			
 		}
-	}		
+	}	*/	
+
+		
 	@FXML
 	void fermerPopUp () {		// Appelé par le joueur depuis l'interface du pnj des crafts
 		popUpCraft.setVisible(false);
@@ -335,6 +360,7 @@ public class Controleur implements Initializable {
 		 this.env.getPnj().dialogue(this.env.getPersonnage(),Integer.parseInt(repMenu.getText()));
 		 fermerPopUp();
 	}
+
 	
 	@FXML
 	void cuirePatate () {		// Appelé par le joueur depuis l'interface du feu de camp

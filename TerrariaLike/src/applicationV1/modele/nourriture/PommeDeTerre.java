@@ -18,7 +18,7 @@ public class PommeDeTerre extends Nourriture{
 		super(4,5,0);
 		
 		this.xMin=0; // valeur minimal de x
-		this.xMax=1200; // valeur maximal de x
+		this.xMax=1600; // valeur maximal de x
 		this.yMin=500; // valeur minimal de y
 		this.yMax=700; // valeur maximal de y
 		

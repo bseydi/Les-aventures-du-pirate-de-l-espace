@@ -11,17 +11,13 @@ public class ArbreVue {
 	private Arbre arbre;
 	private Pane paneArbre;
 	private Personnage p;
-	private Image[] tabImg;
 	private ImageView img;
 	
 	public ArbreVue(Pane paneArbre, Arbre arbre,Personnage p) {
 		this.paneArbre=paneArbre;
 		this.arbre=arbre;
 		this.p=p;
-		this.tabImg=new Image[2];
-		tabImg[0]=new Image("./image/imageArbre/Fraisier.png");
-		tabImg[1]=new Image("./image/imageArbre/arbreSansFruit.png");
-		this.img = new ImageView(tabImg[0]);
+		this.img=new ImageView( new Image("./image/imageArbre/Fraisier.png"));
 		paneArbre.getChildren().add(img);
 		img.setTranslateX(arbre.getX());
     	img.setTranslateY(arbre.getY());
@@ -29,11 +25,6 @@ public class ArbreVue {
 
 	public void afficherArbre() {
 		paneArbre.getChildren().remove(img);
-		if(this.arbre.getArbre()==1) {
-			img = new ImageView(tabImg[0]);
-		}else if(this.arbre.getArbre()==2){
-			img = new ImageView(tabImg[1]);
-		}
 		img.setTranslateX(arbre.getX());
     	img.setTranslateY(arbre.getY());
 		paneArbre.getChildren().add(img);

@@ -1,7 +1,9 @@
 package applicationV1.modele.nourriture;
 
+import applicationV1.modele.Acteur;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.scene.image.ImageView;
 
 public abstract class  Nourriture {
 
@@ -51,6 +53,16 @@ private int id;
 	}
 	public  void setY(int y) {
 		
+	}
+
+	public Nourriture getPommeDeTerre2() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ImageView img() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -43,14 +43,14 @@ public class Inventaire {
         this.objets.replace(objets, this.objets.get(objets) - 1);
     }
     
-    public int nbOutils (String outils) {
-    	return this.outils.get(outils);
+    public int nbOutils(String outil) {
+    	return this.outils.get(outil);
     }
     
     public void ajouterNourriture(String nourriture, int valeur) {
     	this.nourritures.replace(nourriture, this.nourritures.get(nourriture) + valeur);
     }
-    
+       
     public void supprimerNourriture (String nourriture, int valeur ) {
     	this.nourritures.replace(nourriture, this.nourritures.get(nourriture) - 1);
     }  

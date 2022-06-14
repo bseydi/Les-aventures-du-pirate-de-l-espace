@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import applicationV1.modele.Personnage;
 import applicationV1.vue.PommeDeTerreVue;
-import controleur.ControleurClickPommeDeTerre;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -57,9 +56,6 @@ public class PommeDeTerreList {
 		if(personnage.getX()<pommeDeTerre.getX()+40 && personnage.getX()>pommeDeTerre.getX()-15 && personnage.getY()<pommeDeTerre.getY()+40 && personnage.getY()>pommeDeTerre.getY()-15)
 			return true;
 		return false;
-	}
-	public void recupereClickPommeDeTerre() throws FileNotFoundException{
-		//listImgPommeDeTerre.get(indice).addEventFilter(MouseEvent.MOUSE_CLICKED,new ControleurClickPommeDeTerre(personnage, pommeDeTerreVue, pommeDeTerreList));
 	}
 	
 	public ArrayList<Integer> getListCoordonneeImgPommeDeTerre() {

@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -16,8 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<BorderPane onKeyPressed="#toucheAppuyée" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.Controleur">
+<BorderPane fx:id="root" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.Controleur">
 	<center>
 		<Pane fx:id="panneauJeu" prefHeight="1600" prefWidth="800" BorderPane.alignment="CENTER">
 			<children>
@@ -45,7 +41,8 @@
 						<Label fx:id="labelPierre" text="Label" textFill="#fcfafa" />
 					</children>
 				</TilePane>
-				<Pane fx:id="popUpCraft" layoutX="550.0" layoutY="0.0" prefHeight="355.0" prefWidth="420.0" style="-fx-background-color: Gray; -fx-border-color: black;">
+
+				<Pane fx:id="popUpCraft" layoutX="550" layoutY="0" prefHeight="355.0" prefWidth="420.0" style="-fx-background-color: Gray; -fx-border-color: black;">
 					<children>
 						<TextField fx:id="repMenu" layoutX="235.0" layoutY="320.0" prefHeight="26.0" prefWidth="32.0" style="-fx-border-color: black;" />
 						<TextArea layoutX="24.0" layoutY="40.0" prefHeight="280.0" prefWidth="145.0" style="-fx-background-color: black;" text="1 : épée en pierre&#10;2 : épée en fer&#10;3 : hache en pierre&#10;4 : pioche en bois&#10;5 : pioche en pierre&#10;6 : Bloc de pierre&#10;7 : Planche&#10;8 : Feu de camp">
@@ -266,9 +263,9 @@
                   </ImageView>
                </children>
             </Pane>
-            <Pane fx:id="paneGameOver" prefHeight="960.0" prefWidth="647.0">
+            <Pane fx:id="paneGameOver" layoutX="332.0" prefHeight="960.0" prefWidth="647.0">
                <children>
-                  <ImageView fitHeight="504.0" fitWidth="640.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="504.0" fitWidth="640.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../image/game%20over.jpg" />
                      </image>

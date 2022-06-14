@@ -13,8 +13,6 @@ public class PommeDeTerreVue {
 	private Nourriture pommeDeTerre2;
 	private Pane panneauJeu;
 	private ImageView img=new ImageView();
-	
-	
 	private Personnage p;
 
 	
@@ -32,8 +30,6 @@ public class PommeDeTerreVue {
 	public ImageView img() {
 		return img;
 	}
-	
-	
 		
 	public void afficherPommeDeTerre() {
 		this.pommeDeTerre2=new PommeDeTerre();
@@ -41,21 +37,12 @@ public class PommeDeTerreVue {
 		img.setTranslateX(pommeDeTerre2.getX());
     	img.setTranslateY(pommeDeTerre2.getY());
     	panneauJeu.getChildren().add(img);
-    	
-	//	img.addEventHandler(MouseEvent.MOUSE_CLICKED,new ControleurClickPommeDeTerre(personnage, pommeDeTerreVue, pommeDeTerreList));
-
     }
 	
 	public Nourriture getPommeDeTerre2() {
 		return pommeDeTerre2;
 	}
-/*
-	public boolean PommeDeTerreACotePerso() {
-		if(p.getX()<pommeDeTerre.getX()+40 && p.getX()>pommeDeTerre.getX()-15 && p.getY()<pommeDeTerre.getY()+40 && p.getY()>pommeDeTerre.getY()-15)
-			return true;
-		return false;
-	}*/
-	
+
 	public int coordonneeImgX() {
 		return (int)img.getLayoutX();
 	}

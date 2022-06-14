@@ -22,19 +22,28 @@ public class Environnement {
 	
 	private Collisions c1;
 	
+	Collisions c2;
 	
-	
+	Creature1 creature1;
+		
 	public Environnement() {
 		
 		this.personnage = new Personnage(300,290,5);
 		this.pnj = new PnjCraft(20,430);
+		this.creature1 = new Creature1(600,290,1);
 		this.terrain = new Terrain ();
 		this.c1 = new Collisions(this.personnage, this.terrain);
+		this.c2 = new Collisions(this.creature1, this.terrain);
+		this.arbre1 = new Arbre(320,260);
+		this.arbre2 = new Arbre(5,290);
+		this.arbre3 = new Arbre(130,290);
 		this.fraise = new Fraise();
 		this.pommeDeTerre = new PommeDeTerre();
+
 		this.arbre1 = new Arbre(400, 418);
 		this.arbre2 = new Arbre(950,322);
 		this.arbre3 = new Arbre(700, 386);
+
 	}
 	
 	public Terrain getTerrain() {
@@ -43,6 +52,11 @@ public class Environnement {
 
 	public Personnage getPersonnage() {
 		return personnage;
+	}
+
+
+	public Creature1 getCreature1() {
+		return creature1;
 	}
 
 	public PnjCraft getPnj() {
@@ -61,6 +75,8 @@ public class Environnement {
 		return arbre3;
 	}
 
+
+
 	public Nourriture getFraise() {
 		return fraise;
 	}
@@ -72,5 +88,8 @@ public class Environnement {
 	public Collisions getC1() {
 		return c1;
 	}
-	
+
+	public Collisions getC2() {
+		return c2;
+	}
 }
