@@ -1,12 +1,14 @@
 package applicationV1.modele.outils;
 
-public abstract class Outils extends Craftable {
+public abstract class Outils  {
 	
-	int durabilité;	
 	int dégat;
 	
-	public Outils(int dura, int dégat) {
-		this.durabilité = dura;
+	public Outils( int dégat) {
 		this.dégat = dégat;
+	}
+	
+	public void attaquer(Outils arme) {
+		
 	}
 }

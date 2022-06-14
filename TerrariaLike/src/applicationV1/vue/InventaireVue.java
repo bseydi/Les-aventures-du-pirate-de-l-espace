@@ -66,7 +66,7 @@ public class InventaireVue {
 			if (typeItems == 1) {
 				img = new ImageView(new Image("./image/PatateCuite.png"));
 			} else if (typeItems == 2) {
-				img = new ImageView(new Image("./image/PommeDeTerre.png"));
+				img = new ImageView(new Image("./image/feuDeCampCadre.gif"));
 			} else if (typeItems == 3) {
 				img = new ImageView(new Image("./image/hachePierre.png"));
 			}		

@@ -26,12 +26,9 @@ public class Environnement {
 	public Environnement() {
 		
 		this.personnage = new Personnage(300,290,5);
-		this.pnj = new PnjCraft(2,338);
+		this.pnj = new PnjCraft(20,430);
 		this.terrain = new Terrain ();
 		this.c1 = new Collisions(this.personnage, this.terrain);
-		this.arbre1 = new Arbre(320,260);
-		this.arbre2 = new Arbre(5,290);
-		this.arbre3 = new Arbre(130,290);
 		this.fraise = new Fraise();
 		this.pommeDeTerre = new PommeDeTerre();
 	}

@@ -25,9 +25,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
@@ -75,6 +81,9 @@ public class Controleur implements Initializable {
 	private Pane popUpCraft;
 	
 	@FXML
+	private Pane popUpFeuDeCamp;
+	
+	@FXML
 	private TextField repMenu;
 	
 	@FXML
@@ -100,8 +109,20 @@ public class Controleur implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {	
+		Image image = new Image("./image/background.jpg");
 		paneGameOver.setVisible(false);
+		
+		BackgroundImage arrièrePlan = new BackgroundImage(image,BackgroundRepeat.NO_REPEAT,
+				BackgroundRepeat.NO_REPEAT,
+				BackgroundPosition.DEFAULT,
+				BackgroundSize.DEFAULT);
+		
+		Background background = new Background(arrièrePlan);
+		panneauJeu.setBackground(background);
+		
 		popUpCraft.setVisible(false);
+		popUpFeuDeCamp.setVisible(false);
+
 		this.env = new Environnement();
 		this.pnjVue = new PnjCraftVue(panneauJeu, this.env.getPnj());
 		
@@ -112,9 +133,7 @@ public class Controleur implements Initializable {
 		this.ressourcesDeBaseVue = new RessourcesDeBaseVue(this.env.getPersonnage(),labelBois,labelFer,labelPierre);
 		this.env.getPersonnage().pointdeVieProperty().addListener((o, oldVal, newVal) -> { vieVue.afficheCoeur();});
 		
-		this.arbrevue1 = new ArbreVue(panneauJeu,this.env.getArbre1(),this.env.getPersonnage());
-		this.arbrevue2 = new ArbreVue(panneauJeu,this.env.getArbre2(),this.env.getPersonnage());
-		this.arbrevue3 = new ArbreVue(panneauJeu,this.env.getArbre3(),this.env.getPersonnage());
+
 		
 		
 		this.pommeDeTerreVue = new PommeDeTerreVue(panneauJeu, this.env.getPommeDeTerre(),env.getPersonnage());
@@ -152,16 +171,7 @@ public class Controleur implements Initializable {
 		gameLoop.setCycleCount(Timeline.INDEFINITE);
 		
 		KeyFrame kf = new KeyFrame (Duration.seconds(0.017),(ev ->{						
-			/*if (remettreDirection0 = true) {
-				temps2++;
-				if (!sauter && !this.env.getC1().blocDessous(this.env.getPersonnage().getX(), this.env.getPersonnage().getY())) {
-					if (temps2%20==0) {
-						direction = 0;
-						temps2 = 0;
-						remettreDirection0 = false;
-					}
-				}
-			}*/					
+						
 			if (!sauter) {
 				if (this.env.getC1().blocDessous(this.env.getPersonnage().getX(), this.env.getPersonnage().getY())) {			
 					if(direction == 1) {
@@ -325,20 +335,30 @@ public class Controleur implements Initializable {
 		}*/
 	}		
 	@FXML
-	void fermerPopUp () {
+	void fermerPopUp () {		// Appelé par le joueur depuis l'interface du pnj des crafts
 		popUpCraft.setVisible(false);
+		popUpFeuDeCamp.setVisible(false);
 		panneauJeu.requestFocus();
 	}
 	@FXML
-	void confirmer () {
-
+	void confirmer () {			// Appelé par le joueur depuis l'interface du pnj des crafts
 		 this.env.getPnj().dialogue(this.env.getPersonnage(),Integer.parseInt(repMenu.getText()));
 		 fermerPopUp();
 	}
-
-
-		
-		 
+	
+	@FXML
+	void cuirePatate () {		// Appelé par le joueur depuis l'interface du feu de camp
+		if (this.env.getPersonnage().getInventaire().getNbNourritures("Patate") >= 1 ) {
+			this.env.getPersonnage().getInventaire().ajouterNourriture("Patate cuite", 1);
+			this.env.getPersonnage().getInventaire().supprimerNourriture("Patate",1);
+		}
+	}
+	
+	@FXML
+	void cuireViande () {		// Appelé par le joueur depuis l'interface du feu de camp 
+		if (this.env.getPersonnage().getInventaire().getNbNourritures("Viande cru") >= 1 ) {
+			this.env.getPersonnage().getInventaire().ajouterNourriture("Viande cuite",1);
+			this.env.getPersonnage().getInventaire().supprimerNourriture("Viande cru",1);			
+		}	 
+	}
 }		
-
-
