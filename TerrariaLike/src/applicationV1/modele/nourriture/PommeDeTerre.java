@@ -18,13 +18,10 @@ public class PommeDeTerre extends Nourriture{
 		super(4,5,0);
 		
 		this.xMin=0; // valeur minimal de x
-		this.xMax=700; // valeur maximal de x
-		this.yMin=400; // valeur minimal de y
-		this.yMax=600; // valeur maximal de y
-		this.xMin=0;
-		this.xMax=500;
-		this.yMin=400;
-		this.yMax=600;
+		this.xMax=1200; // valeur maximal de x
+		this.yMin=500; // valeur minimal de y
+		this.yMax=700; // valeur maximal de y
+		
 		Random randomX = new Random();
 		Random randomY = new Random();
 		

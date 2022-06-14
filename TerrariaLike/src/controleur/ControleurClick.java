@@ -24,7 +24,7 @@ public class ControleurClick implements EventHandler<MouseEvent> {
 	
 		
 	}
-
+/*
 	@Override
 	public void handle(MouseEvent event) {
         ImageView img =(ImageView) event.getSource();
@@ -56,6 +56,8 @@ public class ControleurClick implements EventHandler<MouseEvent> {
                 }
             }
         }
+	}
+        */
 	public void handle(MouseEvent event) {
 		ImageView img =(ImageView) event.getSource();
 		if ( event.getButton() == MouseButton.PRIMARY && Range.coordTile(personnage,numéro)) {

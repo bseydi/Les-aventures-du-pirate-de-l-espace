@@ -133,7 +133,9 @@ public class Controleur implements Initializable {
 		this.ressourcesDeBaseVue = new RessourcesDeBaseVue(this.env.getPersonnage(),labelBois,labelFer,labelPierre);
 		this.env.getPersonnage().pointdeVieProperty().addListener((o, oldVal, newVal) -> { vieVue.afficheCoeur();});
 		
-
+		this.arbrevue1 = new ArbreVue(panneauJeu, this.env.getArbre1(), this.env.getPersonnage());
+		this.arbrevue2 = new ArbreVue(panneauJeu, this.env.getArbre2(), this.env.getPersonnage());
+		this.arbrevue3 = new ArbreVue(panneauJeu, this.env.getArbre3(), this.env.getPersonnage());
 		
 		
 		this.pommeDeTerreVue = new PommeDeTerreVue(panneauJeu, this.env.getPommeDeTerre(),env.getPersonnage());
@@ -284,8 +286,6 @@ public class Controleur implements Initializable {
 		}
 		else if(event.getCode()==KeyCode.SPACE && Range.rangeToPnj(this.env.getPersonnage(),this.env.getPnj())) {
 			popUpCraft.setVisible(!popUpCraft.isVisible());
-			
-			
 		}
 
 		else if(event.getCode()==KeyCode.B) {
@@ -323,16 +323,6 @@ public class Controleur implements Initializable {
 	   		}
 			
 		}
-		/*else if(event.getCode()==KeyCode.M) {
-			if(pommeDeTerreVue.pouvoirSrupprimerPommeDeTerre(pommeDeTerreVue, this.env.getPersonnage())){
-					pommeDeTerreVue.supprimerPommeDeTerre();
-					System.out.println("fhuihruhrg");
-			}
-			System.out.println(pommeDeTerreVue.pouvoirSrupprimerPommeDeTerre(pommeDeTerreVue, this.env.getPersonnage()));
-
-				
-				
-		}*/
 	}		
 	@FXML
 	void fermerPopUp () {		// Appelé par le joueur depuis l'interface du pnj des crafts
