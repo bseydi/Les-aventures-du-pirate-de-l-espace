@@ -1,35 +1,53 @@
 package applicationV1.modele.nourriture;
 
+import java.util.Random;
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-public class PommeDeTerre {
+public class PommeDeTerre extends Nourriture{
 
-	private int donnerPV;
-	private IntegerProperty quantiteProperty;
+	private int x,y;
+	private int xMin,xMax,yMin,yMax;
+	private Random randomX = new Random();
+	private Random randomY = new Random();
+
+
 
 	public PommeDeTerre() {
-		this.donnerPV = 5;
-		this.quantiteProperty =  new SimpleIntegerProperty(0);
+		super(4,5,0);
+		
+		this.xMin=0; // valeur minimal de x
+		this.xMax=700; // valeur maximal de x
+		this.yMin=400; // valeur minimal de y
+		this.yMax=600; // valeur maximal de y
+		this.xMin=0;
+		this.xMax=500;
+		this.yMin=400;
+		this.yMax=600;
+		Random randomX = new Random();
+		Random randomY = new Random();
+		
+
+		x=xMin+randomX.nextInt(xMax-xMin); // valeur aléatoire de x pour positionner l'image sur le plateau de jeu
+		y=yMin+randomY.nextInt(yMax-yMin); // valeur aléatoire de y pour positionner l'image sur le plateau de jeu
+		
 	}
 	
-	public int getDonnerPV() {
-		return donnerPV;
-	}
 	
-	public void setDonnerPV(int donnerPV) {
-		this.donnerPV = donnerPV;
+	public int getX() {
+		return x;
 	}
-	
-	public final IntegerProperty quantiteProperty() {
-		return quantiteProperty;
+
+	public void setX(int x) {
+		this.x = x;
 	}
-	
-	public IntegerProperty getQuantiteProperty() {
-		return quantiteProperty;
+
+	public int getY() {
+		return y;
 	}
-	
-	public void setQuantiteProperty(int quantite) {
-		this.quantiteProperty.setValue(quantite);
+
+	public void setY(int y) {
+		this.y = y;
 	}
 }

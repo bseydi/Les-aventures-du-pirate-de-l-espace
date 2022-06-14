@@ -1,25 +1,25 @@
 package applicationV1.modele;
 
-import applicationV1.modele.fonctionnalités.Arbre;
 import applicationV1.modele.fonctionnalités.Collisions;
 import applicationV1.modele.nourriture.Fraise;
+import applicationV1.modele.nourriture.Nourriture;
 import applicationV1.modele.nourriture.PommeDeTerre;
 
 public class Environnement {
 	
-	Terrain terrain;
+	private Terrain terrain;
 	
-	Personnage personnage;
-	PnjCraft pnj;
+	private Personnage personnage;
+	private PnjCraft pnj;
 	
-	Arbre arbre1;
-	Arbre arbre2;
-	Arbre arbre3;
+	private Arbre arbre1;
+	private Arbre arbre2;
+	private Arbre arbre3;
 	
-	Fraise fraise;
-	PommeDeTerre pommeDeTerre;
+	private Nourriture fraise;
+	private Nourriture pommeDeTerre;
 	
-	Collisions c1;
+	private Collisions c1;
 	
 	
 	
@@ -72,13 +72,13 @@ public class Environnement {
 
 
 
-	public Fraise getFraise() {
+	public Nourriture getFraise() {
 		return fraise;
 	}
 
 
 
-	public PommeDeTerre getPommeDeTerre() {
+	public Nourriture getPommeDeTerre() {
 		return pommeDeTerre;
 	}
 

@@ -4,10 +4,14 @@ import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.CloseAction;
 
 import applicationV1.modele.Environnement;
 import applicationV1.modele.fonctionnalités.Range;
+import applicationV1.modele.nourriture.PommeDeTerre;
+import applicationV1.modele.nourriture.PommeDeTerreList;
 import applicationV1.vue.ArbreVue;
+import applicationV1.vue.EstMort;
 import applicationV1.vue.InventaireVue;
 import applicationV1.vue.PersonnageVue;
 import applicationV1.vue.PnjCraftVue;
@@ -30,35 +34,39 @@ import javafx.util.Duration;
 
 public class Controleur implements Initializable {
 	
-	Environnement env;
+	private Environnement env;
 	
-	TerrainVue terrainVue;
-	PersonnageVue personnageVue;
+	private TerrainVue terrainVue;
+	private PersonnageVue personnageVue;
 
-	InventaireVue inventaireVue;
+	private InventaireVue inventaireVue;
 	
-	PnjCraftVue pnjVue;
+	private PnjCraftVue pnjVue;
 	
-	ArbreVue arbrevue1;
-	ArbreVue arbrevue2;
-	ArbreVue arbrevue3;
+	private ArbreVue arbrevue1;
+	private ArbreVue arbrevue2;
+	private ArbreVue arbrevue3;
 	
-	PommeDeTerreVue pommeDeTerreVue;
+	private PommeDeTerreVue pommeDeTerreVue;
+	private PommeDeTerreList pommeDeTerreList;
+	
+	private VieVue vieVue;
 
-	VieVue vieVue;
-
-	RessourcesDeBaseVue ressourcesDeBaseVue;
+	private RessourcesDeBaseVue ressourcesDeBaseVue;
 
 	private Timeline gameLoop;
 
 	private int temps;
 	private int temps2;
 	private int temps3;
+	private int temps4;
+	
 	private int posYInit;
 	private boolean remettreDirection0 = false; // remet la direction à 0 au bout d'un certain temps.
 
 	private int direction = 0;
 	private boolean sauter = false;
+	private EstMort estMort;
 
 	@FXML
 	private ImageView fermerPopUp;
@@ -87,11 +95,14 @@ public class Controleur implements Initializable {
 	@FXML
 	private Label labelPierre;
 	
+    @FXML
+    private Pane paneGameOver;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {	
-		
+		paneGameOver.setVisible(false);
+		popUpCraft.setVisible(false);
 		this.env = new Environnement();
-		
 		this.pnjVue = new PnjCraftVue(panneauJeu, this.env.getPnj());
 		
 		this.terrainVue = new TerrainVue(this.env.getPersonnage(), terrainJeu, this.env.getTerrain());
@@ -105,9 +116,13 @@ public class Controleur implements Initializable {
 		this.arbrevue2 = new ArbreVue(panneauJeu,this.env.getArbre2(),this.env.getPersonnage());
 		this.arbrevue3 = new ArbreVue(panneauJeu,this.env.getArbre3(),this.env.getPersonnage());
 		
-		this.pommeDeTerreVue = new PommeDeTerreVue(panneauJeu, this.env.getPommeDeTerre());
+		
+		this.pommeDeTerreVue = new PommeDeTerreVue(panneauJeu, this.env.getPommeDeTerre(),env.getPersonnage());
+		this.pommeDeTerreList = new PommeDeTerreList(panneauJeu, env.getPersonnage(),this.env.getPommeDeTerre(), pommeDeTerreVue);
 		
 		this.inventaireVue = new InventaireVue(panneauJeu, this.env.getPersonnage());
+		this.estMort=new EstMort(this.env.getPersonnage(), paneGameOver);
+		this.env.getPersonnage().pointdeVieProperty().addListener(estMort);
 
 		initAnimation();
 		gameLoop.play();
@@ -115,6 +130,7 @@ public class Controleur implements Initializable {
 			this.terrainVue.creerTerrainJeu();
 			this.vieVue.afficheCoeur();
 			this.ressourcesDeBaseVue.afficheRessources();
+			this.pommeDeTerreList.recupereClickPommeDeTerre();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -129,6 +145,8 @@ public class Controleur implements Initializable {
 		temps=0;
 		temps2 = 0;
 		temps3=0;
+		temps4=0;
+		
 
 		posYInit=0;
 		gameLoop.setCycleCount(Timeline.INDEFINITE);
@@ -180,24 +198,32 @@ public class Controleur implements Initializable {
 				temps = 0 ;
 				sauter = false;
 			}
+			
+			
 			if(temps3%400==0) {
-				temps = 0 ;
-				sauter = false;
-				if(this.env.getArbre1().getArbreProperty().intValue()==2) {
-					this.env.getArbre1().changerArbre();
-	        		arbrevue1.afficherArbre();
-				}
-				if(this.env.getArbre2().getArbreProperty().intValue()==2) {
-					this.env.getArbre2().changerArbre();
-	        		arbrevue2.afficherArbre();
-				}
-				if(this.env.getArbre3().getArbreProperty().intValue()==2) {
-					this.env.getArbre3().changerArbre();
-	        		arbrevue3.afficherArbre();
-				}
+				temps3 = 0 ;
 				pommeDeTerreVue.afficherPommeDeTerre();
+				pommeDeTerreList.ajouterImagePommeDeTerre();
 			}
+			if(temps4%20==0) {
+				
+				if(pommeDeTerreList.PommeDeTerreACotePerso()) {
+					pommeDeTerreList.srupprimerPommeDeTerre();
+					System.out.println("list pomme de terre coordonnee"+pommeDeTerreList.getListCoordonneeImgPommeDeTerre());
+					//appeller methode pour ajouter une pomme de terre
+					this.env.getPommeDeTerre().setQuantiteProperty(this.env.getPommeDeTerre().getQuantiteProperty()+1);
+					System.out.println(this.env.getPommeDeTerre().getQuantiteProperty());
+				}
+				
+				if(this.env.getPersonnage().getPointDeVie()==0) {
+					paneGameOver.setVisible(true);
+					
+				}
+			}
+			
 			temps3++;
+			temps4++;
+			
 		})
 				);
 		gameLoop.getKeyFrames().add(kf);	
@@ -264,26 +290,39 @@ public class Controleur implements Initializable {
 			System.out.println(this.env.getPersonnage().getPointDeVie());
 		}	
 		else if(event.getCode()==KeyCode.L) {
-			if(arbrevue1.changerArbre() && arbre1.getArbreProperty().intValue()==1) {
-				arbre1.changerArbre();
-	    		arbrevue1.afficherArbre();
-	   			fraise.setQuantiteProperty(fraise.getQuantiteProperty().intValue()+1);
+			if(arbrevue1.ArbreACotePerso() && this.env.getArbre1().getArbre()==1) {
+				//this.env.getArbre1().changerArbre();
+	    		//arbrevue1.afficherArbre();
+	   			this.env.getFraise().setQuantiteProperty(this.env.getFraise().getQuantiteProperty()+1);
+        		System.out.println("quantite fraise"+this.env.getFraise().getQuantiteProperty());
+
 			}
-			else if(arbrevue2.changerArbre() && arbre2.getArbreProperty().intValue()==1) {
-				arbre2.changerArbre();
-				arbrevue2.afficherArbre();
-	   			fraise.setQuantiteProperty(fraise.getQuantiteProperty().intValue()+1); 			
+			else if(arbrevue2.ArbreACotePerso() && this.env.getArbre2().getArbre()==1) {
+				//this.env.getArbre2().changerArbre();
+				//arbrevue2.afficherArbre();
+	   			this.env.getFraise().setQuantiteProperty(this.env.getFraise().getQuantiteProperty()+1); 			
+        		System.out.println("quantite fraise"+this.env.getFraise().getQuantiteProperty());
+
 			}
-			else if(arbrevue3.changerArbre() && arbre3.getArbreProperty().intValue()==1) {
-				arbre3.changerArbre();
-				arbrevue3.afficherArbre();
-				fraise.setQuantiteProperty(fraise.getQuantiteProperty().intValue()+1);
+			else if(arbrevue3.ArbreACotePerso() && this.env.getArbre3().getArbre()==1) {
+				//this.env.getArbre3().changerArbre();
+				//arbrevue3.afficherArbre();
+				this.env.getFraise().setQuantiteProperty(this.env.getFraise().getQuantiteProperty()+1);
+        		System.out.println("quantite fraise"+this.env.getFraise().getQuantiteProperty());
+
 	   		}
-			else if(event.getCode()==KeyCode.M && PommeDeTerreVue.pouvoirSrupprimerPommeDeTerre(pommeDeTerreVue, personnage)) {
-				System.out.println("fhuihruhrg");
-				pommeDeTerreVue.afficherPommeDeTerre();
-			}
+			
 		}
+		/*else if(event.getCode()==KeyCode.M) {
+			if(pommeDeTerreVue.pouvoirSrupprimerPommeDeTerre(pommeDeTerreVue, this.env.getPersonnage())){
+					pommeDeTerreVue.supprimerPommeDeTerre();
+					System.out.println("fhuihruhrg");
+			}
+			System.out.println(pommeDeTerreVue.pouvoirSrupprimerPommeDeTerre(pommeDeTerreVue, this.env.getPersonnage()));
+
+				
+				
+		}*/
 	}		
 	@FXML
 	void fermerPopUp () {
