@@ -4,7 +4,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class Personnage extends Acteur{
-	private int blocEnMains = 6; //Sa valeur correspond à l'objet en mains.
+	private int blocEnMains = 1; //Sa valeur correspond à l'objet en mains.
 	private int objetEnMains = 6; //Sa valeur correspond à l'outil en mains.   
 	private IntegerProperty pointDeNourritureProperty;
 	private Ressources ressource;
@@ -42,6 +42,7 @@ public class Personnage extends Acteur{
 
 		}
 		else if (typeItem == 2) {
+			System.out.println(blocEnMains);
 			blocEnMains++;
 			if(blocEnMains > 3) {
 				blocEnMains=1;
