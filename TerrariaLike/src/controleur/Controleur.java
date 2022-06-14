@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import applicationV1.modele.Environnement;
 import applicationV1.modele.fonctionnalités.Range;
 import applicationV1.vue.ArbreVue;
+import applicationV1.vue.BarNourritureVue;
 import applicationV1.vue.InventaireVue;
 import applicationV1.vue.PersonnageVue;
 import applicationV1.vue.PnjCraftVue;
@@ -29,24 +30,25 @@ import javafx.util.Duration;
 
 public class Controleur implements Initializable {
 	
-	Environnement env;
+	private Environnement env;
 	
-	TerrainVue terrainVue;
-	PersonnageVue personnageVue;
+	private TerrainVue terrainVue;
+	private PersonnageVue personnageVue;
 
-	InventaireVue inventaireVue;
+	private InventaireVue inventaireVue;
 	
-	PnjCraftVue pnjVue;
+	private PnjCraftVue pnjVue;
 	
-	ArbreVue arbrevue1;
-	ArbreVue arbrevue2;
-	ArbreVue arbrevue3;
+	private ArbreVue arbrevue1;
+	private ArbreVue arbrevue2;
+	private ArbreVue arbrevue3;
 	
-	PommeDeTerreVue pommeDeTerreVue;
+	private PommeDeTerreVue pommeDeTerreVue;
 
-	VieVue vieVue;
+	private VieVue vieVue;
+	private BarNourritureVue bNourriture;
 
-	RessourcesDeBaseVue ressourcesDeBaseVue;
+	private RessourcesDeBaseVue ressourcesDeBaseVue;
 
 	private Timeline gameLoop;
 
@@ -76,6 +78,9 @@ public class Controleur implements Initializable {
 
 	@FXML
 	private Pane placeCoeur;
+	
+   @FXML
+    private Pane placeBar;
 
 	@FXML
 	private Label labelBois;
@@ -88,17 +93,22 @@ public class Controleur implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {	
-		
+		this.popUpCraft.setVisible(false);
+
 		this.env = new Environnement();
 		
-		this.pnjVue = new PnjCraftVue(panneauJeu, this.env.getPnj());
+		this.pnjVue = new PnjCraftVue(this.panneauJeu, this.env.getPnj());
 		
-		this.terrainVue = new TerrainVue(this.env.getPersonnage(), terrainJeu, this.env.getTerrain());
-		this.personnageVue = new PersonnageVue(panneauJeu,this.env.getPersonnage());
+		this.terrainVue = new TerrainVue(this.env.getPersonnage(), this.terrainJeu, this.env.getTerrain());
+		this.personnageVue = new PersonnageVue(this.panneauJeu,this.env.getPersonnage());
 		this.vieVue = new VieVue(placeCoeur,this.env.getPersonnage().pointdeVieProperty());
+		this.bNourriture = new BarNourritureVue(this.placeBar,this.env.getPersonnage().pointdeNourritureProperty());
 		
 		this.ressourcesDeBaseVue = new RessourcesDeBaseVue(this.env.getPersonnage(),labelBois,labelFer,labelPierre);
+		
 		this.env.getPersonnage().pointdeVieProperty().addListener((o, oldVal, newVal) -> { vieVue.afficheCoeur();});
+		this.env.getPersonnage().pointdeNourritureProperty().addListener((o, oldVal, newVal) -> { bNourriture.afficheNourritureBar();});
+
 		
 		this.arbrevue1 = new ArbreVue(panneauJeu,this.env.getArbre1(),this.env.getPersonnage());
 		this.arbrevue2 = new ArbreVue(panneauJeu,this.env.getArbre2(),this.env.getPersonnage());
@@ -113,6 +123,7 @@ public class Controleur implements Initializable {
 		try {
 			this.terrainVue.creerTerrainJeu();
 			this.vieVue.afficheCoeur();
+			this.bNourriture.afficheNourritureBar();
 			this.ressourcesDeBaseVue.afficheRessources();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -238,45 +249,45 @@ public class Controleur implements Initializable {
 			inventaireVue.changerItems(3);	
 		}else if(event.getCode()==KeyCode.SPACE && Range.rangeToPnj(this.env.getPersonnage(),this.env.getPnj())) {
 			popUpCraft.setVisible(!popUpCraft.isVisible());
-			
-			
 		}
-
 		else if(event.getCode()==KeyCode.B) {
 			popUpCraft.setVisible(true);
 		}else if(event.getCode()==KeyCode.A) {
-			this.env.getPersonnage().perdVie();
-			System.out.println(this.env.getPersonnage().getPointDeVie());
+			this.env.getPersonnage().perdNourriture();
+			System.out.println(this.env.getPersonnage().getPointDeNourriture());
     	} 
 		else if(event.getCode()==KeyCode.E) {
-			this.env.getPersonnage().gagneVie();
-			System.out.println(this.env.getPersonnage().getPointDeVie());
+			this.env.getPersonnage().manger();
+			System.out.println(this.env.getPersonnage().getPointDeNourriture());
 		}	
 		else if(event.getCode()==KeyCode.L) {
-		System.out.println(this.env.getFraise().getQuantiteProperty());
-		if(arbrevue1.changerArbre() && this.env.getArbre1().getArbreProperty().intValue()==1) {
-			this.env.getArbre1().changerArbre();
-    		arbrevue1.afficherArbre();
-   			this.env.getFraise().setQuantiteProperty(this.env.getFraise().getQuantiteProperty().intValue()+1);
-   		}else if(arbrevue2.changerArbre() && this.env.getArbre2().getArbreProperty().intValue()==1) {
-			this.env.getArbre2().changerArbre();
-			arbrevue2.afficherArbre();
-   			this.env.getFraise().setQuantiteProperty(this.env.getFraise().getQuantiteProperty().intValue()+1); 			
-		}else if(arbrevue3.changerArbre() && this.env.getArbre3().getArbreProperty().intValue()==1) {
-			this.env.getArbre3().changerArbre();
-			arbrevue3.afficherArbre();
-			this.env.getFraise().setQuantiteProperty(this.env.getFraise().getQuantiteProperty().intValue()+1);
-   		}
-		System.out.println(this.env.getFraise().getQuantiteProperty());
+			System.out.println(this.env.getFraise().getQuantiteProperty());
+			if(arbrevue1.changerArbre() && this.env.getArbre1().getArbreProperty().intValue()==1) {
+				this.env.getArbre1().changerArbre();
+	    		arbrevue1.afficherArbre();
+	   			this.env.getFraise().setQuantiteProperty(this.env.getFraise().quantiteProperty().intValue()+1);
+	   		}
+			else if(arbrevue2.changerArbre() && this.env.getArbre2().getArbreProperty().intValue()==1) {
+				this.env.getArbre2().changerArbre();
+				arbrevue2.afficherArbre();
+	   			this.env.getFraise().setQuantiteProperty(this.env.getFraise().quantiteProperty().intValue()+1); 			
+			}
+	   		else if(arbrevue3.changerArbre() && this.env.getArbre3().getArbreProperty().intValue()==1) {
+				this.env.getArbre3().changerArbre();
+				arbrevue3.afficherArbre();
+				this.env.getFraise().setQuantiteProperty(this.env.getFraise().quantiteProperty().intValue()+1);
+	   		}
 		
-	}
-
+		}
+		
 	}		
+	
 	@FXML
 	void fermerPopUp () {
 		popUpCraft.setVisible(false);
 		panneauJeu.requestFocus();
 	}
+	
 	@FXML
 	void confirmer () {
 

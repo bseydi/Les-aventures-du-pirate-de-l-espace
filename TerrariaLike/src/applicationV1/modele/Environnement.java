@@ -1,26 +1,27 @@
 package applicationV1.modele;
 
+import java.util.ArrayList;
+
 import applicationV1.modele.fonctionnalités.Arbre;
 import applicationV1.modele.fonctionnalités.Collisions;
 import applicationV1.modele.nourriture.Fraise;
+import applicationV1.modele.nourriture.Nourriture;
 import applicationV1.modele.nourriture.PommeDeTerre;
 
 public class Environnement {
 	
-	Terrain terrain;
+	private Terrain terrain;
 	
-	Personnage personnage;
-	PnjCraft pnj;
+	private Personnage personnage;
+	private PnjCraft pnj;
 	
-	Arbre arbre1;
-	Arbre arbre2;
-	Arbre arbre3;
+	private Arbre a;
 	
-	Fraise fraise;
-	PommeDeTerre pommeDeTerre;
-	
-	Collisions c1;
-	
+	private Nourriture fraise;
+	private Nourriture pommeDeTerre;
+
+	private Collisions c1;
+	private ArrayList<Arbre> listeArbres;
 	
 	
 	public Environnement() {
@@ -29,61 +30,47 @@ public class Environnement {
 		this.pnj = new PnjCraft(2,338);
 		this.terrain = new Terrain ();
 		this.c1 = new Collisions(this.personnage, this.terrain);
-		this.arbre1 = new Arbre(320,260);
-		this.arbre2 = new Arbre(5,290);
-		this.arbre3 = new Arbre(130,290);
 		this.fraise = new Fraise();
 		this.pommeDeTerre = new PommeDeTerre();
+		this.listeArbres = new ArrayList<>();
+		this.listeArbres.add(this.a = new Arbre(320,260));
+		this.listeArbres.add(this.a = new Arbre(5,290));
+		this.listeArbres.add(this.a = new Arbre(130,290));
+	
 	}
 	
 	public Terrain getTerrain() {
 		return terrain;
 	}
 
-
-
 	public Personnage getPersonnage() {
 		return personnage;
 	}
-
-
 
 	public PnjCraft getPnj() {
 		return pnj;
 	}
 
-
-
 	public Arbre getArbre1() {
-		return arbre1;
+		return this.listeArbres.get(0);
 	}
-
-
 
 	public Arbre getArbre2() {
-		return arbre2;
+		return this.listeArbres.get(1);
 	}
-
-
 
 	public Arbre getArbre3() {
-		return arbre3;
+		return this.listeArbres.get(2);
 	}
 
-
-
-	public Fraise getFraise() {
+	public Nourriture getFraise() {
 		return fraise;
 	}
 
-
-
-	public PommeDeTerre getPommeDeTerre() {
+	public Nourriture getPommeDeTerre() {
 		return pommeDeTerre;
 	}
-
-
-
+	
 	public Collisions getC1() {
 		return c1;
 	}

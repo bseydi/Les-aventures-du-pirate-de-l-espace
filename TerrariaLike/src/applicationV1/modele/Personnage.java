@@ -7,11 +7,13 @@ public class Personnage {
 	private IntegerProperty xProperty,yProperty;
 	private int vitesse; 
 	private IntegerProperty pointDeVieProperty;
-	private int nourritureEnMains = 1; //Sa valeur correspond à la nourriturre en mains 1=fraise 2=viandes 3=viande cuite 4=pdt 5=pdt cuites.
+	private IntegerProperty pointDeNourritureProperty;
 	private int blocEnMains = 1; //Sa valeur correspond au bloc en mains.
 	private int objetEnMains = 1; //Sa valeur correspond à l'objet en mains 1 = mains, 2 = épée, 3 = hache bois, 4 = pioche en bois, 5 = pioche en pierre.                          
 	private Ressources ressource;
 	private Inventaire inventaire;
+	private int idNourriture = 1;
+	private int i ;
 	
 	public Personnage (int x,int y,int v){
 		super();
@@ -19,8 +21,10 @@ public class Personnage {
 		this.yProperty =new SimpleIntegerProperty(y);
 		this.vitesse=v;
 		this.pointDeVieProperty=new SimpleIntegerProperty(100);
+		this.pointDeNourritureProperty=new SimpleIntegerProperty(100);
 		this.ressource = new Ressources ();
 		this.inventaire = new Inventaire();
+		this.i = 1;
 	}
 	
 	public void seDeplacerAGauche() {
@@ -70,6 +74,18 @@ public class Personnage {
 		return this.pointDeVieProperty.getValue();
 	}
 	
+	public final IntegerProperty pointdeNourritureProperty() {
+		return this.pointDeNourritureProperty;
+	}
+
+	public void setPointDeNourriture(int n) {
+		pointDeNourritureProperty.setValue(n);
+	}
+	
+	public final int getPointDeNourriture() {
+		return this.pointDeNourritureProperty.getValue();
+	}
+	
 	public Ressources getRessource() {
 		return ressource;
 	}
@@ -80,13 +96,17 @@ public class Personnage {
 
 	public int changerItemsEnMain(int typeItem) {		
 		int itemEnMain = 0;
+		
 		if (typeItem == 1) {
-			nourritureEnMains++;
-			if(nourritureEnMains > 5) {
-				nourritureEnMains=1;
-			}	
-			itemEnMain = nourritureEnMains;
-		}else if (typeItem == 2) {
+			if(this.i >=5) {
+				i = 0;
+			}
+			System.out.println(i);
+			this.idNourriture = this.inventaire.getListeNourriture().get(i).getId();
+			itemEnMain = this.idNourriture;
+			this.i++;
+
+		} else if (typeItem == 2) {
 			blocEnMains++;
 			if(blocEnMains > 2) {
 				blocEnMains=1;
@@ -101,10 +121,6 @@ public class Personnage {
 		}		
 		return itemEnMain;
 	}
-
-	public int getNourritureEnMains() {
-		return nourritureEnMains;
-	}		
 	
 	public int getBlocEnMains() {
 		return blocEnMains;
@@ -119,7 +135,7 @@ public class Personnage {
 		if(getPointDeVie() <= 0) {
 			System.out.println("Impossible de retirer de la vie");
 		}else {
-			pointDeVieProperty.set(this.getPointDeVie() - 1);
+			setPointDeVie(getPointDeVie() - 10);
 		}
 	}
 	// methodo pour tester l'ajoute de vie et son affichage
@@ -127,9 +143,27 @@ public class Personnage {
 		if(getPointDeVie() >= 100) {
 			System.out.println("Impossible d'ajouter de la vie");
 		}else {
-			pointDeVieProperty.set(this.getPointDeVie() + 1);
+			setPointDeVie(getPointDeVie() + 10);
 		}
 	}
+	//Methode qui permet de tester la perte du nb nourriture et sont affichage sur la vue
+
+	public void perdNourriture() {
+		if(getPointDeNourriture() <= 0) {
+			System.out.println("Impossible de retirer de la vie");
+		}else {
+			setPointDeNourriture(getPointDeNourriture() - 10);
+		}
+	}
+	// methodo pour tester l'ajoute du nb de nourriture et son affichage
+	public void manger() {
+		if(getPointDeNourriture() >= 100) {
+			System.out.println("Impossible d'ajouter de la vie");
+		}else {
+			setPointDeNourriture(getPointDeNourriture() + 10);
+		}
+	}
+	
 	/* Sera utiliser plus tard pour faire perdre des point de vie au personnage
 	 * public void perdVie(int pvPerdu) {
 	 * 		setPointDeVie(getPointDeVie() += pvPerdu);
