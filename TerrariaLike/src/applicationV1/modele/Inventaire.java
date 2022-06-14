@@ -85,11 +85,7 @@ public class Inventaire {
     	}
     		
     }
-   /* 
-    public int getNbNourritures(String nourriture) {
-		return nourritures.get(nourriture);
-	}
-    */
+ 
     public ArrayList<Nourriture> getListeNourriture() {
     	return this.listeNourriture;
     }

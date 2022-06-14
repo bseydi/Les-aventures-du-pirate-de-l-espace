@@ -111,10 +111,10 @@ public class Controleur implements Initializable {
 				BackgroundSize.DEFAULT);
 		
 		Background background = new Background(arrièrePlan);
-		panneauJeu.setBackground(background);
+		this.panneauJeu.setBackground(background);
 		
-		popUpCraft.setVisible(false);
-		popUpFeuDeCamp.setVisible(false);
+		this.popUpCraft.setVisible(false);
+		this.popUpFeuDeCamp.setVisible(false);
 
 		this.env = new Environnement();
 		
@@ -228,9 +228,9 @@ public class Controleur implements Initializable {
 	
 	@FXML
 	void fermerPopUp () {		// Appelé par le joueur depuis l'interface du pnj des crafts
-		popUpCraft.setVisible(false);
-		popUpFeuDeCamp.setVisible(false);
-		panneauJeu.requestFocus();
+		this.popUpCraft.setVisible(false);
+		this.popUpFeuDeCamp.setVisible(false);
+		this.panneauJeu.requestFocus();
 	}
 	
 	@FXML
