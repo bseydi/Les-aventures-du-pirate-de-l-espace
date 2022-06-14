@@ -85,11 +85,20 @@ public class ControleurClavier implements EventHandler <KeyEvent> {
 		System.out.println(this.env.getFraise().getQuantiteProperty());*/
 			this.env.getCreature1().attaquer(this.env.getPersonnage());;
 		}
+		else if(event.getCode()==KeyCode.R) {
+			this.env.getPersonnage().perdVie();
+			System.out.println(this.env.getPersonnage().getPointDeVie());
+    	} 
+		else if(event.getCode()==KeyCode.T) {
+			this.env.getPersonnage().gagneVie();
+			System.out.println(this.env.getPersonnage().getPointDeVie());
+		}
 		else if (event.getCode()==KeyCode.A) {
 			this.env.getPersonnage().perdNourriture();
 		}
 		else if (event.getCode()==KeyCode.E) {
 			this.env.getPersonnage().manger();
 		}
+		
 	}	
 }

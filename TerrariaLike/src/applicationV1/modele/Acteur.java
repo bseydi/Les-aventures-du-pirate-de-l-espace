@@ -157,4 +157,6 @@ public class Acteur {
 	public final int getPointDeVie() {
 		return this.pointDeVieProperty.getValue();
 	}
+	
+	
 }

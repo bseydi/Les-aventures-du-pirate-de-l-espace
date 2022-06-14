@@ -1,6 +1,7 @@
 package applicationV1.modele.fonctionnalités;
 
 import applicationV1.modele.Personnage;
+import applicationV1.vue.PommeDeTerreVue;
 import applicationV1.modele.PnjCraft;
 public class Range {
 
@@ -18,9 +19,10 @@ public class Range {
 			
 			return false;
 		}
-		
 		public static boolean rangeToPnj (Personnage perso, PnjCraft pnj) {
 			return Math.abs(perso.getX() - pnj.getX()) <= 70 && Math.abs(perso.getY() - pnj.getY()) <= 70;
 		}
+		
+		
 		
 }

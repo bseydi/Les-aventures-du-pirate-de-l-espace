@@ -16,15 +16,17 @@ public class ControleurClick implements EventHandler<MouseEvent> {
 	private Terrain terrain;
 	private Personnage personnage;
 
-	public ControleurClick(Personnage personnage,Terrain t,int idBlock,int numéro ) {
+	
+	public ControleurClick(Personnage personnage,Terrain t,int idBlock,int numéro) {
 		this.idBlock= idBlock;
 		this.numéro = numéro;
 		this.terrain = t;
 		this.personnage = personnage;
+	
+		
 	}
 
-	
-	@Override
+
 	public void handle(MouseEvent event) {
 		ImageView img =(ImageView) event.getSource();
 		if ( event.getButton() == MouseButton.PRIMARY && Range.coordTile(personnage,numéro)) {

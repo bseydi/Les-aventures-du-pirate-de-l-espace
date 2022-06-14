@@ -2,11 +2,11 @@ package applicationV1.modele;
 
 import java.util.ArrayList;
 
-import applicationV1.modele.fonctionnalités.Arbre;
 import applicationV1.modele.fonctionnalités.Collisions;
 import applicationV1.modele.nourriture.Fraise;
 import applicationV1.modele.nourriture.Nourriture;
 import applicationV1.modele.nourriture.PommeDeTerre;
+import applicationV1.vue.ArbreVue;
 
 public class Environnement {
 	
@@ -14,11 +14,12 @@ public class Environnement {
 	
 	private Personnage personnage;
 	private PnjCraft pnj;
-	
-	private Arbre a;
-	
+
 	private Nourriture fraise;
 	private Nourriture pommeDeTerre;
+	private Arbre a;
+	
+	
 	private ArrayList<Arbre> listeArbres;
 	
 	private Collisions c1;
@@ -35,10 +36,13 @@ public class Environnement {
 		this.c2 = new Collisions(this.creature1, this.terrain);
 		this.fraise = new Fraise();
 		this.pommeDeTerre = new PommeDeTerre();
+
+		
+
 		this.listeArbres = new ArrayList<>();
-		this.listeArbres.add(this.a = new Arbre(320,260));
-		this.listeArbres.add(this.a = new Arbre(5,290));
-		this.listeArbres.add(this.a = new Arbre(130,290));
+		this.listeArbres.add(this.a = new Arbre(400, 418));
+		this.listeArbres.add(this.a = new Arbre(950,322));
+		this.listeArbres.add(this.a = new Arbre(700, 386));
 	
 	}
 	
@@ -49,6 +53,7 @@ public class Environnement {
 	public Personnage getPersonnage() {
 		return personnage;
 	}
+
 
 	public Creature1 getCreature1() {
 		return creature1;
@@ -81,7 +86,7 @@ public class Environnement {
 	public Collisions getC1() {
 		return c1;
 	}
-	
+
 	public Collisions getC2() {
 		return c2;
 	}
