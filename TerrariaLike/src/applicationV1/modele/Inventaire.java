@@ -22,15 +22,15 @@ public class Inventaire {
         this.outils = new HashMap<>();        
         this.outils.put("EpéeEnPierre", 0);
         this.outils.put("EpéeEnFer", 0);
-        this.outils.put("HacheEnPierre", 0);
-        this.outils.put("PiocheEnBois", 0);
-        this.outils.put("PiocheEnPierre", 0);
+        this.outils.put("HacheEnPierre", 1);
+        this.outils.put("PiocheEnBois", 1);
+        this.outils.put("PiocheEnPierre", 1);
         this.outils.put("Pelle", 1);
         
         this.objets = new HashMap<>();
-        this.objets.put("Planche", 0);
-        this.objets.put("MurDepierre", 0);
-        this.objets.put("FeuDeCamp", 0);
+        this.objets.put("Planche", 5);
+        this.objets.put("MurDePierre", 5);
+        this.objets.put("FeuDeCamp", 1);
         this.objets.put("Pièges", 0);
         
         this.listeNourriture = new ArrayList<Nourriture>();
@@ -58,20 +58,43 @@ public class Inventaire {
         this.objets.replace(objets, this.objets.get(objets) - 1);
     }
     
-    public int nbOutils (String pelle) {
-    	return this.outils.get(pelle);
+    public int nbOutils (String outils) {
+    	return this.outils.get(outils);
     }
     
-    public void ajouterNourriture(Nourriture n) {
-    	this.listeNourriture.add(n);
+    public void ajouterNourriture(int n) {
+    	for(int i = 0; i < this.listeNourriture.size(); i++) {
+    		if(this.listeNourriture.get(i).getId() == n) {
+    			this.listeNourriture.get(i).setQuantiteProperty(this.listeNourriture.get(i).getQuantiteProperty() + 1);
+    		}
+    	}
     }
     
-    public void retirerNourriture(Nourriture n) {
-    	this.listeNourriture.remove(n);  
+    public void retirerNourriture(int n) {
+    	for(int i = 0; i < this.listeNourriture.size(); i++) {
+    		if(this.listeNourriture.get(i).getId() == n) {
+    			if(this.listeNourriture.get(i).getQuantiteProperty() == 0) {
+    				this.listeNourriture.get(i).setQuantiteProperty(0);
+    			}
+    			else {
+    				this.listeNourriture.get(i).setQuantiteProperty(this.listeNourriture.get(i).getQuantiteProperty() - 1);
+    			}
+    			
+    		}
+    	}
+    		
     }
-    
+   /* 
+    public int getNbNourritures(String nourriture) {
+		return nourritures.get(nourriture);
+	}
+    */
     public ArrayList<Nourriture> getListeNourriture() {
     	return this.listeNourriture;
     }
+    
+    public int getNbBloc (String bloc) {
+	   return objets.get(bloc);
+   }
 
 }    

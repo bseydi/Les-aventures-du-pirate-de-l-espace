@@ -27,7 +27,7 @@ public class Environnement {
 	public Environnement() {
 		
 		this.personnage = new Personnage(300,290,5);
-		this.pnj = new PnjCraft(2,338);
+		this.pnj = new PnjCraft(20,430);
 		this.terrain = new Terrain ();
 		this.c1 = new Collisions(this.personnage, this.terrain);
 		this.fraise = new Fraise();

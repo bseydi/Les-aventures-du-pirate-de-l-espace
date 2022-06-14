@@ -1,12 +1,8 @@
 package applicationV1.modele;
 
-import java.util.ArrayList;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 
 public class PnjCraft {
 

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -11,6 +15,8 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+
+
 
 <BorderPane onKeyPressed="#toucheAppuyée" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.Controleur">
 	<center>
@@ -230,6 +236,38 @@
                   </ImageView>
 					</children>
 				</Pane>
+            <Pane fx:id="popUpFeuDeCamp" layoutX="104.0" layoutY="309.0" prefHeight="136.0" prefWidth="289.0" style="-fx-background-color: grey; -fx-border-color: black;">
+               <children>
+                  <Text layoutX="102.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Feu de camp" />
+                  <ImageView layoutX="27.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../image/PommeDeTerre.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView layoutX="27.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../image/ViandeCreature.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView layoutX="230.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../image/PatateCuite.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView layoutX="230.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../image/ViandeCreatureCuite.png" />
+                     </image>
+                  </ImageView>
+                  <RadioButton layoutX="77.0" layoutY="43.0" mnemonicParsing="false" onAction="#cuirePatate" text="Cuire tes patates" />
+                  <RadioButton layoutX="83.0" layoutY="90.0" mnemonicParsing="false" onAction="#cuireViande" text="Cuire ta viande" />
+                  <ImageView fx:id="fermerPopUpFeu" fitHeight="25.0" fitWidth="39.0" layoutX="263.0" layoutY="2.0" onMouseClicked="#fermerPopUp" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../image/Croix.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
 
 
 			</children>

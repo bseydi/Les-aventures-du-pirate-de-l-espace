@@ -8,8 +8,8 @@ public class Range {
 			int x = 0;
 			int y = 0;
 
-			x = num % 30;
-			y = num / 30;
+			x = num % 50;
+			y = num / 50;
 			y = y * 32;
 			x = x * 32;
 			if ( Math.abs(perso.getX() - x) <= 70 && Math.abs(perso.getY() - y) <= 70)
