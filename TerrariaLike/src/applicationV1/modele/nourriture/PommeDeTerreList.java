@@ -1,12 +1,10 @@
 package applicationV1.modele.nourriture;
 
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 import applicationV1.modele.Personnage;
 import applicationV1.vue.PommeDeTerreVue;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 public class PommeDeTerreList {
@@ -40,47 +38,47 @@ public class PommeDeTerreList {
 	
 	public void ajouterImagePommeDeTerre() {
 		
-		listCoordonneeImgPommeDeTerre.add(pommeDeTerreVue.getPommeDeTerre2().getX());
-    	listCoordonneeImgPommeDeTerre.add(pommeDeTerreVue.getPommeDeTerre2().getY());
+		this.listCoordonneeImgPommeDeTerre.add(this.pommeDeTerreVue.getPommeDeTerre2().getX());
+    	this.listCoordonneeImgPommeDeTerre.add(this.pommeDeTerreVue.getPommeDeTerre2().getY());
     	this.listImgPommeDeTerre.add(pommeDeTerreVue.img());
 	}
 	
 	public boolean PommeDeTerreACotePerso() {
 		for(int i=0;i<getListCoordonneeImgPommeDeTerre().size();i=i+2) {
 			
-			if((Math.abs(getListCoordonneeImgPommeDeTerre().get(i)-personnage.getX()))<=60 && (Math.abs(getListCoordonneeImgPommeDeTerre().get(i+1)-personnage.getY()))<=60) {
+			if((Math.abs(getListCoordonneeImgPommeDeTerre().get(i)-this.personnage.getX()))<=60 && (Math.abs(getListCoordonneeImgPommeDeTerre().get(i+1)-personnage.getY()))<=60) {
 				this.indice=i;
 				return true;
 			}
 		}
-		if(personnage.getX()<pommeDeTerre.getX()+40 && personnage.getX()>pommeDeTerre.getX()-15 && personnage.getY()<pommeDeTerre.getY()+40 && personnage.getY()>pommeDeTerre.getY()-15)
+		if(this.personnage.getX()<pommeDeTerre.getX()+40 && this.personnage.getX()>this.pommeDeTerre.getX()-15 && personnage.getY()<pommeDeTerre.getY()+40 && personnage.getY()>pommeDeTerre.getY()-15)
 			return true;
 		return false;
 	}
 	
 	public ArrayList<Integer> getListCoordonneeImgPommeDeTerre() {
-		return listCoordonneeImgPommeDeTerre;
+		return this.listCoordonneeImgPommeDeTerre;
 	}
 	public ArrayList<ImageView> getListImgPommeDeTerre() {
-		return listImgPommeDeTerre;
+		return this.listImgPommeDeTerre;
 	}
 	
 	// permet de savoir si l'image de la pomme de terre se trouve au même endroit que la souris
 	public void srupprimerPommeDeTerre() {
-		if(indice==0) {
-			panneauJeu.getChildren().remove(listImgPommeDeTerre.get(indice));
-			listImgPommeDeTerre.remove(indice);
-			listCoordonneeImgPommeDeTerre.remove(indice);
-			listCoordonneeImgPommeDeTerre.remove(indice);
+		if(this.indice==0) {
+			this.panneauJeu.getChildren().remove(this.listImgPommeDeTerre.get(this.indice));
+			this.listImgPommeDeTerre.remove(this.indice);
+			this.listCoordonneeImgPommeDeTerre.remove(this.indice);
+			this.listCoordonneeImgPommeDeTerre.remove(this.indice);
 		}
 		else {
-			indice2=(indice/2);
-			panneauJeu.getChildren().remove(listImgPommeDeTerre.get(indice2));
-			listImgPommeDeTerre.remove(indice2);
-			listCoordonneeImgPommeDeTerre.remove(indice);
-			listCoordonneeImgPommeDeTerre.remove(indice);
+			this.indice2=(this.indice/2);
+			this.panneauJeu.getChildren().remove(this.listImgPommeDeTerre.get(this.indice2));
+			this.listImgPommeDeTerre.remove(this.indice2);
+			this.listCoordonneeImgPommeDeTerre.remove(this.indice);
+			this.listCoordonneeImgPommeDeTerre.remove(this.indice);
 		}
-		indice2=0;
+		this.indice2=0;
 		
 	}
 }

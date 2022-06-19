@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="root" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.Controleur">
+<BorderPane fx:id="root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.Controleur">
 	<center>
 		<Pane fx:id="panneauJeu" prefHeight="1600" prefWidth="800" BorderPane.alignment="CENTER">
 			<children>
@@ -264,16 +264,53 @@
                   </ImageView>
                </children>
             </Pane>
-            <Pane fx:id="paneGameOver" layoutX="332.0" prefHeight="960.0" prefWidth="647.0">
+            <Button fx:id="BoutonPartir" layoutX="1200.0" layoutY="300.0" mnemonicParsing="false" onAction="#EntrerEtPartir" prefHeight="40.0" prefWidth="200.0" text="Entrer et quitter la planète" />
+            <Pane fx:id="popUpFinDeJeu" layoutX="360.0" layoutY="93.0" prefHeight="400.0" prefWidth="800.0" style="-fx-background-color: grey; -fx-border-color: black;">
                <children>
-                  <ImageView fitHeight="504.0" fitWidth="640.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="504.0" fitWidth="640.0" layoutX="80.0" layoutY="-17.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../image/game%20over.jpg" />
+                        <Image url="@../../image/game%20over.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="boutonArreter" layoutX="206.0" layoutY="320.0" mnemonicParsing="false" onAction="#arreter" prefHeight="20.0" prefWidth="100.0" text="Arreter" />
+               </children>
+            </Pane>
+            <Pane fx:id="popUpFusée" layoutX="300.0" layoutY="250" prefHeight="100.0" prefWidth="228.0" style="-fx-background-color: grey; -fx-border-color: black;">
+               <children>
+                  <Button fx:id="BoutonRéparerFusée" layoutX="14.0" layoutY="51.0" mnemonicParsing="false" onAction="#RéparerFusée" prefHeight="40.0" prefWidth="200.0" text="Réparer La Fusée" />
+                  <Text fontSmoothingType="LCD" layoutX="27.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Réparer Votre Fusée" textAlignment="CENTER" wrappingWidth="198.84521484375">
+                     <font>
+                        <Font name="DejaVuMathTeXGyre-Regular" size="15.0" />
+                     </font>
+                  </Text>
+                  <ImageView layoutX="102.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../image/imageRessource/ressource_fer.png" />
+                     </image>
+                  </ImageView>
+                  <Text fontSmoothingType="LCD" layoutX="126.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Requis" textAlignment="CENTER" wrappingWidth="76.84521484375">
+                     <font>
+                        <Font name="DejaVuMathTeXGyre-Regular" size="15.0" />
+                     </font>
+                  </Text>
+                  <Text fontSmoothingType="LCD" layoutX="55.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="20" textAlignment="CENTER" wrappingWidth="39.84521484375">
+                     <font>
+                        <Font name="DejaVuMathTeXGyre-Regular" size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <Pane fx:id="popUpErreur" layoutX="116.0" layoutY="155.0" prefHeight="89.0" prefWidth="290.0" style="-fx-background-color: grey; -fx-border-color: black;">
+               <children>
+                  <Label fx:id="textErreur" layoutX="20.0" layoutY="15.0" prefHeight="59.0" prefWidth="250.0" text="Label" textAlignment="CENTER" />
+                  <Text layoutX="125.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Erreur" />
+                  <ImageView fx:id="fermerPopUp1" fitHeight="25.0" fitWidth="39.0" layoutX="258.0" layoutY="11.0" onMouseClicked="#fermerPopUp" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../image/Croix.png" />
                      </image>
                   </ImageView>
                </children>
             </Pane>
-
 
 			</children>
 		</Pane>

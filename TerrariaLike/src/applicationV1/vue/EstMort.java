@@ -17,46 +17,19 @@ import javafx.scene.text.Text;
 public class EstMort implements ChangeListener<Number>{
 	
 	private Personnage p;
-	private Pane paneGameOver;
-	private ChoiceDialog choiceDialog;
-	private Dialog<String> dialog;
-	private HBox hbox;
-	private Button button1,button2;
+private Pane popUpFinJeu;
 	
 	public EstMort (Personnage p,Pane pane) {
 		this.p=p;
-		this.paneGameOver=pane;
-		this.hbox=new HBox();
-		this.hbox.setAlignment(Pos.CENTER);
-		this.choiceDialog=new ChoiceDialog<>();
-		this.dialog=new Dialog<String>();// creer dialog
-		this.button1 = new Button("Rejouer");
-	    this.button2 = new Button("Arreter");
+		this.popUpFinJeu=pane;
 	}
 
 	@Override
 	public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number arg2) {
 		// TODO Auto-generated method stub
 		if(p.getPointDeVie()==0) {
-			paneGameOver.setVisible(true);
-			dialog.setTitle("Game over");
-			dialog.setContentText("Game over");
-			Text txt = new Text("Tu n'as plus de vie, tu as perdu");
-		    Font font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 12);
-		    txt.setFont(font);
-		    button1.setOnAction(e -> showDialog1());
-		    button2.setOnAction(e -> showDialog2());
-		    
-
+			popUpFinJeu.setVisible(true);
 		}
 	}
 	
-	private void showDialog1() {
-		
-	}
-	
-	private void showDialog2() {
-	      
-	}
-
 }

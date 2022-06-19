@@ -1,6 +1,6 @@
 package applicationV1.vue;
 
-import applicationV1.modele.Creature1;
+import applicationV1.modele.Environnement;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -8,17 +8,18 @@ import javafx.scene.layout.Pane;
 public class Creature1Vue {
 
 	private Pane panneauJeu;
-	private Creature1 creature1;
+	private Environnement env;
+	private ImageView r;
 	
-	public Creature1Vue (Pane panneauJeu, Creature1 creature1) {
+	public Creature1Vue (Pane panneauJeu, Environnement env) {
 		this.panneauJeu = panneauJeu;
-		this.creature1 = creature1;
+		this.env = env;
 	}
 	
 	public void creature1 () {
-		ImageView r = new ImageView(new Image("./image/astronaut.png"));
-		r.translateXProperty().bind(creature1.xProperty());
-    	r.translateYProperty().bind(creature1.yProperty());
+		r = new ImageView(new Image("./image/corbeau.gif"));
+		r.translateXProperty().bind(this.env.getCreature1().xProperty());
+    	r.translateYProperty().bind(this.env.getCreature1().yProperty());
    	 	panneauJeu.getChildren().add(r);
 	}
 	

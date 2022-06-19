@@ -1,6 +1,7 @@
 package applicationV1.modele;
 
 import applicationV1.modele.fonctionnalités.Collisions;
+import applicationV1.modele.fonctionnalités.GestionErreur;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -8,17 +9,19 @@ public class Acteur {
 	private IntegerProperty xProperty,yProperty;
 	private int vitesse; 
 	private IntegerProperty pointDeVieProperty;
+	private GestionErreur gn;
 	private int direction = 0;
 	private int posYInit = 0; 
 	private boolean remettreDirection0 = false;
 	private boolean sauter = false;
 	private int temps = 0;
 	
-	public Acteur (int x,int y,int v) {
+	public Acteur (int x,int y,int v, GestionErreur gn) {
 		this.xProperty=new SimpleIntegerProperty(x);
 		this.yProperty =new SimpleIntegerProperty(y);
 		this.vitesse=v;
 		this.pointDeVieProperty=new SimpleIntegerProperty(100);
+		this.gn = gn;
 	}
 	
 	public static void tomber (Acteur acteur, Collisions c, int direction , int posYInit) { // Gravité : fait tomber l'acteur dans une direction ou tout droit
@@ -29,18 +32,30 @@ public class Acteur {
 				if (acteur.getY() == posYInit-2) {
 					direction = 0;
 				}
-			} else if (direction == 2) {
+			}
+			else if (direction == 2) {
 				acteur.setY(acteur.getY()+2);
 				acteur.setX(acteur.getX()-2);
 				if (acteur.getY() == posYInit-2) {
 					direction = 0;
 				}
-			}else {
+			}
+			else {
 				acteur.setY(acteur.getY()+2);
 			}				
 		}	
 	}
 	
+	public static void limiteDeMap (Acteur a) {
+        if ( a.getX() > 1550) {
+            a.setX(20);
+            a.setY(415);
+        }       
+        if ( a.getX() < 0) {
+            a.setX(1540);
+            a.setY(350);
+        }
+    }
 	
 	public int getDirection() {
 		return direction;
@@ -74,16 +89,18 @@ public class Acteur {
 		this.sauter = sauter;
 	}
 
-	public void saut(int direction) { // permet à l'acteur de décoller dans une direction ou sur place
-		if(direction == 1) {
-			this.setY(this.getY()-2);
-			this.setX(this.getX()+1);
-		} else if (direction == 2) {
-			this.setY(this.getY()-2);
-			this.setX(this.getX()-1);
-		}else {
-			this.setY(this.getY()-2);
-		}	
+	public void saut(Collisions c, int direction) { // permet à l'acteur de décoller dans une direction ou sur place
+		//if (c.blocDroit(this.getX(), this.getY()) && c.blocGauche(this.getX(), this.getY())) {
+			if(direction == 1) {
+				this.setY(this.getY()-2);
+				this.setX(this.getX()+1);
+			} else if (direction == 2) {
+				this.setY(this.getY()-2);
+				this.setX(this.getX()-1);
+			}else {
+				this.setY(this.getY()-2);
+			}
+		//}
 	}
 	
 	public int getTemp() {
@@ -136,7 +153,7 @@ public class Acteur {
 	//Methode qui permet de tester la perte de vie et sont affichage sur la vue
 		public void perdVie() {
 			if(getPointDeVie() <= 0) {
-				System.out.println("Impossible de retirer de la vie");
+				this.gn.testerEreur(3);
 			}else {
 				setPointDeVie(getPointDeVie() - 10);
 			}
@@ -144,10 +161,14 @@ public class Acteur {
 		// methodo pour tester l'ajoute de vie et son affichage
 		public void gagneVie() {
 			if(getPointDeVie() >= 100) {
-				System.out.println("Impossible d'ajouter de la vie");
+				this.gn.testerEreur(2);
 			}else {
 				setPointDeVie(getPointDeVie() + 10);
 			}
+		}
+
+	public GestionErreur getGn() {
+			return gn;
 		}
 
 	public void setPointDeVie(int n) {

@@ -4,20 +4,19 @@ import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.CloseAction;
-
 import applicationV1.modele.Acteur;
 import applicationV1.modele.Creature1;
+import applicationV1.modele.Creature2;
 import applicationV1.modele.Environnement;
-import applicationV1.modele.fonctionnalités.Range;
-import applicationV1.modele.nourriture.PommeDeTerre;
+import applicationV1.modele.fonctionnalités.GestionErreur;
 import applicationV1.modele.nourriture.PommeDeTerreList;
 import applicationV1.modele.Personnage;
 import applicationV1.vue.ArbreVue;
 import applicationV1.vue.BarNourritureVue;
 import applicationV1.vue.EstMort;
+import applicationV1.vue.FuséeVue;
 import applicationV1.vue.Creature1Vue;
+import applicationV1.vue.Creature2Vue;
 import applicationV1.vue.InventaireVue;
 import applicationV1.vue.PersonnageVue;
 import applicationV1.vue.PnjCraftVue;
@@ -27,13 +26,15 @@ import applicationV1.vue.TerrainVue;
 import applicationV1.vue.VieVue;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Background;
@@ -70,16 +71,21 @@ public class Controleur implements Initializable {
 	
 	
 	private Creature1Vue creature1Vue;
+	private Creature2Vue creature2Vue;
 	
+	private FuséeVue fuséeVue;
+	private boolean finDuJeu = false;
 
 	private Timeline gameLoop;
 	private int temps;
 	private int temps2;
-
 	private int temps3;
 	private int temps4;
+	private int temps5;
 
 	private EstMort estMort;
+	
+	private GestionErreur gn;  // gestionnaire d'erreur affiche toutes les erreurs
 
 
 	@FXML
@@ -89,10 +95,19 @@ public class Controleur implements Initializable {
 	private ImageView fermerPopUp;
 	
 	@FXML
+    private ImageView fermerPopUp1;
+	
+	@FXML
 	private Pane popUpCraft;
 	
 	@FXML
 	private Pane popUpFeuDeCamp;
+	
+	@FXML
+	private Pane popUpFinDeJeu;
+	
+	@FXML
+    private Pane popUpErreur;
 	
 	@FXML
 	private TextField repMenu;
@@ -118,13 +133,31 @@ public class Controleur implements Initializable {
 	@FXML
 	private Label labelPierre;
 	
+	@FXML
+	private Pane popUpFusée;
+    
     @FXML
-    private Pane paneGameOver;
+    private Label textErreur;
+    
+    @FXML
+	private ImageView fermerPopUpFusée;
+
+	@FXML
+	private Button BoutonRéparerFusée;
+
+	@FXML
+	private Button BoutonPartir;
+
+	@FXML
+	private Button boutonArreter;
+
+	//@FXML			bouton rejouer retirer car n'est pas fonctionnel
+	//private Button boutonRejouer;
+    
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		Image image = new Image("./image/background.jpg");
-		paneGameOver.setVisible(false);
 		
 		BackgroundImage arrièrePlan = new BackgroundImage(image,BackgroundRepeat.NO_REPEAT,
 				BackgroundRepeat.NO_REPEAT,
@@ -136,30 +169,41 @@ public class Controleur implements Initializable {
 		
 		this.popUpCraft.setVisible(false);
 		this.popUpFeuDeCamp.setVisible(false);
-
-		this.env = new Environnement();
-		this.pnjVue = new PnjCraftVue(panneauJeu, this.env.getPnj());
+		this.popUpFusée.setVisible(false);
+		this.BoutonPartir.setVisible(false);
+		this.popUpFinDeJeu.setVisible(false);
+		this.popUpErreur.setVisible(false);
 		
-		this.terrainVue = new TerrainVue(this.env.getPersonnage(), this.terrainJeu, this.env.getTerrain());
-		this.personnageVue = new PersonnageVue(this.panneauJeu,this.env.getPersonnage());
+		this.gn = new GestionErreur(this.textErreur, this.popUpErreur);
+		this.env = new Environnement(this.gn);
+		
+		this.pnjVue = new PnjCraftVue(panneauJeu, this.env.getPnj());
+		this.terrainVue = new TerrainVue(this.env, this.terrainJeu);
+		this.personnageVue = new PersonnageVue(this.panneauJeu,this.env.getPersonnage(), this.env);
 		this.vieVue = new VieVue(placeCoeur,this.env.getPersonnage().pointdeVieProperty());
 		this.bNourriture = new BarNourritureVue(this.placeBar,this.env.getPersonnage().pointdeNourritureProperty());
 		this.ressourcesDeBaseVue = new RessourcesDeBaseVue(this.env.getPersonnage(),labelBois,labelFer,labelPierre);
+				
+		//Bind de la vie et de la bar de nourriture pour pouvoir etre modifier à l'affichage
+		this.env.getPersonnage().pointdeVieProperty().addListener((o, oldVal, newVal) -> { this.vieVue.afficheCoeur();});
+		this.env.getPersonnage().pointdeNourritureProperty().addListener((o, oldVal, newVal) -> { this.bNourriture.afficheNourritureBar();});
 		
-		this.env.getPersonnage().pointdeVieProperty().addListener((o, oldVal, newVal) -> { vieVue.afficheCoeur();});
+		this.creature1Vue = new Creature1Vue(panneauJeu, this.env);
+		this.creature2Vue = new Creature2Vue(panneauJeu, this.env);
+		
 		
 		this.arbrevue1 = new ArbreVue(panneauJeu, this.env.getArbre1(), this.env.getPersonnage());
 		this.arbrevue2 = new ArbreVue(panneauJeu, this.env.getArbre2(), this.env.getPersonnage());
 		this.arbrevue3 = new ArbreVue(panneauJeu, this.env.getArbre3(), this.env.getPersonnage());
 		
-		
-		this.pommeDeTerreVue = new PommeDeTerreVue(panneauJeu, this.env.getPommeDeTerre(),env.getPersonnage());
-		this.pommeDeTerreList = new PommeDeTerreList(panneauJeu, env.getPersonnage(),this.env.getPommeDeTerre(), pommeDeTerreVue);
+		this.pommeDeTerreVue = new PommeDeTerreVue(panneauJeu, this.env.getPersonnage().getInventaire().getListeNourriture().get(3),env.getPersonnage());
+		this.pommeDeTerreList = new PommeDeTerreList(panneauJeu, env.getPersonnage(),this.env.getPersonnage().getInventaire().getListeNourriture().get(3), pommeDeTerreVue);
 		
 		this.inventaireVue = new InventaireVue(panneauJeu, this.env.getPersonnage());
-		this.estMort=new EstMort(this.env.getPersonnage(), paneGameOver);
-		this.env.getPersonnage().pointdeVieProperty().addListener(estMort);
-
+		this.estMort=new EstMort(this.env.getPersonnage(), popUpFinDeJeu);
+		this.env.getPersonnage().pointdeVieProperty().addListener(estMort);		
+		this.fuséeVue = new FuséeVue (panneauJeu, env);
+		
 		initAnimation();
 		gameLoop.play();
 		try {
@@ -172,11 +216,11 @@ public class Controleur implements Initializable {
 		}
 		this.personnageVue.perso();
 		this.pnjVue.pnj();
+		this.creature1Vue.creature1();
+		this.creature2Vue.creature2();
+		this.fuséeVue.créerFusée();
 
-			 
-		creature1Vue = new Creature1Vue(panneauJeu, this.env.getCreature1());
-		creature1Vue.creature1();
-		root.addEventHandler(KeyEvent.KEY_PRESSED, new ControleurClavier(env, inventaireVue, popUpCraft));
+		root.addEventHandler(KeyEvent.KEY_PRESSED, new ControleurClavier(env, inventaireVue, popUpCraft, popUpFusée, popUpFeuDeCamp, personnageVue));
 	}	
 
 	
@@ -187,6 +231,7 @@ public class Controleur implements Initializable {
 		temps2=0;
 		temps3=0;
 		temps4=0;
+		temps5=1;
 		
 
 		this.env.getPersonnage().setPosYInit(0);
@@ -196,175 +241,146 @@ public class Controleur implements Initializable {
 		KeyFrame kf = new KeyFrame (Duration.seconds(0.017),(ev ->{						
 			Personnage perso = this.env.getPersonnage();
 			Creature1 creature = this.env.getCreature1();
+			Creature2 creature2 = this.env.getCreature2();
 			
-			if (perso.isRemettreDirection0()) {//Remet la direction du perso à 0 au bout d'un certain temps.
-				temps++;
-				if (!perso.isSauter() && !this.env.getC1().blocDessous(perso.getX(), perso.getY())) {
-					if (temps%40==0) {
+			if (perso.isRemettreDirection0()) { // Remet la direction du personnage à 0(ni droite ni gauche) au bout d'un certain temps.
+				temps2++;
+				if(!perso.isSauter() && !this.env.getC1().blocDessous(perso.getX(), perso.getY())) {
+					if (temps2%40==0) {
 						perso.setDirection(0);
-						temps = 0;
+						personnageVue.animationPerso();
 						perso.setRemettreDirection0(false);
-					}
-				}
-			}		
-			
-			//creature.suivre(perso, this.env.getC2());
+					}							
+				}	
+			}
+
+
+			creature2.bouger(this.env.getC2());
+
+			if (temps%40 ==0) {  
+				creature2.attaquer(perso);
+			}
+			if (this.env.getFusée().isEnvol()) {
+				this.env.getFusée().décollage();
+			}
 			
 			
 			/*------------------------- saut et gravité du personnage ------------------------------------*/
-				if (!perso.isSauter()) {
-					Acteur.tomber(perso,this.env.getC1(), perso.getDirection(), perso.getPosYInit());
-				}			
-				if (perso.isSauter()) {	
-					perso.saut(perso.getDirection());
-					perso.setTemps(perso.getTemp()+1);
-				}
-				
-				if(perso.getTemp()%20==0) {
-					perso.setTemps(0);
-					perso.setSauter(false);
-				}
-			/*------------------------- saut et gravité de la créature ------------------------------------*/	
-				if(!creature.isSauter()) {
-					Acteur.tomber(creature,this.env.getC2(),creature.getDirection(),creature.getPosYInit());
-				}
-				
-				if (creature.isSauter()) {
-					creature.saut(creature.getDirection());
-					creature.setTemps(creature.getTemp()+1); //temps++
-				}
-				
-				if(creature.getTemp()%20==0) {
-					creature.setTemps(0);
-					creature.setSauter(false);
-				}
+			if (!perso.isSauter()) {
+				Acteur.tomber(perso,this.env.getC1(), perso.getDirection(), perso.getPosYInit());
+			}			
+			if (perso.isSauter()) {	
+				perso.saut(this.env.getC1(), perso.getDirection());
+				perso.setTemps(perso.getTemp()+1); //temps++
+			}
 			
+			if(perso.getTemp()%25==0) {
+				perso.setTemps(0);
+				perso.setSauter(false);
+			}
+			/*------------------------- saut et gravité de la créature 1 ------------------------------------*/	
+			if(!creature.isSauter()) {
+				Acteur.tomber(creature,this.env.getC2(),creature.getDirection(),creature.getPosYInit());
+			}
+			
+			if (creature.isSauter()) {
+				creature.saut(this.env.getC2(),0);
+				creature.setTemps(creature.getTemp()+1); //temps++
+			}
+			
+			if(creature.getTemp()%25==0) {
+				creature.setTemps(0);
+				creature.setSauter(false);
+			}
+				
+			/*-----------------------------gravité de la créature 2 -----------------------------------------*/				
+				Acteur.tomber(creature2,this.env.getC2(),creature2.getDirection(),creature2.getPosYInit());
+			
+			/*---------------------------------    Evénements -------------------------------------------------*/		
+			if (finDuJeu) {
+				temps4++;
+				if (temps4 > 200) {
+					this.popUpFinDeJeu.setVisible(true);
+				}
+			}
+
+			if (temps > 4000) {
+				creature.suivre(perso, this.env.getC2());
+			}
+
+			Acteur.limiteDeMap(perso);
+			Acteur.limiteDeMap(creature);
+			Acteur.limiteDeMap(this.env.getCreature2());
 			
 			if(temps3%400==0) {
+				//rajoute une pomme de terre sur le terrain
 				temps3 = 0 ;
 				pommeDeTerreVue.afficherPommeDeTerre();
 				pommeDeTerreList.ajouterImagePommeDeTerre();
 			}
 			temps3++;
 			if(temps4%20==0) {
-				
+				// regarde si on est a coté d'une pomme de terre
 				if(pommeDeTerreList.PommeDeTerreACotePerso()) {
 					pommeDeTerreList.srupprimerPommeDeTerre();
-					System.out.println("list pomme de terre coordonnee"+pommeDeTerreList.getListCoordonneeImgPommeDeTerre());
 					//appeller methode pour ajouter une pomme de terre
-					this.env.getPommeDeTerre().setQuantiteProperty(this.env.getPommeDeTerre().getQuantiteProperty()+1);
-					System.out.println(this.env.getPommeDeTerre().getQuantiteProperty());
+					this.env.getPersonnage().getInventaire().ajouterNourriture(4);
 				}
 			}
 			temps4++;
+			
+			temps++;
+			
+			if(temps5%800 == 0) {
+				this.env.getPersonnage().perdNourriture(5);
+				temps5 = 0;
+			}
+			temps5++;
 
 		})
 				);
 		gameLoop.getKeyFrames().add(kf);	
 	}
-
-/*
-	@FXML
-	void toucheAppuyée(KeyEvent event) {		
-		if(event.getCode()==KeyCode.D) {
-			if (!this.env.getC1().blocDessous(this.env.getPersonnage().getX(), this.env.getPersonnage().getY())) {
-				if (this.env.getC1().blocDroit(this.env.getPersonnage().getX(), this.env.getPersonnage().getY())) {
-					direction = 1;				
-					this.env.getPersonnage().seDeplacerADroite();
-					remettreDirection0 = true;
-				}
-			} 
-		}
-		else if(event.getCode()==KeyCode.Q) {
-			if (!this.env.getC1().blocDessous(this.env.getPersonnage().getX(), this.env.getPersonnage().getY())) {
-				if (this.env.getC1().blocGauche(this.env.getPersonnage().getX(), this.env.getPersonnage().getY())) {
-					direction = 2;
-					this.env.getPersonnage().seDeplacerAGauche(); 
-					remettreDirection0 = true;
-				}
-			} 
-		}
-		else if(event.getCode()==KeyCode.Z) {   		
-			if (!this.env.getC1().blocDessous(this.env.getPersonnage().getX(), this.env.getPersonnage().getY())) {
-				sauter = true;
-				posYInit = this.env.getPersonnage().getY();
-			}	
-		}
-		else if(event.getCode()==KeyCode.S) {   		
-			direction = 0;			
-		}
-		else if(event.getCode()==KeyCode.W) {   		
-			inventaireVue.changerItems(1);
-
-		}
-		else if(event.getCode()==KeyCode.X) {   		
-			inventaireVue.changerItems(2);	
-
-		}
-		else if(event.getCode()==KeyCode.C) { 
-			inventaireVue.changerItems(3);	
-		}
-		else if(event.getCode()==KeyCode.V) {
-			popUpCraft.setVisible(false);
-		}
-		else if(event.getCode()==KeyCode.SPACE && Range.rangeToPnj(this.env.getPersonnage(),this.env.getPnj())) {
-			popUpCraft.setVisible(!popUpCraft.isVisible());
-		}
-
-		else if(event.getCode()==KeyCode.B) {
-			popUpCraft.setVisible(true);
-		}
-		else if(event.getCode()==KeyCode.A) {
-			this.env.getPersonnage().perdVie();
-			System.out.println(this.env.getPersonnage().getPointDeVie());
-    	} 
-		else if(event.getCode()==KeyCode.E) {
-			this.env.getPersonnage().gagneVie();
-			System.out.println(this.env.getPersonnage().getPointDeVie());
-		}	
-		else if(event.getCode()==KeyCode.L) {
-			if(arbrevue1.ArbreACotePerso() && this.env.getArbre1().getArbre()==1) {
-				//this.env.getArbre1().changerArbre();
-	    		//arbrevue1.afficherArbre();
-	   			this.env.getFraise().setQuantiteProperty(this.env.getFraise().getQuantiteProperty()+1);
-        		System.out.println("quantite fraise"+this.env.getFraise().getQuantiteProperty());
-
-			}
-			else if(arbrevue2.ArbreACotePerso() && this.env.getArbre2().getArbre()==1) {
-				//this.env.getArbre2().changerArbre();
-				//arbrevue2.afficherArbre();
-	   			this.env.getFraise().setQuantiteProperty(this.env.getFraise().getQuantiteProperty()+1); 			
-        		System.out.println("quantite fraise"+this.env.getFraise().getQuantiteProperty());
-
-			}
-			else if(arbrevue3.ArbreACotePerso() && this.env.getArbre3().getArbre()==1) {
-				//this.env.getArbre3().changerArbre();
-				//arbrevue3.afficherArbre();
-				this.env.getFraise().setQuantiteProperty(this.env.getFraise().getQuantiteProperty()+1);
-        		System.out.println("quantite fraise"+this.env.getFraise().getQuantiteProperty());
-
-	   		}
-			
-		}
-	}	*/	
-
 		
 	@FXML
-	void fermerPopUp () {		// Appelé par le joueur depuis l'interface du pnj des crafts
+	void fermerPopUp () {	// Appelé par le joueur depuis l'interface du pnj des crafts et pour fermer  la popUp Erreur dans gestionErreur
 		this.popUpCraft.setVisible(false);
 		this.popUpFeuDeCamp.setVisible(false);
+		this.popUpFusée.setVisible(false);
+		this.popUpErreur.setVisible(false);
 		this.panneauJeu.requestFocus();
 	}
 	
 	@FXML
-	void confirmer () {			// Appelé par le joueur depuis l'interface du pnj des crafts
+	void confirmer () {		// Appelé par le joueur depuis l'interface du pnj des crafts
 		 this.env.getPnj().dialogue(this.env.getPersonnage(),Integer.parseInt(repMenu.getText()));
 		 fermerPopUp();
 	}
-
 	
 	@FXML
-	void cuirePatate () {		// Appelé par le joueur depuis l'interface du feu de camp
+	void RéparerFusée(ActionEvent event) { // Fait apparaître la fusée et le bouton "EntrerEtPartir".
+		this.popUpFusée.setVisible(false);
+		this.popUpCraft.setVisible(false);
+		if (this.env.getPersonnage().getRessource().getNbFer() >= 10) {				
+			this.fuséeVue.FaireApparaîtreFusée();
+			this.BoutonPartir.setVisible(true);
+			this.panneauJeu.requestFocus();	
+			this.env.getPersonnage().getRessource().retirerFer(10);
+		}
+	}
+	
+	@FXML
+	void EntrerEtPartir(ActionEvent event) { // Le personnage entre dans la fusée et s'en va.		
+			this.BoutonPartir.setVisible(false);
+			this.personnageVue.FaireApparaîtrePerso();
+			this.env.getFusée().setEnvol(true);
+			this.fuséeVue.fuséeEnFeu();
+			this.finDuJeu = true;
+			this.panneauJeu.requestFocus();		
+	}
+
+	@FXML
+	void cuirePatate () {	// Appelé par le joueur depuis l'interface du feu de camp
 		if (this.env.getPersonnage().getInventaire().getListeNourriture().get(3).getQuantiteProperty() >= 1 ) {
 			this.env.getPersonnage().getInventaire().ajouterNourriture(4);
 			this.env.getPersonnage().getInventaire().retirerNourriture(3);
@@ -372,10 +388,47 @@ public class Controleur implements Initializable {
 	}
 	
 	@FXML
-	void cuireViande () {		// Appelé par le joueur depuis l'interface du feu de camp 
+	void cuireViande () {	// Appelé par le joueur depuis l'interface du feu de camp 
 		if (this.env.getPersonnage().getInventaire().getListeNourriture().get(1).getQuantiteProperty() >= 1 ) {
 			this.env.getPersonnage().getInventaire().ajouterNourriture(2);
 			this.env.getPersonnage().getInventaire().retirerNourriture(1);			
 		}	 
+	}
+	
+	@FXML
+	void rejouer(ActionEvent event) {
+		//réinitielise tous les paramettre pour rejouer
+		
+		this.env.getPersonnage().setPointDeVie(100);
+
+		this.env.getPersonnage().setPointDeNourriture(100);
+		this.env.getPersonnage().getInventaire().getListeNourriture().get(0).setQuantiteProperty(0);
+		this.env.getPersonnage().getInventaire().getListeNourriture().get(1).setQuantiteProperty(0);
+		this.env.getPersonnage().getInventaire().getListeNourriture().get(2).setQuantiteProperty(0);
+		this.env.getPersonnage().getInventaire().getListeNourriture().get(3).setQuantiteProperty(0);
+		this.env.getPersonnage().getInventaire().getListeNourriture().get(4).setQuantiteProperty(0);
+
+		this.env.getPersonnage().getInventaire().getOutils().replace("EpéeEnPierre", 0);
+		this.env.getPersonnage().getInventaire().getOutils().replace("EpéeEnFer", 0);
+		this.env.getPersonnage().getInventaire().getOutils().replace("HacheEnPierre",1);
+		this.env.getPersonnage().getInventaire().getOutils().replace("PiocheEnBois", 1);
+		this.env.getPersonnage().getInventaire().getOutils().replace("PiocheEnPierre",1);
+		this.env.getPersonnage().getInventaire().getOutils().replace("Pelle",1);
+
+		this.env.getPersonnage().getInventaire().getObjets().replace("Planche", 5);
+		this.env.getPersonnage().getInventaire().getObjets().replace("MurDePierre",5);
+		this.env.getPersonnage().getInventaire().getObjets().replace("FeuDeCamp",1);
+		this.env.getPersonnage().getInventaire().getObjets().replace("Pièges",0);
+		
+		this.finDuJeu = false;
+		this.popUpFinDeJeu.setVisible(false);
+		this.personnageVue.FaireApparaîtrePerso();
+		panneauJeu.requestFocus();
+	}
+
+	@FXML
+	void arreter(ActionEvent event) {
+		//ferme la fennetre de jeu
+		Platform.exit();
 	}
 }		

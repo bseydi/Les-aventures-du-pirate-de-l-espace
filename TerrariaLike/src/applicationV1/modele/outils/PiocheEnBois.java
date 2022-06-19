@@ -1,9 +1,15 @@
 package applicationV1.modele.outils;
 
-public class PiocheEnBois extends Outils{
+public class PiocheEnBois {
 
+	private int dégat;
+	
 	public PiocheEnBois() {
-		super(15);
+		this.dégat = 15;
+	}
+	
+	public int getDégat() {
+		return dégat;
 	}
 
 }

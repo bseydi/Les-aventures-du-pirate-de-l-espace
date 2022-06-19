@@ -42,6 +42,11 @@ public class Terrain {
 	public int[] getCarte() {
 		return carte;
 	}
+	
+	public int getIdBlock(int num) {
+        return carte[num];
+	}
+	
 	public void supprimerCase(int num, int val) {
 		carte[num] = val;
 	}

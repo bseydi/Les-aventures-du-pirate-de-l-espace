@@ -1,16 +1,19 @@
 package applicationV1.modele;
 
+import applicationV1.modele.fonctionnalités.GestionErreur;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class PnjCraft {
 
 	private IntegerProperty xProperty,yProperty;
+	private GestionErreur gn;
 	
-	public PnjCraft(int x, int y) {
+	public PnjCraft(int x, int y, GestionErreur gn) {
 		
 		this.xProperty=new SimpleIntegerProperty(x);
 		this.yProperty =new SimpleIntegerProperty(y);
+		this.gn = gn;
 	}
 
 	public void dialogue(Personnage perso, int choix) {
@@ -73,9 +76,8 @@ public class PnjCraft {
 				
 			}
 		} 
-		catch ( Exception e1) 
-		{ System.out.println(" Saisie invalide ! ");
-			
+		catch ( Exception e1) {
+			this.gn.testerEreur(0);;
 		}		
 	}
 	

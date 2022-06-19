@@ -22,14 +22,14 @@ public class Inventaire {
         this.outils = new HashMap<>();        
         this.outils.put("EpéeEnPierre", 0);
         this.outils.put("EpéeEnFer", 0);
-        this.outils.put("HacheEnPierre", 1);
-        this.outils.put("PiocheEnBois", 1);
+        this.outils.put("HacheEnPierre", 1);	// Normalement le personnage n'a que une pelle et une hache 
+        this.outils.put("PiocheEnBois", 1);		//mais on a ajouter pour que vous testiez
         this.outils.put("PiocheEnPierre", 1);
         this.outils.put("Pelle", 1);
         
         this.objets = new HashMap<>();
+        this.objets.put("MurDePierre", 5);		//Pareil ici normalement ils sont a 0
         this.objets.put("Planche", 5);
-        this.objets.put("MurDePierre", 5);
         this.objets.put("FeuDeCamp", 1);
         this.objets.put("Pièges", 0);
         
@@ -58,7 +58,7 @@ public class Inventaire {
         this.objets.replace(objets, this.objets.get(objets) - 1);
     }
     
-    public int nbOutils(String outil) {
+    public int getNbOutils(String outil) {
     	return this.outils.get(outil);
     }
     
@@ -70,7 +70,6 @@ public class Inventaire {
     	}
     }
 
-    
     public void retirerNourriture(int n) {
     	for(int i = 0; i < this.listeNourriture.size(); i++) {
     		if(this.listeNourriture.get(i).getId() == n) {
@@ -93,5 +92,13 @@ public class Inventaire {
     public int getNbBloc (String bloc) {
 	   return objets.get(bloc);
    }
+    
+    public Map<String, Integer> getOutils() {
+		return outils;
+	}
+
+	public Map<String, Integer> getObjets() {
+		return objets;
+	} 
 
 }    

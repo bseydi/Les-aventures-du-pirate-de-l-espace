@@ -1,9 +1,15 @@
 package applicationV1.modele.outils;
 
-public class HacheEnPierre extends Outils{
-
+public class HacheEnPierre {
+	
+	private int dégat;
+	
 	public HacheEnPierre() {
-		super(20);
+		this.dégat = 20;
+	}
+	
+	public int getDégat() {
+		return dégat;
 	}
 
 }

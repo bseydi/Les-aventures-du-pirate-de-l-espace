@@ -39,7 +39,7 @@ public class InventaireVue {
     	
     	this.tabImgView = new ImageView[3];
     	
-    	this.tabImgView[0] = imgView = new ImageView(this.tabImg[4]);
+    	this.tabImgView[0] = imgView = new ImageView(this.tabImg[3]);
 		this.tabImgView[1] = imgView = new ImageView(this.tabImg[5]);
 		this.tabImgView[2] = imgView = new ImageView(this.tabImg[8]);
 		
@@ -62,26 +62,28 @@ public class InventaireVue {
 		int i=0;
 		if (typeItems == 1) {
 			i=personnage.changerItemsEnMain(typeItems);						
-		}else if (typeItems == 2) {
+		}
+		else if (typeItems == 2) {
 			i=personnage.changerItemsEnMain(typeItems);			
-		}else if (typeItems == 3) {
+		}
+		else if (typeItems == 3) {
 			i=personnage.changerItemsEnMain(typeItems);
 		}
-		panneauJeu.getChildren().remove(img);
+	
 		switch(i) {
 		case 1 :
 			if (typeItems == 1) {
 				this.tabImgView[0].setImage(this.tabImg[0]);
 			}
 			else if (typeItems == 2) {
-				this.tabImgView[1].setImage(this.tabImg[5]);
-				if (personnage.getInventaire().getNbBloc("MurDepierre") == 0) {
+				this.tabImgView[1].setImage(this.tabImg[6]);
+				if (personnage.getInventaire().getNbBloc("Planche") == 0) {
 					this.tabImgView[1].setOpacity(0.5);
 				}
 			}
 			else if (typeItems == 3) {
 				this.tabImgView[2].setImage(this.tabImg[9]);
-				if (personnage.getInventaire().nbOutils("EpéeEnPierre") == 0) {
+				if (personnage.getInventaire().getNbOutils("EpéeEnPierre") == 0) {
 					this.tabImgView[2].setOpacity(0.5);
 				}
 			}	
@@ -91,14 +93,11 @@ public class InventaireVue {
 				this.tabImgView[0].setImage(this.tabImg[1]);
 			}
 			else if (typeItems == 2) {
-				this.tabImgView[1].setImage(this.tabImg[6]);
-				if (personnage.getInventaire().getNbBloc("Planche") == 0) {
-					this.tabImgView[1].setOpacity(0.5);
-				}
+				this.tabImgView[1].setImage(this.tabImg[7]);
 			}
 			else if (typeItems == 3) {
 				this.tabImgView[2].setImage(this.tabImg[10]);
-				if (personnage.getInventaire().nbOutils("EpéeEnFer") == 0) {
+				if (personnage.getInventaire().getNbOutils("EpéeEnFer") == 0) {
 					this.tabImgView[2].setOpacity(0.5);
 				}
 			}	
@@ -108,11 +107,14 @@ public class InventaireVue {
 				this.tabImgView[0].setImage(this.tabImg[2]);
 			} 
 			else if (typeItems == 2) {
-				this.tabImgView[1].setImage(this.tabImg[7]);
+				this.tabImgView[1].setImage(this.tabImg[5]);
+				if (personnage.getInventaire().getNbBloc("MurDePierre") == 0) {
+					this.tabImgView[1].setOpacity(0.5);
+				}
 			}
 			else if (typeItems == 3) {
 				this.tabImgView[2].setImage(this.tabImg[11]);
-				if (personnage.getInventaire().nbOutils("HacheEnPierre") == 0) {
+				if (personnage.getInventaire().getNbOutils("HacheEnPierre") == 0) {
 					this.tabImgView[2].setOpacity(0.5);
 				}
 			}		
@@ -123,7 +125,7 @@ public class InventaireVue {
 			}
 			else if (typeItems == 3) {
 				this.tabImgView[2].setImage(this.tabImg[12]);
-				if (personnage.getInventaire().nbOutils("PiocheEnBois") == 0) {
+				if (personnage.getInventaire().getNbOutils("PiocheEnBois") == 0) {
 					this.tabImgView[2].setOpacity(0.5);
 				}
 			}		
@@ -134,7 +136,7 @@ public class InventaireVue {
 			}
 			else if (typeItems == 3) {
 				this.tabImgView[2].setImage(this.tabImg[13]);
-				if (personnage.getInventaire().nbOutils("PiocheEnPierre") == 0) {
+				if (personnage.getInventaire().getNbOutils("PiocheEnPierre") == 0) {
 					this.tabImgView[2].setOpacity(0.5);
 				}
 			}	
@@ -142,7 +144,7 @@ public class InventaireVue {
 		case 6 :
 			if (typeItems == 3) {
 				this.tabImgView[2].setImage(this.tabImg[8]);
-				if (personnage.getInventaire().nbOutils("Pelle") == 0) {
+				if (personnage.getInventaire().getNbOutils("Pelle") == 0) {
 					this.tabImgView[2].setOpacity(0.5);
 				}
 			}
@@ -152,23 +154,5 @@ public class InventaireVue {
 		}
 	
 	}
-		
-		
-		
-		
-		
-		
-		
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

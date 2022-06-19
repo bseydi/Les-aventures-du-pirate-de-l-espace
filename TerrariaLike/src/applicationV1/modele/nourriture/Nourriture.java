@@ -1,22 +1,20 @@
 package applicationV1.modele.nourriture;
 
-
-import applicationV1.modele.Acteur;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.image.ImageView;
 
 public abstract class  Nourriture {
 
-private int pvDonner;
-private IntegerProperty quantiteProperty;
-private int id;
+	private int pvDonner;
+	private IntegerProperty quantiteProperty;
+	private int id;
 
 
 	public Nourriture(int id, int pvD, int i) {
-	this.id = id;
-	this.pvDonner = pvD;
-	this.quantiteProperty = new SimpleIntegerProperty(i);
+		this.id = id;
+		this.pvDonner = pvD;
+		this.quantiteProperty = new SimpleIntegerProperty(i);
 	}
 	
 	public int getId() {
@@ -46,9 +44,11 @@ private int id;
 	public int getX() {
 		return (Integer) null;
 	}
+	
 	public void setX(int x) {
 		
 	}
+	
 	public  int getY() {
 		return (Integer) null;
 	}

@@ -1,12 +1,9 @@
 package applicationV1.modele;
 
 import java.util.ArrayList;
-
 import applicationV1.modele.fonctionnalités.Collisions;
-import applicationV1.modele.nourriture.Fraise;
-import applicationV1.modele.nourriture.Nourriture;
-import applicationV1.modele.nourriture.PommeDeTerre;
-import applicationV1.vue.ArbreVue;
+import applicationV1.modele.fonctionnalités.GestionErreur;
+
 
 public class Environnement {
 	
@@ -15,37 +12,62 @@ public class Environnement {
 	private Personnage personnage;
 	private PnjCraft pnj;
 
-	private Nourriture fraise;
-	private Nourriture pommeDeTerre;
 	private Arbre a;
-	
 	
 	private ArrayList<Arbre> listeArbres;
 	
 	private Collisions c1;
 	private Collisions c2;
 	private Creature1 creature1;
+	private Creature2 creature2;
 	
-	public Environnement() {
+	private FeuDeCamp feuDeCamp;
+	
+	private Fusée fusée;
+	
+	private GestionErreur gn;
+	
+	public Environnement(GestionErreur gn) {
 		
-		this.personnage = new Personnage(300,290,5);
-		this.pnj = new PnjCraft(20,430);
-		this.creature1 = new Creature1(600,290,1);
+		this.gn = gn;
+		this.personnage = new Personnage(300,290,5, this.gn);
+		this.pnj = new PnjCraft(20,430, this.gn);
+		this.creature1 = new Creature1(600,290,1, this.gn);
+		this.creature2 = new Creature2(300,440,1, this.gn);
 		this.terrain = new Terrain ();
 		this.c1 = new Collisions(this.personnage, this.terrain);
 		this.c2 = new Collisions(this.creature1, this.terrain);
-		this.fraise = new Fraise();
-		this.pommeDeTerre = new PommeDeTerre();
-
-		
 
 		this.listeArbres = new ArrayList<>();
 		this.listeArbres.add(this.a = new Arbre(400, 418));
 		this.listeArbres.add(this.a = new Arbre(950,322));
 		this.listeArbres.add(this.a = new Arbre(700, 386));
+		this.fusée = new Fusée(1500,280);
 	
 	}
 	
+	public void creerFeuDeCamp(int numéro) {
+        int x,y;    
+        x = numéro % 50;
+        y = numéro / 50;
+        y = y * 32;
+        x = x * 32;
+        
+        this.feuDeCamp = new FeuDeCamp(x,y);
+    }
+	
+	public FeuDeCamp getFeuDeCamp () {
+        return this.feuDeCamp;
+    }
+	
+	public Fusée getFusée() {
+		return fusée;
+	}
+	
+	public GestionErreur getGn() {
+		return gn;
+	}
+
 	public Terrain getTerrain() {
 		return terrain;
 	}
@@ -57,6 +79,10 @@ public class Environnement {
 
 	public Creature1 getCreature1() {
 		return creature1;
+	}
+	
+	public Creature2 getCreature2() {
+		return creature2;
 	}
 	
 	public PnjCraft getPnj() {
@@ -73,14 +99,6 @@ public class Environnement {
 
 	public Arbre getArbre3() {
 		return this.listeArbres.get(2);
-	}
-
-	public Nourriture getFraise() {
-		return fraise;
-	}
-
-	public Nourriture getPommeDeTerre() {
-		return pommeDeTerre;
 	}
 	
 	public Collisions getC1() {

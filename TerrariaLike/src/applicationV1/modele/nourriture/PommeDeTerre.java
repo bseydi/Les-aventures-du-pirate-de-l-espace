@@ -2,15 +2,12 @@ package applicationV1.modele.nourriture;
 
 import java.util.Random;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-
 public class PommeDeTerre extends Nourriture{
 
 	private int x,y;
 	private int xMin,xMax,yMin,yMax;
-	private Random randomX = new Random();
-	private Random randomY = new Random();
+	private Random randomX;
+	private Random randomY;
 
 
 
@@ -21,12 +18,12 @@ public class PommeDeTerre extends Nourriture{
 		this.yMin=500; // valeur minimal de y
 		this.yMax=700; // valeur maximal de y
 		
-		Random randomX = new Random();
-		Random randomY = new Random();
+		randomX = new Random();
+		randomY = new Random();
 		
 
-		x=xMin+randomX.nextInt(xMax-xMin); // valeur aléatoire de x pour positionner l'image sur le plateau de jeu
-		y=yMin+randomY.nextInt(yMax-yMin); // valeur aléatoire de y pour positionner l'image sur le plateau de jeu
+		x=xMin+this.randomX.nextInt(xMax-xMin); // valeur aléatoire de x pour positionner l'image sur le plateau de jeu
+		y=yMin+this.randomY.nextInt(yMax-yMin); // valeur aléatoire de y pour positionner l'image sur le plateau de jeu
 		
 	}
 	

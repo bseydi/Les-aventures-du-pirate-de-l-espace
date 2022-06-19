@@ -1,8 +1,5 @@
 package applicationV1.modele;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-
 public class Arbre {
 	private int arbre,x,y;
 	
@@ -13,7 +10,7 @@ public class Arbre {
 	}
 
 	public int getArbre() {
-		return arbre;
+		return this.arbre;
 	}
 
 	public void setArbre(int arbre) {
@@ -21,7 +18,7 @@ public class Arbre {
 	}
 
 	public int getX() {
-		return x;
+		return this.x;
 	}
 
 	public void setX(int x) {
@@ -29,7 +26,7 @@ public class Arbre {
 	}
 
 	public int getY() {
-		return y;
+		return this.y;
 	}
 
 	public void setY(int y) {
@@ -37,9 +34,10 @@ public class Arbre {
 	}
 	
 	public void changerArbre() {
-		if(arbre==1) {
+		if(this.arbre==1) {
 			this.arbre=2;
-		}else if(arbre==2) {
+		}
+		else if(this.arbre==2) {
 			this.arbre=1;
 		}
 	}	

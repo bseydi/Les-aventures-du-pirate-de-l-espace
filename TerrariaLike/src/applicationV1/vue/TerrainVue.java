@@ -1,8 +1,8 @@
 package applicationV1.vue;
 
 import java.io.FileNotFoundException;
-import applicationV1.modele.Personnage;
-import applicationV1.modele.Terrain;
+
+import applicationV1.modele.Environnement;
 import controleur.ControleurClick;
 import controleur.ControleurTileQuitté;
 import controleur.ControleurTileSurvolé;
@@ -14,14 +14,12 @@ import javafx.scene.layout.TilePane;
 public class TerrainVue {
 
 	private TilePane terrainJeu;
-	private Terrain terrain;
-	private Personnage perso;
+	private Environnement env;
 	private Image imageTerrain[];
 
-	public TerrainVue(Personnage p,TilePane terrainJeu, Terrain terrain) {
+	public TerrainVue(Environnement env,TilePane terrainJeu) {
 		this.terrainJeu = terrainJeu;
-		this.terrain = terrain;
-		this.perso = p;
+		this.env = env;
 		creerImageTerrain();
 
 	}
@@ -54,7 +52,7 @@ public class TerrainVue {
 	public void creerTerrainJeu() throws FileNotFoundException  {  
 
 		ImageView img = null;
-		int[] carte = terrain.getCarte();
+		int[] carte = env.getTerrain().getCarte();
 		for(int i = 0; i < carte.length ;i++) {
 			switch(carte[i]) {
 			case 0:
@@ -101,8 +99,8 @@ public class TerrainVue {
 			}
 			terrainJeu.getChildren().add(img);
 			img.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET, new ControleurTileSurvolé());
-			img.addEventHandler(MouseEvent.MOUSE_EXITED, new ControleurTileQuitté());
-			img.addEventHandler(MouseEvent.MOUSE_CLICKED, new ControleurClick(perso,terrain,carte[i],i));
+			img.addEventHandler(MouseEvent.MOUSE_EXITED, new ControleurTileQuitté(this.env.getTerrain(), i));
+			img.addEventHandler(MouseEvent.MOUSE_CLICKED, new ControleurClick(env,carte[i],i, env.getGn()));
 		}
 	}
 }	
